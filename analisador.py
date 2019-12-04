@@ -1,7 +1,7 @@
+#coding: utf-8
+
 import ply.lex as lex 
 import re
-
-#Original
 
 # Define um conjunto com todas as palavras reservadas
 reserved = {
@@ -75,13 +75,17 @@ t_GTHAN = r'>'
 
 # Define uma regra para rastrear nomes de variáveis ID (OK!)
 def t_ID(t):
-    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    r'([0-9]?\d*[a-zA-Z_][áãíéêôáâa-zA-Z_0-9]*)'
     t.type = reserved.get(t.value,'ID')    # Check for reserved words
     if len(t.value) <= 255:
-        return t
+
+        if (t.value[0].isnumeric() or 'á' in t.value or "ã" in t.value or "í" in t.value or "é" in t.value or "ê" in t.value or "ô" in t.value or "â" in t.value):
+            print("Token invalido -- " + t.value)
+        else:    
+            return t
+
     else: 
         print("Nome de identificador inválido!")
-
 
 # Define uma regra para rastrear palavras reservadas (OK!)
 def t_RESERVED(t):
@@ -128,13 +132,13 @@ def t_STRING(t):
     t.value = t.value.replace("'","")
     return t
 
-# Teste
-data = ''' 'pokemon' (* aba  aus u1h9 h27g 91h 9hd0a 0a *) // 'string' 14 2.5 harry '''
-
 # Define uma regra para que possamos rastrear números de linha
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
+
+# Teste
+data = ''' 888888balls mário mario 9begin 9 9.5 '''
 
 # Regra de tratamento de erros
 def t_error (t):
