@@ -2,6 +2,7 @@
 
 import ply.lex as lex 
 import re
+import stack
 
 # Define um conjunto com todas as palavras reservadas
 reserved = {
@@ -55,7 +56,15 @@ tokens = [
     'LTHAN',
     'GTHAN',
     'RESERVED',
-    'ID'
+    'ID',
+    'LEFTBRACKET',
+    'RIGHTBRACKET',
+    'LEFTPARENTHESES',
+    'RIGHTPARENTHESES',
+    'SCORE',
+    'COMMA',
+    'TWOPOINTS',
+    'CIRCUMFLEX',
 
 ] + list(reserved.values())
 
@@ -71,6 +80,14 @@ t_LEQUALS = r'<='
 t_GEQUALS = r'>='
 t_LTHAN = r'<'
 t_GTHAN = r'>'
+t_LEFTBRACKET = r'\['
+t_RIGHTBRACKET = r']'
+t_LEFTPARENTHESES = r'\('
+t_RIGHTPARENTHESES = r'\)'
+t_SCORE = r'\.'
+t_COMMA = r'\,'
+t_TWOPOINTS = r'\:'
+t_CIRCUMFLEX = r'\^'
 
 
 # Define uma regra para rastrear nomes de variáveis ID (OK!)
@@ -137,8 +154,10 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
-# Teste
-data = ''' 888888balls mário mario 9begin 9 9.5 '''
+# Ler arquivo
+arquivo = open('AnalisadorLexico\cod.txt','r')
+codigo = arquivo.read()
+arquivo.close()
 
 # Regra de tratamento de erros
 def t_error (t):
@@ -149,7 +168,7 @@ def t_error (t):
 lexer = lex.lex()
 
 # Dê ao lexer alguma contribuição
-lexer.input(data)
+lexer.input(codigo)
 
 # Tokenize
 while True:
