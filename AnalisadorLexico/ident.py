@@ -1,8 +1,11 @@
 import re
+import os
 from stack import Stack
 
 #Cria pilha
 s = Stack()
+
+print(os.getcwd())
 
 #Abre arquivo
 arquivo = open('cod.txt','r')
@@ -10,12 +13,24 @@ arquivo = open('cod.txt','r')
 # Serve para saber quantas vezes o while irá ler as linhas do arquivo
 qtdeLinhas = arquivo.readlines()
 
-# Encontra o padrão de espaços, no caso a partir da segunda linha
+# Encontra o padrão de espaços a partir da primeira linha que houver espaços, e utiliza
+# a quantidade de espaços como referência
 arquivo.seek(0)
-linha = arquivo.readline()
-linha = arquivo.readline()
-padrao = 0
 
+#Identificar o padrão 
+cont = 0
+linha = ''
+while cont < len(qtdeLinhas) - 1:
+   
+   linhaPadrao = arquivo.readline()
+   
+   if linhaPadrao[0] == ' ':
+      linha = linhaPadrao
+      break
+   cont += 1
+
+arquivo.seek(0)
+padrao = 0
 for i in range(len(linha)):
       if linha[i].isspace():
          padrao += 1
