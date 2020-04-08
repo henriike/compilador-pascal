@@ -1,0 +1,17 @@
+program teste;
+
+var
+nome : string;
+teste : real;
+
+
+
+procedure soma(n3,n4: real;);
+
+
+
+
+
+
+
+

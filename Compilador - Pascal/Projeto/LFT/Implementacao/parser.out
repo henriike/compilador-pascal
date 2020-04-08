@@ -1,0 +1,574 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND
+    ARRAY
+    ASSIGNMENT
+    BEGIN
+    CASE
+    COMMENT
+    DIFFERENT
+    DIV
+    DIVIDE
+    DO
+    DOWNTO
+    ELSE
+    END
+    EXP
+    FALSE
+    FOR
+    GEQUALS
+    GTHAN
+    IF
+    LBRACKET
+    LEQUALS
+    LTHAN
+    MINUS
+    MOD
+    NOT
+    OF
+    OR
+    PLUS
+    RBRACKET
+    REPEAT
+    RESERVED
+    SCORE
+    THEN
+    TIMES
+    TO
+    TRUE
+    UNTIL
+    WHILE
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> PROGRAM ID SEMICOLON block
+Rule 2     program -> PROGRAM ID SEMICOLON
+Rule 3     block -> const_declaration_part var_declaration_part procedure_declaration
+Rule 4     const_declaration_part -> CONST const_definition
+Rule 5     const_declaration_part -> <empty>
+Rule 6     const_definition -> ID EQUALS types SEMICOLON const_definition
+Rule 7     const_definition -> ID EQUALS types SEMICOLON
+Rule 8     var_declaration_part -> VAR var_declaration
+Rule 9     var_declaration_part -> <empty>
+Rule 10    var_declaration -> identifier_list TWOPOINTS types SEMICOLON var_declaration
+Rule 11    var_declaration -> identifier_list TWOPOINTS types SEMICOLON
+Rule 12    types -> INTEGER
+Rule 13    types -> REAL
+Rule 14    types -> STRING
+Rule 15    types -> BOOLEAN
+Rule 16    types -> CHAR
+Rule 17    types -> ID
+Rule 18    identifier_list -> ID
+Rule 19    identifier_list -> ID COMMA identifier_list
+Rule 20    subroutine_declaration_part -> procedure_declaration subroutine_declaration_part
+Rule 21    subroutine_declaration_part -> function_declaration subroutine_declaration_part
+Rule 22    subroutine_declaration_part -> <empty>
+Rule 23    procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON procedure_declaration
+Rule 24    procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON
+Rule 25    function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON function_declaration
+Rule 26    function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
+Rule 27    param_section -> identifier_list TWOPOINTS types SEMICOLON param_section
+Rule 28    param_section -> <empty>
+
+Terminals, with rules where they appear
+
+AND                  : 
+ARRAY                : 
+ASSIGNMENT           : 
+BEGIN                : 
+BOOLEAN              : 15
+CASE                 : 
+CHAR                 : 16
+COMMA                : 19
+COMMENT              : 
+CONST                : 4
+DIFFERENT            : 
+DIV                  : 
+DIVIDE               : 
+DO                   : 
+DOWNTO               : 
+ELSE                 : 
+END                  : 
+EQUALS               : 6 7
+EXP                  : 
+FALSE                : 
+FOR                  : 
+FUNCTION             : 25 26
+GEQUALS              : 
+GTHAN                : 
+ID                   : 1 2 6 7 17 18 19 23 24 25 26
+IF                   : 
+INTEGER              : 12
+LBRACKET             : 
+LEQUALS              : 
+LPARENT              : 23 24 25 26
+LTHAN                : 
+MINUS                : 
+MOD                  : 
+NOT                  : 
+OF                   : 
+OR                   : 
+PLUS                 : 
+PROCEDURE            : 23 24
+PROGRAM              : 1 2
+RBRACKET             : 
+REAL                 : 13
+REPEAT               : 
+RESERVED             : 
+RPARENT              : 23 24 25 26
+SCORE                : 
+SEMICOLON            : 1 2 6 7 10 11 23 24 25 26 27
+STRING               : 14
+THEN                 : 
+TIMES                : 
+TO                   : 
+TRUE                 : 
+TWOPOINTS            : 10 11 25 26 27
+UNTIL                : 
+VAR                  : 8
+WHILE                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+block                : 1
+const_declaration_part : 3
+const_definition     : 4 6
+function_declaration : 21 25
+identifier_list      : 10 11 19 27
+param_section        : 23 24 25 26 27
+procedure_declaration : 3 20 23
+program              : 0
+subroutine_declaration_part : 20 21
+types                : 6 7 10 11 25 26 27
+var_declaration      : 8 10
+var_declaration_part : 3
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . PROGRAM ID SEMICOLON block
+    (2) program -> . PROGRAM ID SEMICOLON
+
+    PROGRAM         shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> PROGRAM . ID SEMICOLON block
+    (2) program -> PROGRAM . ID SEMICOLON
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (1) program -> PROGRAM ID . SEMICOLON block
+    (2) program -> PROGRAM ID . SEMICOLON
+
+    SEMICOLON       shift and go to state 4
+
+
+state 4
+
+    (1) program -> PROGRAM ID SEMICOLON . block
+    (2) program -> PROGRAM ID SEMICOLON .
+    (3) block -> . const_declaration_part var_declaration_part procedure_declaration
+    (4) const_declaration_part -> . CONST const_definition
+    (5) const_declaration_part -> .
+
+    $end            reduce using rule 2 (program -> PROGRAM ID SEMICOLON .)
+    CONST           shift and go to state 7
+    VAR             reduce using rule 5 (const_declaration_part -> .)
+    PROCEDURE       reduce using rule 5 (const_declaration_part -> .)
+
+    block                          shift and go to state 5
+    const_declaration_part         shift and go to state 6
+
+state 5
+
+    (1) program -> PROGRAM ID SEMICOLON block .
+
+    $end            reduce using rule 1 (program -> PROGRAM ID SEMICOLON block .)
+
+
+state 6
+
+    (3) block -> const_declaration_part . var_declaration_part procedure_declaration
+    (8) var_declaration_part -> . VAR var_declaration
+    (9) var_declaration_part -> .
+
+    VAR             shift and go to state 9
+    PROCEDURE       reduce using rule 9 (var_declaration_part -> .)
+
+    var_declaration_part           shift and go to state 8
+
+state 7
+
+    (4) const_declaration_part -> CONST . const_definition
+    (6) const_definition -> . ID EQUALS types SEMICOLON const_definition
+    (7) const_definition -> . ID EQUALS types SEMICOLON
+
+    ID              shift and go to state 11
+
+    const_definition               shift and go to state 10
+
+state 8
+
+    (3) block -> const_declaration_part var_declaration_part . procedure_declaration
+    (23) procedure_declaration -> . PROCEDURE ID LPARENT param_section RPARENT SEMICOLON procedure_declaration
+    (24) procedure_declaration -> . PROCEDURE ID LPARENT param_section RPARENT SEMICOLON
+
+    PROCEDURE       shift and go to state 13
+
+    procedure_declaration          shift and go to state 12
+
+state 9
+
+    (8) var_declaration_part -> VAR . var_declaration
+    (10) var_declaration -> . identifier_list TWOPOINTS types SEMICOLON var_declaration
+    (11) var_declaration -> . identifier_list TWOPOINTS types SEMICOLON
+    (18) identifier_list -> . ID
+    (19) identifier_list -> . ID COMMA identifier_list
+
+    ID              shift and go to state 16
+
+    var_declaration                shift and go to state 14
+    identifier_list                shift and go to state 15
+
+state 10
+
+    (4) const_declaration_part -> CONST const_definition .
+
+    VAR             reduce using rule 4 (const_declaration_part -> CONST const_definition .)
+    PROCEDURE       reduce using rule 4 (const_declaration_part -> CONST const_definition .)
+
+
+state 11
+
+    (6) const_definition -> ID . EQUALS types SEMICOLON const_definition
+    (7) const_definition -> ID . EQUALS types SEMICOLON
+
+    EQUALS          shift and go to state 17
+
+
+state 12
+
+    (3) block -> const_declaration_part var_declaration_part procedure_declaration .
+
+    $end            reduce using rule 3 (block -> const_declaration_part var_declaration_part procedure_declaration .)
+
+
+state 13
+
+    (23) procedure_declaration -> PROCEDURE . ID LPARENT param_section RPARENT SEMICOLON procedure_declaration
+    (24) procedure_declaration -> PROCEDURE . ID LPARENT param_section RPARENT SEMICOLON
+
+    ID              shift and go to state 18
+
+
+state 14
+
+    (8) var_declaration_part -> VAR var_declaration .
+
+    PROCEDURE       reduce using rule 8 (var_declaration_part -> VAR var_declaration .)
+
+
+state 15
+
+    (10) var_declaration -> identifier_list . TWOPOINTS types SEMICOLON var_declaration
+    (11) var_declaration -> identifier_list . TWOPOINTS types SEMICOLON
+
+    TWOPOINTS       shift and go to state 19
+
+
+state 16
+
+    (18) identifier_list -> ID .
+    (19) identifier_list -> ID . COMMA identifier_list
+
+    TWOPOINTS       reduce using rule 18 (identifier_list -> ID .)
+    COMMA           shift and go to state 20
+
+
+state 17
+
+    (6) const_definition -> ID EQUALS . types SEMICOLON const_definition
+    (7) const_definition -> ID EQUALS . types SEMICOLON
+    (12) types -> . INTEGER
+    (13) types -> . REAL
+    (14) types -> . STRING
+    (15) types -> . BOOLEAN
+    (16) types -> . CHAR
+    (17) types -> . ID
+
+    INTEGER         shift and go to state 23
+    REAL            shift and go to state 24
+    STRING          shift and go to state 25
+    BOOLEAN         shift and go to state 26
+    CHAR            shift and go to state 27
+    ID              shift and go to state 21
+
+    types                          shift and go to state 22
+
+state 18
+
+    (23) procedure_declaration -> PROCEDURE ID . LPARENT param_section RPARENT SEMICOLON procedure_declaration
+    (24) procedure_declaration -> PROCEDURE ID . LPARENT param_section RPARENT SEMICOLON
+
+    LPARENT         shift and go to state 28
+
+
+state 19
+
+    (10) var_declaration -> identifier_list TWOPOINTS . types SEMICOLON var_declaration
+    (11) var_declaration -> identifier_list TWOPOINTS . types SEMICOLON
+    (12) types -> . INTEGER
+    (13) types -> . REAL
+    (14) types -> . STRING
+    (15) types -> . BOOLEAN
+    (16) types -> . CHAR
+    (17) types -> . ID
+
+    INTEGER         shift and go to state 23
+    REAL            shift and go to state 24
+    STRING          shift and go to state 25
+    BOOLEAN         shift and go to state 26
+    CHAR            shift and go to state 27
+    ID              shift and go to state 21
+
+    types                          shift and go to state 29
+
+state 20
+
+    (19) identifier_list -> ID COMMA . identifier_list
+    (18) identifier_list -> . ID
+    (19) identifier_list -> . ID COMMA identifier_list
+
+    ID              shift and go to state 16
+
+    identifier_list                shift and go to state 30
+
+state 21
+
+    (17) types -> ID .
+
+    SEMICOLON       reduce using rule 17 (types -> ID .)
+
+
+state 22
+
+    (6) const_definition -> ID EQUALS types . SEMICOLON const_definition
+    (7) const_definition -> ID EQUALS types . SEMICOLON
+
+    SEMICOLON       shift and go to state 31
+
+
+state 23
+
+    (12) types -> INTEGER .
+
+    SEMICOLON       reduce using rule 12 (types -> INTEGER .)
+
+
+state 24
+
+    (13) types -> REAL .
+
+    SEMICOLON       reduce using rule 13 (types -> REAL .)
+
+
+state 25
+
+    (14) types -> STRING .
+
+    SEMICOLON       reduce using rule 14 (types -> STRING .)
+
+
+state 26
+
+    (15) types -> BOOLEAN .
+
+    SEMICOLON       reduce using rule 15 (types -> BOOLEAN .)
+
+
+state 27
+
+    (16) types -> CHAR .
+
+    SEMICOLON       reduce using rule 16 (types -> CHAR .)
+
+
+state 28
+
+    (23) procedure_declaration -> PROCEDURE ID LPARENT . param_section RPARENT SEMICOLON procedure_declaration
+    (24) procedure_declaration -> PROCEDURE ID LPARENT . param_section RPARENT SEMICOLON
+    (27) param_section -> . identifier_list TWOPOINTS types SEMICOLON param_section
+    (28) param_section -> .
+    (18) identifier_list -> . ID
+    (19) identifier_list -> . ID COMMA identifier_list
+
+    RPARENT         reduce using rule 28 (param_section -> .)
+    ID              shift and go to state 16
+
+    param_section                  shift and go to state 32
+    identifier_list                shift and go to state 33
+
+state 29
+
+    (10) var_declaration -> identifier_list TWOPOINTS types . SEMICOLON var_declaration
+    (11) var_declaration -> identifier_list TWOPOINTS types . SEMICOLON
+
+    SEMICOLON       shift and go to state 34
+
+
+state 30
+
+    (19) identifier_list -> ID COMMA identifier_list .
+
+    TWOPOINTS       reduce using rule 19 (identifier_list -> ID COMMA identifier_list .)
+
+
+state 31
+
+    (6) const_definition -> ID EQUALS types SEMICOLON . const_definition
+    (7) const_definition -> ID EQUALS types SEMICOLON .
+    (6) const_definition -> . ID EQUALS types SEMICOLON const_definition
+    (7) const_definition -> . ID EQUALS types SEMICOLON
+
+    VAR             reduce using rule 7 (const_definition -> ID EQUALS types SEMICOLON .)
+    PROCEDURE       reduce using rule 7 (const_definition -> ID EQUALS types SEMICOLON .)
+    ID              shift and go to state 11
+
+    const_definition               shift and go to state 35
+
+state 32
+
+    (23) procedure_declaration -> PROCEDURE ID LPARENT param_section . RPARENT SEMICOLON procedure_declaration
+    (24) procedure_declaration -> PROCEDURE ID LPARENT param_section . RPARENT SEMICOLON
+
+    RPARENT         shift and go to state 36
+
+
+state 33
+
+    (27) param_section -> identifier_list . TWOPOINTS types SEMICOLON param_section
+
+    TWOPOINTS       shift and go to state 37
+
+
+state 34
+
+    (10) var_declaration -> identifier_list TWOPOINTS types SEMICOLON . var_declaration
+    (11) var_declaration -> identifier_list TWOPOINTS types SEMICOLON .
+    (10) var_declaration -> . identifier_list TWOPOINTS types SEMICOLON var_declaration
+    (11) var_declaration -> . identifier_list TWOPOINTS types SEMICOLON
+    (18) identifier_list -> . ID
+    (19) identifier_list -> . ID COMMA identifier_list
+
+    PROCEDURE       reduce using rule 11 (var_declaration -> identifier_list TWOPOINTS types SEMICOLON .)
+    ID              shift and go to state 16
+
+    identifier_list                shift and go to state 15
+    var_declaration                shift and go to state 38
+
+state 35
+
+    (6) const_definition -> ID EQUALS types SEMICOLON const_definition .
+
+    VAR             reduce using rule 6 (const_definition -> ID EQUALS types SEMICOLON const_definition .)
+    PROCEDURE       reduce using rule 6 (const_definition -> ID EQUALS types SEMICOLON const_definition .)
+
+
+state 36
+
+    (23) procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT . SEMICOLON procedure_declaration
+    (24) procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT . SEMICOLON
+
+    SEMICOLON       shift and go to state 39
+
+
+state 37
+
+    (27) param_section -> identifier_list TWOPOINTS . types SEMICOLON param_section
+    (12) types -> . INTEGER
+    (13) types -> . REAL
+    (14) types -> . STRING
+    (15) types -> . BOOLEAN
+    (16) types -> . CHAR
+    (17) types -> . ID
+
+    INTEGER         shift and go to state 23
+    REAL            shift and go to state 24
+    STRING          shift and go to state 25
+    BOOLEAN         shift and go to state 26
+    CHAR            shift and go to state 27
+    ID              shift and go to state 21
+
+    types                          shift and go to state 40
+
+state 38
+
+    (10) var_declaration -> identifier_list TWOPOINTS types SEMICOLON var_declaration .
+
+    PROCEDURE       reduce using rule 10 (var_declaration -> identifier_list TWOPOINTS types SEMICOLON var_declaration .)
+
+
+state 39
+
+    (23) procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON . procedure_declaration
+    (24) procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON .
+    (23) procedure_declaration -> . PROCEDURE ID LPARENT param_section RPARENT SEMICOLON procedure_declaration
+    (24) procedure_declaration -> . PROCEDURE ID LPARENT param_section RPARENT SEMICOLON
+
+    $end            reduce using rule 24 (procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON .)
+    PROCEDURE       shift and go to state 13
+
+    procedure_declaration          shift and go to state 41
+
+state 40
+
+    (27) param_section -> identifier_list TWOPOINTS types . SEMICOLON param_section
+
+    SEMICOLON       shift and go to state 42
+
+
+state 41
+
+    (23) procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON procedure_declaration .
+
+    $end            reduce using rule 23 (procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON procedure_declaration .)
+
+
+state 42
+
+    (27) param_section -> identifier_list TWOPOINTS types SEMICOLON . param_section
+    (27) param_section -> . identifier_list TWOPOINTS types SEMICOLON param_section
+    (28) param_section -> .
+    (18) identifier_list -> . ID
+    (19) identifier_list -> . ID COMMA identifier_list
+
+    RPARENT         reduce using rule 28 (param_section -> .)
+    ID              shift and go to state 16
+
+    identifier_list                shift and go to state 33
+    param_section                  shift and go to state 43
+
+state 43
+
+    (27) param_section -> identifier_list TWOPOINTS types SEMICOLON param_section .
+
+    RPARENT         reduce using rule 27 (param_section -> identifier_list TWOPOINTS types SEMICOLON param_section .)
+

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4476095b-5a10-4f37-862e-78870a9cb349" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1aD0KorezIwlCxo9F9JT8Bb2j9f" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RunManager" selected="Python.ExpressionLanguageParser">
+    <configuration name="ExpressionLanguageLex" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="LFT" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Implementacao" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Implementacao/ExpressionLanguageLex.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ExpressionLanguageParser" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="LFT" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Implementacao" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Implementacao/ExpressionLanguageParser.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SintaxeAbstrata" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="LFT" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Implementacao" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Implementacao/SintaxeAbstrata.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Visitor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="LFT" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Implementacao" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Implementacao/Visitor.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.ExpressionLanguageParser" />
+        <item itemvalue="Python.SintaxeAbstrata" />
+        <item itemvalue="Python.ExpressionLanguageLex" />
+        <item itemvalue="Python.Visitor" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4476095b-5a10-4f37-862e-78870a9cb349" name="Default Changelist" comment="" />
+      <created>1586254797761</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586254797761</updated>
+      <workItem from="1586254805489" duration="221000" />
+      <workItem from="1586255070828" duration="255000" />
+      <workItem from="1586259393964" duration="49000" />
+      <workItem from="1586259466759" duration="32724000" />
+      <workItem from="1586345649511" duration="4860000" />
+      <workItem from="1586353163275" duration="4110000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1205" height="190" key="GridCell.Tab.0.bottom" timestamp="1586360942614">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1205" height="190" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1586360942614" />
+    <state width="1205" height="190" key="GridCell.Tab.0.center" timestamp="1586360942614">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1205" height="190" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1586360942614" />
+    <state width="1205" height="190" key="GridCell.Tab.0.left" timestamp="1586360942614">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1205" height="190" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1586360942614" />
+    <state width="1205" height="190" key="GridCell.Tab.0.right" timestamp="1586360942614">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="1205" height="190" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1586360942614" />
+    <state x="781" y="150" key="SettingsEditor" timestamp="1586259597839">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="781" y="150" key="SettingsEditor/0.0.2560.1040@0.0.2560.1040" timestamp="1586259597839" />
+    <state x="346" y="16" width="1026" height="726" key="dock-window-1" timestamp="1586282752409">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="346" y="16" width="1026" height="726" key="dock-window-1/0.0.2560.1040@0.0.2560.1040" timestamp="1586282752409" />
+    <state x="37" y="71" width="1140" height="694" key="dock-window-2" timestamp="1586354727018">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="37" y="71" width="1140" height="694" key="dock-window-2/0.0.2560.1040@0.0.2560.1040" timestamp="1586354727018" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/LFT$ExpressionLanguageLex.coverage" NAME="ExpressionLanguageLex Coverage Results" MODIFIED="1586271428404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Implementacao" />
+    <SUITE FILE_PATH="coverage/LFT$ExpressionLanguageParser.coverage" NAME="ExpressionLanguageParser Coverage Results" MODIFIED="1586353810785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Implementacao" />
+    <SUITE FILE_PATH="coverage/LFT$SintaxeAbstrata.coverage" NAME="SintaxeAbstrata Coverage Results" MODIFIED="1586284991805" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Implementacao" />
+    <SUITE FILE_PATH="coverage/LFT$Visitor.coverage" NAME="Visitor Coverage Results" MODIFIED="1586255295333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Implementacao" />
+  </component>
+</project>
