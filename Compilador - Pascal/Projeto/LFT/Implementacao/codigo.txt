@@ -1,8 +1,8 @@
 program teste;
 
 const
-a = 12;
 b = 13;
+a = 12;
 c = 14;
 
 
@@ -13,6 +13,7 @@ teste : real;
 
 function teste2(n3,n4: real;) : integer;
 function soma45(n3,n4: real;) : integer;
+procedure teste3(n3 : real;);
 
 
 

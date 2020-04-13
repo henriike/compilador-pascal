@@ -109,3 +109,21 @@ class FFunctionDeclaration(FunctionDeclaration):
         self.id = id
     def accept(self, visitor):
         visitor.visitFFunctionDeclaration(self)
+
+
+
+
+class Expressao(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, Visitor):
+        pass
+
+
+class EExpressaoBinaria(Expressao):
+    def __init__(self, operador, arg1, arg2):
+        self.operador = operador
+        self.arg1 = arg1
+        self.arg2 = arg2
+
+    def accept(self, visitor):
+        visitor.visitEExpressaoBinaria(self)

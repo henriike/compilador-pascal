@@ -13,7 +13,8 @@ class Visitor:
         if bBlock.var_dec != None:
             bBlock.var_dec.accept(self)
         if bBlock.subroutine_dec != None:
-           bBlock.subroutine_dec.accept(self)
+            for i in bBlock.subroutine_dec:
+                i.accept(self)
         #bBlock.compoundStatement_dec.accept(self)
 
 
@@ -25,8 +26,6 @@ class Visitor:
             indices = reversed(indices)
             for key in indices:
                 print(key,' = ', cConstDefinition.dicDefinicoes[key], ';')
-
-
 
 
     def visitVVarDeclaration(self, vVarDeclaration):
@@ -52,3 +51,9 @@ class Visitor:
         if fFunctionDeclaration != None:
             for key, v in fFunctionDeclaration.dicDefinicoes.items():
                 print('function', fFunctionDeclaration.id, ' ( ', key, ' ) : ', v, ' ; ')
+
+
+
+
+    # p[0] = dict({p[1]: p[3]}.items() + p[0].items())
+    # Gera um novo dicionário, inserindo os dados corretamente (organizado)

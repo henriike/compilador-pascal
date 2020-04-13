@@ -9,6 +9,11 @@ import SintaxeAbstrata as sa
 import Visitor as vis
 
 
+precedence = (
+    ('left', 'PLUS', 'MINUS')
+)
+
+
 # Declaração do program que pode encadear na declaração de blocos
 def p_program(p):
     '''
@@ -117,22 +122,19 @@ def p_subroutine_declaration_part(p):
     if len(p) == 1:
         p[0] = []
     else:
-        p[2].append(p[1])
+        p[2].insert(0, p[1])
         p[0] = p[2]
 
 
 # Declaração de procedimento -> Funções que não retornam valor
 def p_procedure_declaration(p):
     '''
-    procedure_declaration : PROCEDURE ID LPARENT param_section RPARENT SEMICOLON procedure_declaration
-                          | PROCEDURE ID LPARENT param_section RPARENT SEMICOLON
+    procedure_declaration : PROCEDURE ID LPARENT param_section RPARENT SEMICOLON
     '''
-    if len(p) == 7:
-        p[0] = sa.PProcedureDeclaration({})
-        p[0].dicDefinicoes.update({p[2]:p[4]})
-    else:
-        p[7].dicDefinicoes.update({p[2]:p[4]})
-        p[0] = p[7]
+
+    p[0] = sa.PProcedureDeclaration({})
+    p[0].dicDefinicoes.update({p[2]:p[4]})
+
 
 
 
@@ -140,16 +142,10 @@ def p_procedure_declaration(p):
 # Declaração de função -> Funções que retornam valor
 def p_function_declaration(p):
     '''
-    function_declaration : FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON function_declaration
-                         | FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
+    function_declaration : FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
     '''
-    if len(p) == 9:
-        p[0] = sa.FFunctionDeclaration({}, p[2])
-        p[0].dicDefinicoes.update({p[4]:p[7]})
-    else:
-        p[9].dicDefinicoes.update({p[4]:p[7]})
-        p[0] = p[9]
-
+    p[0] = sa.FFunctionDeclaration({}, p[2])
+    p[0].dicDefinicoes.update({p[4]:p[7]})
 
 
 # Declaração de parâmetros das funções

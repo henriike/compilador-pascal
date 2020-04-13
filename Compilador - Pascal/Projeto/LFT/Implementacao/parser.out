@@ -66,12 +66,10 @@ Rule 19    identifier_list -> ID COMMA identifier_list
 Rule 20    subroutine_declaration_part -> procedure_declaration subroutine_declaration_part
 Rule 21    subroutine_declaration_part -> function_declaration subroutine_declaration_part
 Rule 22    subroutine_declaration_part -> <empty>
-Rule 23    procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON procedure_declaration
-Rule 24    procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON
-Rule 25    function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON function_declaration
-Rule 26    function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
-Rule 27    param_section -> identifier_list TWOPOINTS types SEMICOLON param_section
-Rule 28    param_section -> <empty>
+Rule 23    procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON
+Rule 24    function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
+Rule 25    param_section -> identifier_list TWOPOINTS types SEMICOLON param_section
+Rule 26    param_section -> <empty>
 
 Terminals, with rules where they appear
 
@@ -96,15 +94,15 @@ EQUALS               : 6 7
 EXP                  : 
 FALSE                : 
 FOR                  : 
-FUNCTION             : 25 26
+FUNCTION             : 24
 GEQUALS              : 
 GTHAN                : 
-ID                   : 1 2 6 7 17 18 19 23 24 25 26
+ID                   : 1 2 6 7 17 18 19 23 24
 IF                   : 
 INTEGER              : 12
 LBRACKET             : 
 LEQUALS              : 
-LPARENT              : 23 24 25 26
+LPARENT              : 23 24
 LTHAN                : 
 MINUS                : 
 MOD                  : 
@@ -112,21 +110,21 @@ NOT                  :
 OF                   : 
 OR                   : 
 PLUS                 : 
-PROCEDURE            : 23 24
+PROCEDURE            : 23
 PROGRAM              : 1 2
 RBRACKET             : 
 REAL                 : 13
 REPEAT               : 
 RESERVED             : 
-RPARENT              : 23 24 25 26
+RPARENT              : 23 24
 SCORE                : 
-SEMICOLON            : 1 2 6 7 10 11 23 24 25 26 27
+SEMICOLON            : 1 2 6 7 10 11 23 24 25
 STRING               : 14
 THEN                 : 
 TIMES                : 
 TO                   : 
 TRUE                 : 
-TWOPOINTS            : 10 11 25 26 27
+TWOPOINTS            : 10 11 24 25
 UNTIL                : 
 VAR                  : 8
 WHILE                : 
@@ -137,13 +135,13 @@ Nonterminals, with rules where they appear
 block                : 1
 const_declaration_part : 3
 const_definition     : 4 6
-function_declaration : 21 25
-identifier_list      : 10 11 19 27
-param_section        : 23 24 25 26 27
-procedure_declaration : 20 23
+function_declaration : 21
+identifier_list      : 10 11 19 25
+param_section        : 23 24 25
+procedure_declaration : 20
 program              : 0
 subroutine_declaration_part : 3 20 21
-types                : 6 7 10 11 25 26 27
+types                : 6 7 10 11 24 25
 var_declaration      : 8 10
 var_declaration_part : 3
 
@@ -237,10 +235,8 @@ state 8
     (20) subroutine_declaration_part -> . procedure_declaration subroutine_declaration_part
     (21) subroutine_declaration_part -> . function_declaration subroutine_declaration_part
     (22) subroutine_declaration_part -> .
-    (23) procedure_declaration -> . PROCEDURE ID LPARENT param_section RPARENT SEMICOLON procedure_declaration
-    (24) procedure_declaration -> . PROCEDURE ID LPARENT param_section RPARENT SEMICOLON
-    (25) function_declaration -> . FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON function_declaration
-    (26) function_declaration -> . FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
+    (23) procedure_declaration -> . PROCEDURE ID LPARENT param_section RPARENT SEMICOLON
+    (24) function_declaration -> . FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
 
     $end            reduce using rule 22 (subroutine_declaration_part -> .)
     PROCEDURE       shift and go to state 15
@@ -294,10 +290,8 @@ state 13
     (20) subroutine_declaration_part -> . procedure_declaration subroutine_declaration_part
     (21) subroutine_declaration_part -> . function_declaration subroutine_declaration_part
     (22) subroutine_declaration_part -> .
-    (23) procedure_declaration -> . PROCEDURE ID LPARENT param_section RPARENT SEMICOLON procedure_declaration
-    (24) procedure_declaration -> . PROCEDURE ID LPARENT param_section RPARENT SEMICOLON
-    (25) function_declaration -> . FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON function_declaration
-    (26) function_declaration -> . FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
+    (23) procedure_declaration -> . PROCEDURE ID LPARENT param_section RPARENT SEMICOLON
+    (24) function_declaration -> . FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
 
     $end            reduce using rule 22 (subroutine_declaration_part -> .)
     PROCEDURE       shift and go to state 15
@@ -313,10 +307,8 @@ state 14
     (20) subroutine_declaration_part -> . procedure_declaration subroutine_declaration_part
     (21) subroutine_declaration_part -> . function_declaration subroutine_declaration_part
     (22) subroutine_declaration_part -> .
-    (23) procedure_declaration -> . PROCEDURE ID LPARENT param_section RPARENT SEMICOLON procedure_declaration
-    (24) procedure_declaration -> . PROCEDURE ID LPARENT param_section RPARENT SEMICOLON
-    (25) function_declaration -> . FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON function_declaration
-    (26) function_declaration -> . FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
+    (23) procedure_declaration -> . PROCEDURE ID LPARENT param_section RPARENT SEMICOLON
+    (24) function_declaration -> . FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
 
     $end            reduce using rule 22 (subroutine_declaration_part -> .)
     PROCEDURE       shift and go to state 15
@@ -328,16 +320,14 @@ state 14
 
 state 15
 
-    (23) procedure_declaration -> PROCEDURE . ID LPARENT param_section RPARENT SEMICOLON procedure_declaration
-    (24) procedure_declaration -> PROCEDURE . ID LPARENT param_section RPARENT SEMICOLON
+    (23) procedure_declaration -> PROCEDURE . ID LPARENT param_section RPARENT SEMICOLON
 
     ID              shift and go to state 23
 
 
 state 16
 
-    (25) function_declaration -> FUNCTION . ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON function_declaration
-    (26) function_declaration -> FUNCTION . ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
+    (24) function_declaration -> FUNCTION . ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
 
     ID              shift and go to state 24
 
@@ -404,16 +394,14 @@ state 22
 
 state 23
 
-    (23) procedure_declaration -> PROCEDURE ID . LPARENT param_section RPARENT SEMICOLON procedure_declaration
-    (24) procedure_declaration -> PROCEDURE ID . LPARENT param_section RPARENT SEMICOLON
+    (23) procedure_declaration -> PROCEDURE ID . LPARENT param_section RPARENT SEMICOLON
 
     LPARENT         shift and go to state 34
 
 
 state 24
 
-    (25) function_declaration -> FUNCTION ID . LPARENT param_section RPARENT TWOPOINTS types SEMICOLON function_declaration
-    (26) function_declaration -> FUNCTION ID . LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
+    (24) function_declaration -> FUNCTION ID . LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
 
     LPARENT         shift and go to state 35
 
@@ -500,14 +488,13 @@ state 33
 
 state 34
 
-    (23) procedure_declaration -> PROCEDURE ID LPARENT . param_section RPARENT SEMICOLON procedure_declaration
-    (24) procedure_declaration -> PROCEDURE ID LPARENT . param_section RPARENT SEMICOLON
-    (27) param_section -> . identifier_list TWOPOINTS types SEMICOLON param_section
-    (28) param_section -> .
+    (23) procedure_declaration -> PROCEDURE ID LPARENT . param_section RPARENT SEMICOLON
+    (25) param_section -> . identifier_list TWOPOINTS types SEMICOLON param_section
+    (26) param_section -> .
     (18) identifier_list -> . ID
     (19) identifier_list -> . ID COMMA identifier_list
 
-    RPARENT         reduce using rule 28 (param_section -> .)
+    RPARENT         reduce using rule 26 (param_section -> .)
     ID              shift and go to state 19
 
     param_section                  shift and go to state 39
@@ -515,14 +502,13 @@ state 34
 
 state 35
 
-    (25) function_declaration -> FUNCTION ID LPARENT . param_section RPARENT TWOPOINTS types SEMICOLON function_declaration
-    (26) function_declaration -> FUNCTION ID LPARENT . param_section RPARENT TWOPOINTS types SEMICOLON
-    (27) param_section -> . identifier_list TWOPOINTS types SEMICOLON param_section
-    (28) param_section -> .
+    (24) function_declaration -> FUNCTION ID LPARENT . param_section RPARENT TWOPOINTS types SEMICOLON
+    (25) param_section -> . identifier_list TWOPOINTS types SEMICOLON param_section
+    (26) param_section -> .
     (18) identifier_list -> . ID
     (19) identifier_list -> . ID COMMA identifier_list
 
-    RPARENT         reduce using rule 28 (param_section -> .)
+    RPARENT         reduce using rule 26 (param_section -> .)
     ID              shift and go to state 19
 
     param_section                  shift and go to state 41
@@ -560,23 +546,21 @@ state 38
 
 state 39
 
-    (23) procedure_declaration -> PROCEDURE ID LPARENT param_section . RPARENT SEMICOLON procedure_declaration
-    (24) procedure_declaration -> PROCEDURE ID LPARENT param_section . RPARENT SEMICOLON
+    (23) procedure_declaration -> PROCEDURE ID LPARENT param_section . RPARENT SEMICOLON
 
     RPARENT         shift and go to state 44
 
 
 state 40
 
-    (27) param_section -> identifier_list . TWOPOINTS types SEMICOLON param_section
+    (25) param_section -> identifier_list . TWOPOINTS types SEMICOLON param_section
 
     TWOPOINTS       shift and go to state 45
 
 
 state 41
 
-    (25) function_declaration -> FUNCTION ID LPARENT param_section . RPARENT TWOPOINTS types SEMICOLON function_declaration
-    (26) function_declaration -> FUNCTION ID LPARENT param_section . RPARENT TWOPOINTS types SEMICOLON
+    (24) function_declaration -> FUNCTION ID LPARENT param_section . RPARENT TWOPOINTS types SEMICOLON
 
     RPARENT         shift and go to state 46
 
@@ -610,15 +594,14 @@ state 43
 
 state 44
 
-    (23) procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT . SEMICOLON procedure_declaration
-    (24) procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT . SEMICOLON
+    (23) procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT . SEMICOLON
 
     SEMICOLON       shift and go to state 48
 
 
 state 45
 
-    (27) param_section -> identifier_list TWOPOINTS . types SEMICOLON param_section
+    (25) param_section -> identifier_list TWOPOINTS . types SEMICOLON param_section
     (12) types -> . INTEGER
     (13) types -> . REAL
     (14) types -> . STRING
@@ -637,8 +620,7 @@ state 45
 
 state 46
 
-    (25) function_declaration -> FUNCTION ID LPARENT param_section RPARENT . TWOPOINTS types SEMICOLON function_declaration
-    (26) function_declaration -> FUNCTION ID LPARENT param_section RPARENT . TWOPOINTS types SEMICOLON
+    (24) function_declaration -> FUNCTION ID LPARENT param_section RPARENT . TWOPOINTS types SEMICOLON
 
     TWOPOINTS       shift and go to state 50
 
@@ -654,31 +636,23 @@ state 47
 
 state 48
 
-    (23) procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON . procedure_declaration
-    (24) procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON .
-    (23) procedure_declaration -> . PROCEDURE ID LPARENT param_section RPARENT SEMICOLON procedure_declaration
-    (24) procedure_declaration -> . PROCEDURE ID LPARENT param_section RPARENT SEMICOLON
+    (23) procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON .
 
-  ! shift/reduce conflict for PROCEDURE resolved as shift
-    FUNCTION        reduce using rule 24 (procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON .)
-    $end            reduce using rule 24 (procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON .)
-    PROCEDURE       shift and go to state 15
+    PROCEDURE       reduce using rule 23 (procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON .)
+    FUNCTION        reduce using rule 23 (procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON .)
+    $end            reduce using rule 23 (procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON .)
 
-  ! PROCEDURE       [ reduce using rule 24 (procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON .) ]
-
-    procedure_declaration          shift and go to state 51
 
 state 49
 
-    (27) param_section -> identifier_list TWOPOINTS types . SEMICOLON param_section
+    (25) param_section -> identifier_list TWOPOINTS types . SEMICOLON param_section
 
-    SEMICOLON       shift and go to state 52
+    SEMICOLON       shift and go to state 51
 
 
 state 50
 
-    (25) function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS . types SEMICOLON function_declaration
-    (26) function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS . types SEMICOLON
+    (24) function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS . types SEMICOLON
     (12) types -> . INTEGER
     (13) types -> . REAL
     (14) types -> . STRING
@@ -693,74 +667,46 @@ state 50
     CHAR            shift and go to state 33
     ID              shift and go to state 27
 
-    types                          shift and go to state 53
+    types                          shift and go to state 52
 
 state 51
 
-    (23) procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON procedure_declaration .
-
-    PROCEDURE       reduce using rule 23 (procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON procedure_declaration .)
-    FUNCTION        reduce using rule 23 (procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON procedure_declaration .)
-    $end            reduce using rule 23 (procedure_declaration -> PROCEDURE ID LPARENT param_section RPARENT SEMICOLON procedure_declaration .)
-
-
-state 52
-
-    (27) param_section -> identifier_list TWOPOINTS types SEMICOLON . param_section
-    (27) param_section -> . identifier_list TWOPOINTS types SEMICOLON param_section
-    (28) param_section -> .
+    (25) param_section -> identifier_list TWOPOINTS types SEMICOLON . param_section
+    (25) param_section -> . identifier_list TWOPOINTS types SEMICOLON param_section
+    (26) param_section -> .
     (18) identifier_list -> . ID
     (19) identifier_list -> . ID COMMA identifier_list
 
-    RPARENT         reduce using rule 28 (param_section -> .)
+    RPARENT         reduce using rule 26 (param_section -> .)
     ID              shift and go to state 19
 
     identifier_list                shift and go to state 40
-    param_section                  shift and go to state 54
+    param_section                  shift and go to state 53
+
+state 52
+
+    (24) function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types . SEMICOLON
+
+    SEMICOLON       shift and go to state 54
+
 
 state 53
 
-    (25) function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types . SEMICOLON function_declaration
-    (26) function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types . SEMICOLON
+    (25) param_section -> identifier_list TWOPOINTS types SEMICOLON param_section .
 
-    SEMICOLON       shift and go to state 55
+    RPARENT         reduce using rule 25 (param_section -> identifier_list TWOPOINTS types SEMICOLON param_section .)
 
 
 state 54
 
-    (27) param_section -> identifier_list TWOPOINTS types SEMICOLON param_section .
+    (24) function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON .
 
-    RPARENT         reduce using rule 27 (param_section -> identifier_list TWOPOINTS types SEMICOLON param_section .)
-
-
-state 55
-
-    (25) function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON . function_declaration
-    (26) function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON .
-    (25) function_declaration -> . FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON function_declaration
-    (26) function_declaration -> . FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON
-
-  ! shift/reduce conflict for FUNCTION resolved as shift
-    PROCEDURE       reduce using rule 26 (function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON .)
-    $end            reduce using rule 26 (function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON .)
-    FUNCTION        shift and go to state 16
-
-  ! FUNCTION        [ reduce using rule 26 (function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON .) ]
-
-    function_declaration           shift and go to state 56
-
-state 56
-
-    (25) function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON function_declaration .
-
-    PROCEDURE       reduce using rule 25 (function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON function_declaration .)
-    FUNCTION        reduce using rule 25 (function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON function_declaration .)
-    $end            reduce using rule 25 (function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON function_declaration .)
+    PROCEDURE       reduce using rule 24 (function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON .)
+    FUNCTION        reduce using rule 24 (function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON .)
+    $end            reduce using rule 24 (function_declaration -> FUNCTION ID LPARENT param_section RPARENT TWOPOINTS types SEMICOLON .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for PROCEDURE in state 48 resolved as shift
-WARNING: shift/reduce conflict for FUNCTION in state 55 resolved as shift
 WARNING: reduce/reduce conflict in state 4 resolved using rule (program -> PROGRAM ID SEMICOLON)
 WARNING: rejected rule (const_declaration_part -> <empty>) in state 4
