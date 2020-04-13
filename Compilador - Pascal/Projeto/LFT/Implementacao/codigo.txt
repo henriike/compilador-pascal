@@ -1,13 +1,18 @@
 program teste;
 
+const
+a = 12;
+b = 13;
+c = 14;
+
+
 var
 nome : string;
 teste : real;
 
 
-
-procedure soma(n3,n4: real;);
-
+function teste2(n3,n4: real;) : integer;
+function soma45(n3,n4: real;) : integer;
 
 
 

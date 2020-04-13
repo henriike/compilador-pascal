@@ -18,11 +18,12 @@ class Visitor:
 
 
 
-
     def visitCConstDefinition(self, cConstDefinition):
         if cConstDefinition != None:
             print('const')
-            for key in cConstDefinition.dicDefinicoes:
+            indices = list(cConstDefinition.dicDefinicoes.keys())
+            indices = reversed(indices)
+            for key in indices:
                 print(key,' = ', cConstDefinition.dicDefinicoes[key], ';')
 
 
@@ -31,15 +32,20 @@ class Visitor:
     def visitVVarDeclaration(self, vVarDeclaration):
         if vVarDeclaration != None:
             print('var')
-            for key in vVarDeclaration.dicDefinicoes:
+            indices = list(vVarDeclaration.dicDefinicoes.keys())
+            indices = reversed(indices)
+            for key in indices:
                 print(key,' : ', vVarDeclaration.dicDefinicoes[key], ';')
 
 
 
     def visitPProcedureDeclaration(self, pProcedureDeclaration):
         if pProcedureDeclaration != None:
-            for key in pProcedureDeclaration.dicDefinicoes:
+            indices = list(pProcedureDeclaration.dicDefinicoes.keys())
+            indices = reversed(indices)
+            for key in indices:
                 print('procedure', key, ' ( ', pProcedureDeclaration.dicDefinicoes[key], ' ) ;')
+
 
 
     def visitFFunctionDeclaration(self, fFunctionDeclaration):

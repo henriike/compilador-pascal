@@ -25,7 +25,7 @@ def p_program(p):
 # Declaração dos blocos
 def p_block(p):
     '''
-    block : const_declaration_part var_declaration_part procedure_declaration
+    block : const_declaration_part var_declaration_part subroutine_declaration_part
     '''
     p[0] = sa.BBlock(p[1], p[2], p[3], None)
 
