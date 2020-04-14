@@ -14,13 +14,16 @@ precedence = (
     ('nonassoc', 'EQUALS', 'LTHAN', 'LEQUALS', 'GTHAN', 'GEQUALS', 'DIFFERENT'),
 
     # Operadores Aditivos
-    ('left', 'PLUS', 'MINUS'),
+    ('left', 'PLUS', 'MINUS', 'OR'),
 
     # Operadores Multiplicativos (*, /, div, MOD)
-    ('left', 'TIMES', 'DIVIDE', 'DIV', 'MOD'),
+    ('left', 'TIMES', 'DIVIDE', 'DIV', 'MOD', 'AND'),
 
     # Operadores Unários (+, -) --> Possuem maior precedência entre os aritméticos
-    ('left', 'UMINUS', 'UPLUS', 'AND', 'OR', 'NOT'),
+    ('left', 'UMINUS', 'UPLUS'),
+
+    # O operador NOT é associativo a direita
+    ('right', 'NOT'),
 
     # Operador Parêntesis
     ('left', 'LPARENT', 'RPARENT')
@@ -221,20 +224,24 @@ def p_if_statement(p):
     '''
     if_statement : if1
                  | if2
+                 |
     '''
 
 
 def p_if1(p):
     '''
-    if1 : IF expr_list THEN if1 ELSE if1
+    if1 : IF expr_list THEN if1
+        | IF expr_list THEN if2
+        | ELSE if1
         |
     '''
 
 
 def p_if2(p):
     '''
-    if2 : IF expr_list THEN if_statement
-        | IF expr_list THEN if1 ELSE if2
+    if2 : IF expr_list THEN if2
+        | ELSE if2
+        |
     '''
 
 

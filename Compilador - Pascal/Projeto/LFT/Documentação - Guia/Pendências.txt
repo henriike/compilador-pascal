@@ -57,7 +57,33 @@ nome := 2 + 1 div 2 + 3 or 4 * 2;
         begin
             soma2 := 6 * 2 div 2 * 3 and 2 <> 2;
         end;
-		
+	
+
+begin
+    if 5 > 2 then
+        begin
+            nome := 4;
+        end;
+    else
+        begin
+            nome := 4;
+            if 4 > 8 then
+                begin
+                    nome := 90;
+                end;
+            else
+                begin
+                    nome := 7;
+                    if 8 > 9 then
+                        if 7 > 9 then
+                            begin
+                                nome := 90;
+                            end;
+                end;
+        end;
+end;
+
+	
 
 1 - Regras do simple_expr
 2 - Precedência
