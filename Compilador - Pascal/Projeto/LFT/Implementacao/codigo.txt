@@ -12,8 +12,24 @@ teste : real;
 
 
 function teste2(n3,n4: real;) : integer;
-function soma45(n3,n4: real;) : integer;
+function soma45() : integer;
 procedure teste3(n3 : real;);
+procedure teste80();
+
+
+begin
+    if 5 > 2 then
+        begin
+            nome:=5;
+        end;
+    else
+        if 4 > 2 then
+            begin
+                nome := 4
+            end;
+end;
+
+
 
 
 

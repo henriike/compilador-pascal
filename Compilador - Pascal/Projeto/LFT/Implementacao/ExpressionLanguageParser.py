@@ -10,7 +10,20 @@ import Visitor as vis
 
 
 precedence = (
-    ('left', 'PLUS', 'MINUS')
+    # Operadores relacionais (=, <, <=, >, >=, <>)
+    ('nonassoc', 'EQUALS', 'LTHAN', 'LEQUALS', 'GTHAN', 'GEQUALS', 'DIFFERENT'),
+
+    # Operadores Aditivos
+    ('left', 'PLUS', 'MINUS'),
+
+    # Operadores Multiplicativos (*, /, div, MOD)
+    ('left', 'TIMES', 'DIVIDE', 'DIV', 'MOD'),
+
+    # Operadores Unários (+, -) --> Possuem maior precedência entre os aritméticos
+    ('left', 'UMINUS', 'UPLUS', 'AND', 'OR', 'NOT'),
+
+    # Operador Parêntesis
+    ('left', 'LPARENT', 'RPARENT')
 )
 
 
@@ -30,9 +43,9 @@ def p_program(p):
 # Declaração dos blocos
 def p_block(p):
     '''
-    block : const_declaration_part var_declaration_part subroutine_declaration_part
+    block : const_declaration_part var_declaration_part subroutine_declaration_part compound_statement
     '''
-    p[0] = sa.BBlock(p[1], p[2], p[3], None)
+    p[0] = sa.BBlock(p[1], p[2], p[3], p[4])
 
 
 
@@ -167,10 +180,149 @@ def p_param_section(p):
 # Declaração do compound_statement que chama o statement, onde o statement
 # engloba: assign, procedure_call, if, case, while, repeat, for
 
+def p_compound_statement(p):
+    '''
+    compound_statement : BEGIN statement SEMICOLON statement END SEMICOLON
+                       | BEGIN statement END SEMICOLON
+    '''
+
+
+def p_statement(p):
+    '''
+    statement : assign_statement statement
+              | procedure_call statement
+              | if_statement statement
+              | while_statement statement
+              | repeat_statement statement
+              | compound_statement statement
+              |
+    '''
 
 
 
+# Atribuição
+def p_assign_statement(p):
+    '''
+    assign_statement : ID ASSIGNMENT expr SEMICOLON
+    '''
 
+
+
+# Chamada de função,
+def p_procedure_call(p):
+    '''
+    procedure_call :  ID LPARENT expr_list RPARENT SEMICOLON
+    '''
+
+
+
+# Declaração de if e else
+def p_if_statement(p):
+    '''
+    if_statement : if1
+                 | if2
+    '''
+
+
+def p_if1(p):
+    '''
+    if1 : IF expr_list THEN if1 ELSE if1
+        |
+    '''
+
+
+def p_if2(p):
+    '''
+    if2 : IF expr_list THEN if_statement
+        | IF expr_list THEN if1 ELSE if2
+    '''
+
+
+# Estrutura de Repetição - While
+def p_while_statement(p):
+    '''
+    while_statement : WHILE expr DO statement
+    '''
+
+
+# Estrutura de Repetição - Repeat
+def p_repeat_statement(p):
+    '''
+    repeat_statement : REPEAT statement UNTIL expr
+    '''
+
+
+# Declaração de expr_list
+def p_expr_list(p):
+    '''
+    expr_list : expr
+              | expr COMMA expr_list
+    '''
+
+
+def p_expr(p):
+    '''
+    expr : simple_expr relop_simple_expr
+    '''
+
+
+
+def p_relop_simple_expr(p):
+    '''
+    relop_simple_expr : relop simple_expr relop_simple_expr
+                      |
+    '''
+
+
+def p_relop(p):
+    '''
+    relop : EQUALS
+          | LTHAN
+          | GTHAN
+          | DIFFERENT
+          | GEQUALS
+          | LEQUALS
+    '''
+
+
+def p_simple_expr(p):
+    '''
+    simple_expr : uplus_uminus factor
+                | uplus_uminus factor addop_mulop factor simple_expr
+    '''
+
+
+def p_uplus_uminus(p):
+    '''
+    uplus_uminus : UPLUS
+                 | UMINUS
+                 |
+    '''
+
+
+def p_addop_mulop(p):
+    '''
+    addop_mulop : PLUS
+                | MINUS
+                | OR
+                | TIMES
+                | DIVIDE
+                | DIV
+                | MOD
+                | AND
+                |
+    '''
+
+
+def p_factor(p):
+    '''
+    factor : ID
+           | INTEGER
+           | REAL
+           | STRING
+           | NOT factor
+           |
+    '''
 
 
 

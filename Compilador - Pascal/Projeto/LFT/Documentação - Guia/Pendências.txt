@@ -1,0 +1,66 @@
+def p_simple_expr(p):
+    '''
+    simple_expr : uplus_uminus factor
+                | uplus_uminus factor addop_mulop factor simple_expr
+    '''
+
+
+
+def p_uplus_uminus(p):
+    '''
+    uplus_uminus : UPLUS
+                 | UMINUS
+                 |
+    '''
+	
+	
+
+def p_addop_mulop(p):
+    '''
+    addop_mulop : PLUS
+                | MINUS
+                | OR
+                | TIMES
+                | DIVIDE
+                | DIV
+                | MOD
+                | AND
+                |
+    '''	
+
+
+def p_factor(p):
+    '''
+    factor : ID
+           | INTEGER
+           | REAL
+           | STRING
+           | NOT factor
+           |
+    '''
+	
+	
+if 5 > 2 then
+        begin
+            nome:=5;
+        end;
+    else
+
+	
+	
+nome := 2 + 1 div 2 + 3 or 4 * 2;
+    begin
+        teste2 := 5 * 2;
+        nomeuzi := 4;
+        soma(5);
+    end;
+        begin
+            soma2 := 6 * 2 div 2 * 3 and 2 <> 2;
+        end;
+		
+
+1 - Regras do simple_expr
+2 - Precedência
+3 - O ponto no end
+4 - If
+5 - Olhar o statement

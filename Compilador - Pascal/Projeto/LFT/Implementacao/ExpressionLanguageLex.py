@@ -41,7 +41,7 @@ reserved = {
     'boolean'   : 'BOOLEAN',
     'exp'       : 'EXP',
     'true'      : 'TRUE',
-    'false'     : 'FALSE'
+    'false'     : 'FALSE',
 }
 
  # Lista de nomes de tokens. Isso é sempre necessário
@@ -51,6 +51,7 @@ tokens = [
     'MINUS', 
     'TIMES', 
     'DIVIDE',
+    'DIVIDE_INT',
     'EQUALS',
     'ASSIGNMENT',
     'DIFFERENT',
@@ -68,8 +69,14 @@ tokens = [
     'COMMA',
     'TWOPOINTS',
     'SEMICOLON',
+    'UMINUS',
+    'UPLUS'
 ] + list(reserved.values())
 
+
+# Operators Unary (+, -)
+t_UMINUS = r'\-'
+t_UPLUS = r'\+'
 
 # Arithmetic Operators ( + - * / %)
 t_PLUS = r'\+'

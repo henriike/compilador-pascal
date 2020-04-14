@@ -15,7 +15,8 @@ class Visitor:
         if bBlock.subroutine_dec != None:
             for i in bBlock.subroutine_dec:
                 i.accept(self)
-        #bBlock.compoundStatement_dec.accept(self)
+        #if bBlock.compoundStatement_dec != None:
+        #   bBlock.compoundStatement_dec.accept(self)
 
 
 

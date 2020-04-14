@@ -112,7 +112,7 @@ class FFunctionDeclaration(FunctionDeclaration):
 
 
 
-
+'''
 class Expressao(metaclass=ABCMeta):
     @abstractmethod
     def accept(self, Visitor):
@@ -127,3 +127,4 @@ class EExpressaoBinaria(Expressao):
 
     def accept(self, visitor):
         visitor.visitEExpressaoBinaria(self)
+'''
