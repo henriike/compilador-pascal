@@ -118,13 +118,10 @@ class Expressao(metaclass=ABCMeta):
     def accept(self, Visitor):
         pass
 
-
-class EExpressaoBinaria(Expressao):
-    def __init__(self, operador, arg1, arg2):
-        self.operador = operador
-        self.arg1 = arg1
-        self.arg2 = arg2
+class EExpressao(Expressao):
+    def __init__(self, dicDefinicoes):
+        self.dicDefinicoes = dicDefinicoes
 
     def accept(self, visitor):
-        visitor.visitEExpressaoBinaria(self)
+        visitor.visitEExpressao(self)
 '''

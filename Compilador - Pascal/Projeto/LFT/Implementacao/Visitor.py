@@ -15,8 +15,8 @@ class Visitor:
         if bBlock.subroutine_dec != None:
             for i in bBlock.subroutine_dec:
                 i.accept(self)
-        #if bBlock.compoundStatement_dec != None:
-        #   bBlock.compoundStatement_dec.accept(self)
+        if bBlock.compoundStatement_dec != None:
+            bBlock.compoundStatement_dec.accept(self)
 
 
 
@@ -53,6 +53,11 @@ class Visitor:
             for key, v in fFunctionDeclaration.dicDefinicoes.items():
                 print('function', fFunctionDeclaration.id, ' ( ', key, ' ) : ', v, ' ; ')
 
+
+
+    def visitEExpressao(self, eExpressao):
+        for key in eExpressao.dicDefinicoes.keys():
+            print(key, eExpressao.dicDefinicoes[key])
 
 
 

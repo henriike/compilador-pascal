@@ -46,7 +46,7 @@ def p_program(p):
 # Declaração dos blocos
 def p_block(p):
     '''
-    block : const_declaration_part var_declaration_part subroutine_declaration_part compound_statement
+    block : const_declaration_part var_declaration_part subroutine_declaration_part compound_statement_score
     '''
     p[0] = sa.BBlock(p[1], p[2], p[3], p[4])
 
@@ -183,10 +183,17 @@ def p_param_section(p):
 # Declaração do compound_statement que chama o statement, onde o statement
 # engloba: assign, procedure_call, if, case, while, repeat, for
 
-def p_compound_statement(p):
+def p_compound_statement_score(p):
     '''
-    compound_statement : BEGIN statement SEMICOLON statement END SEMICOLON
-                       | BEGIN statement END SEMICOLON
+    compound_statement_score : BEGIN statement END SCORE
+                             |
+    '''
+
+
+
+def p_compound_statement_semicolon(p):
+    '''
+    compound_statement_semicolon : BEGIN statement END SEMICOLON
     '''
 
 
@@ -195,9 +202,11 @@ def p_statement(p):
     statement : assign_statement statement
               | procedure_call statement
               | if_statement statement
+              | case_statement statement
               | while_statement statement
               | repeat_statement statement
-              | compound_statement statement
+              | for_statement statement
+              | compound_statement_semicolon statement
               |
     '''
 
@@ -245,6 +254,25 @@ def p_if2(p):
     '''
 
 
+
+
+# Estrutura CASE - SWITCH
+def p_case_statement(p):
+    '''
+    case_statement : CASE expr OF case END SEMICOLON
+                   | case
+    '''
+
+
+def p_case(p):
+    '''
+    case : INTEGER TWOPOINTS statement
+         | REAL TWOPOINTS statement
+         | ID TWOPOINTS statement
+    '''
+
+
+
 # Estrutura de Repetição - While
 def p_while_statement(p):
     '''
@@ -252,12 +280,29 @@ def p_while_statement(p):
     '''
 
 
+
+
 # Estrutura de Repetição - Repeat
 def p_repeat_statement(p):
     '''
-    repeat_statement : REPEAT statement UNTIL expr
+    repeat_statement : REPEAT statement UNTIL expr SEMICOLON
+                     | statement
     '''
 
+
+
+# Estrutura de Repetição - For
+# No caso To é usado, se o valor inicial for maior que o valor final, a instrução nunca será executada.
+# No caso de DownTo ser usado, se o valor inicial for menor que o valor final, a instrução nunca será executada.
+def p_for_statement(p):
+    '''
+    for_statement : FOR ID ASSIGNMENT expr TO expr DO
+                  | statement
+    '''
+
+
+
+# ---------------------------------------------------------- Fazer Visitor daqui pra baixo
 
 # Declaração de expr_list
 def p_expr_list(p):
@@ -274,11 +319,13 @@ def p_expr(p):
 
 
 
+
 def p_relop_simple_expr(p):
     '''
     relop_simple_expr : relop simple_expr relop_simple_expr
                       |
     '''
+
 
 
 def p_relop(p):
@@ -290,6 +337,7 @@ def p_relop(p):
           | GEQUALS
           | LEQUALS
     '''
+    p[0] = p[1]
 
 
 def p_simple_expr(p):
@@ -299,12 +347,16 @@ def p_simple_expr(p):
     '''
 
 
+
+
 def p_uplus_uminus(p):
     '''
     uplus_uminus : UPLUS
                  | UMINUS
                  |
     '''
+
+
 
 
 def p_addop_mulop(p):
@@ -321,6 +373,8 @@ def p_addop_mulop(p):
     '''
 
 
+
+
 def p_factor(p):
     '''
     factor : ID
@@ -330,6 +384,11 @@ def p_factor(p):
            | NOT factor
            |
     '''
+
+
+
+
+
 
 
 

@@ -17,6 +17,16 @@ procedure teste3(n3 : real;);
 procedure teste80();
 
 
+begin
+
+    nome := nome + nome;
+
+    for i := 100 to 5 > 4 do
+
+
+
+
+end.
 
 
 
