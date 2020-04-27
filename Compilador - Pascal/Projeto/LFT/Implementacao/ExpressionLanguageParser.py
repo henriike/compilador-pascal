@@ -23,10 +23,10 @@ precedence = (
     ('left', 'UMINUS', 'UPLUS'),
 
     # O operador NOT é associativo a direita
-    ('right', 'NOT'),
+    ('right', 'NOT')
 
     # Operador Parêntesis
-    ('left', 'LPARENT', 'RPARENT')
+   # ('left', 'LPARENT', 'RPARENT')
 )
 
 
@@ -185,32 +185,42 @@ def p_param_section(p):
 
 def p_compound_statement_score(p):
     '''
-    compound_statement_score : BEGIN statement END SCORE
-                             |
+    compound_statement_score : BEGIN statements END SCORE
+                             | BEGIN END SCORE
     '''
 
 
 
 def p_compound_statement_semicolon(p):
     '''
-    compound_statement_semicolon : BEGIN statement END SEMICOLON
+    compound_statement_semicolon : BEGIN statements END SEMICOLON
+                                   | BEGIN END SEMICOLON
+    '''
+
+def p_statements(p):
+    '''
+    statements : statement
+                | statement statements
     '''
 
 
 def p_statement(p):
     '''
-    statement : assign_statement statement
-              | procedure_call statement
-              | if_statement statement
-              | case_statement statement
-              | while_statement statement
-              | repeat_statement statement
-              | for_statement statement
-              | compound_statement_semicolon statement
-              |
+    statement :  nstatement
+                | if2
     '''
 
-
+def p_nstatement(p):
+    '''
+     nstatement : assign_statement
+              | procedure_call
+              | IF expr_list THEN nstatement ELSE nstatement
+              | case_statement
+              | while_statement
+              | repeat_statement
+              | for_statement
+              | compound_statement_semicolon
+    '''
 
 # Atribuição
 def p_assign_statement(p):
@@ -227,30 +237,10 @@ def p_procedure_call(p):
     '''
 
 
-
-# Declaração de if e else
-def p_if_statement(p):
-    '''
-    if_statement : if1
-                 | if2
-                 |
-    '''
-
-
-def p_if1(p):
-    '''
-    if1 : IF expr_list THEN if1
-        | IF expr_list THEN if2
-        | ELSE if1
-        |
-    '''
-
-
 def p_if2(p):
     '''
-    if2 : IF expr_list THEN if2
-        | ELSE if2
-        |
+    if2 : IF expr_list THEN statement
+        | IF expr_list THEN nstatement ELSE if2
     '''
 
 
@@ -285,8 +275,7 @@ def p_while_statement(p):
 # Estrutura de Repetição - Repeat
 def p_repeat_statement(p):
     '''
-    repeat_statement : REPEAT statement UNTIL expr SEMICOLON
-                     | statement
+    repeat_statement : REPEAT statement UNTIL expr SEMICOLON statement
     '''
 
 
@@ -296,8 +285,7 @@ def p_repeat_statement(p):
 # No caso de DownTo ser usado, se o valor inicial for menor que o valor final, a instrução nunca será executada.
 def p_for_statement(p):
     '''
-    for_statement : FOR ID ASSIGNMENT expr TO expr DO
-                  | statement
+    for_statement : FOR ID ASSIGNMENT expr TO expr DO statement
     '''
 
 
@@ -314,19 +302,24 @@ def p_expr_list(p):
 
 def p_expr(p):
     '''
-    expr : simple_expr relop_simple_expr
+    expr : expr EQUALS expr
+          | expr LTHAN expr
+          | expr GTHAN expr
+          | expr DIFFERENT expr
+          | expr GEQUALS expr
+          | expr LEQUALS expr
+          | expr PLUS expr
+          | expr MINUS expr
+          | expr OR expr
+          | expr TIMES expr
+          | expr DIVIDE expr
+          | expr DIV expr
+          | expr MOD expr
+          | expr AND expr
+          | PLUS expr %prec UPLUS
+          | MINUS expr %prec UMINUS
+          | factor
     '''
-
-
-
-
-def p_relop_simple_expr(p):
-    '''
-    relop_simple_expr : relop simple_expr relop_simple_expr
-                      |
-    '''
-
-
 
 def p_relop(p):
     '''
@@ -340,11 +333,6 @@ def p_relop(p):
     p[0] = p[1]
 
 
-def p_simple_expr(p):
-    '''
-    simple_expr : uplus_uminus factor
-                | uplus_uminus factor addop_mulop factor simple_expr
-    '''
 
 
 
@@ -353,7 +341,7 @@ def p_uplus_uminus(p):
     '''
     uplus_uminus : UPLUS
                  | UMINUS
-                 |
+
     '''
 
 
@@ -369,7 +357,7 @@ def p_addop_mulop(p):
                 | DIV
                 | MOD
                 | AND
-                |
+
     '''
 
 
@@ -382,7 +370,7 @@ def p_factor(p):
            | REAL
            | STRING
            | NOT factor
-           |
+
     '''
 
 

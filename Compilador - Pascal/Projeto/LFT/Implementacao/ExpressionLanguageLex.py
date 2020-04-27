@@ -75,8 +75,8 @@ tokens = [
 
 
 # Operators Unary (+, -)
-t_UMINUS = r'\-'
-t_UPLUS = r'\+'
+#t_UMINUS = r'\-'
+#t_UPLUS = r'\+'
 
 # Arithmetic Operators ( + - * / %)
 t_PLUS = r'\+'
