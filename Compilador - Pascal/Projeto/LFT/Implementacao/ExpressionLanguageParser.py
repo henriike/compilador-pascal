@@ -186,8 +186,7 @@ def p_compound_statement_score(p):
                              | BEGIN END SCORE
     '''
     if len(p) == 5:
-        p[0] = []
-        p[0].append(sa.CCompoundStatementScore(p[2]))
+        p[0] = p[2]
 
 
 
@@ -196,8 +195,8 @@ def p_compound_statement_semicolon(p):
     compound_statement_semicolon : BEGIN statements END SEMICOLON
                                  | BEGIN END SEMICOLON
     '''
-
-
+    if len(p) == 5:
+        p[0] = sa.CCompoundStatementSemicolon(p[2])
 
 
 def p_statements(p):
@@ -205,10 +204,10 @@ def p_statements(p):
     statements : statement
                | statement statements
     '''
-    if len(p) == 3:
-        p[0] = p[2]
+    if len(p) == 2:
+        p[0] = sa.SSingleStatement(p[1])
     else:
-        p[0] = p[1]
+        p[0] = sa.CCompoundStatement(p[1], p[2])
 
 
 def p_statement(p):
@@ -217,7 +216,6 @@ def p_statement(p):
               | if2
     '''
     p[0] = p[1]
-
 
 
 def p_nstatement(p):
@@ -231,7 +229,9 @@ def p_nstatement(p):
                | for_statement
                | compound_statement_semicolon
     '''
-    if len(p) == 2:
+    if p[1] == 'if':
+        p[0] = sa.IfStatement(p[2], p[4], p[6])
+    else:
         p[0] = p[1]
 
 
@@ -258,14 +258,29 @@ def p_if2(p):
     if2 : IF expr_list THEN statement
         | IF expr_list THEN nstatement ELSE if2
     '''
+    if len(p) == 5:
+        p[0] = sa.IIfStatement(p[2], p[4], None)
+    else:
+        p[0] = sa.IIfStatement(p[2], p[4], p[6])
+
 
 
 # Estrutura CASE - SWITCH
 def p_case_statement(p):
     '''
-    case_statement : CASE expr OF case END SEMICOLON
-                   | case
+    case_statement : CASE expr OF cases END SEMICOLON
     '''
+
+
+def p_cases(p):
+    '''
+    cases : case
+          | case cases
+    '''
+    if len(p) == 2:
+        p[0] = sa.SSingleCase(p[1])
+    else:
+        p[0] = sa.CCompoundCase(p[1], p[2])
 
 
 def p_case(p):
@@ -274,6 +289,12 @@ def p_case(p):
          | REAL TWOPOINTS statement
          | ID TWOPOINTS statement
     '''
+    if isinstance(p[1], int):
+        p[0] = sa.IIntegerCase(p[1], p[3])
+    elif isinstance(p[1], float):
+        p[0] = sa.RRealCase(p[1], p[3])
+    else:
+        p[0] = sa.IIdCase(p[1], p[3])
 
 
 # Estrutura de Repetição - While
@@ -287,8 +308,9 @@ def p_while_statement(p):
 # Estrutura de Repetição - Repeat
 def p_repeat_statement(p):
     '''
-    repeat_statement : REPEAT statement UNTIL expr SEMICOLON statement
+    repeat_statement : REPEAT statement UNTIL expr SEMICOLON
     '''
+    p[0] = sa.RRepeatStatement(p[2], p[4])
 
 
 
@@ -299,6 +321,7 @@ def p_for_statement(p):
     '''
     for_statement : FOR ID ASSIGNMENT expr TO expr DO statement
     '''
+    p[0] = sa.FForStatement(p[2], p[4], p[6], p[8])
 
 
 
@@ -309,9 +332,9 @@ def p_expr_list(p):
               | expr COMMA expr_list
     '''
     if len(p) == 2:
-        p[0] = p[1]
+        p[0] = sa.SSingleExprList(p[1])
     else:
-        p[0] = p[1] + " , " + str(p[3])
+        p[0] = sa.CCompoundExprList(p[1], p[3])
 
 
 def p_expr(p):
@@ -334,12 +357,45 @@ def p_expr(p):
           | MINUS expr %prec UMINUS
           | factor
     '''
-    if len(p) == 2:
-        p[0] = p[1]
-    elif len(p) == 4:
-        p[0] = str(p[1]) + ' ' + str(p[2]) + ' ' + str(p[3])
+    if len(p) == 4:
+        if p[2] == '=':
+            p[0] = sa.EEqualsExp(p[1], p[3])
+        elif p[2] == '<':
+            p[0] = sa.LLthanExp(p[1], p[3])
+        elif p[2] == '>':
+            p[0] = sa.GGthanExp(p[1], p[3])
+        elif p[2] == '<>':
+            p[0] = sa.DDifferentExp(p[1], p[3])
+        elif p[2] == '>=':
+            p[0] = sa.GGequals(p[1], p[3])
+        elif p[2] == '<=':
+            p[0] = sa.LLequalsExp(p[1], p[3])
+        elif p[2] == '+':
+            p[0] = sa.PPlusExp(p[1], p[3])
+        elif p[2] == '-':
+            p[0] = sa.MMinusExp(p[1], p[3])
+        elif p[2] == 'or':
+            p[0] = sa.OOrExp(p[1], p[3])
+        elif p[2] == 'times':
+            p[0] = sa.TTimesExp(p[1], p[3])
+        elif p[2] == 'divide':
+            p[0] = sa.DDivideExp(p[1], p[3])
+        elif p[2] == 'div':
+            p[0] = sa.DDivExp(p[1], p[3])
+        elif p[2] == 'mod':
+            p[0] = sa.MModExp(p[1], p[3])
+        elif p[2] == 'and':
+            p[0] = sa.AAndExp(p[1], p[3])
+
     elif len(p) == 3:
-        p[0] = p[1] + p[2]
+        if p[1] == '+':
+            p[0] = sa.UPPlusExp(p[2])
+        elif p[1] == '-':
+            p[0] = sa.UMMinusExp(p[2])
+
+    else:
+        p[0] = p[1]
+
 
 
 
@@ -352,11 +408,16 @@ def p_factor(p):
            | NOT factor
     '''
     if len(p) == 2:
-        p[0] = p[1]
-
-
-
-
+        if isinstance(p[1], int):
+            p[0] = sa.FFactorInt(p[1])
+        elif isinstance(p[1], float):
+            p[0] = sa.FFactorReal(p[1])
+        elif p[1][0] == '\'':
+            p[0] = sa.FFactorString(p[1])
+        else:
+            p[0] = sa.FFactorId(p[1])
+    else:
+        p[0] = sa.FFactorNot(p[2])
 
 
 

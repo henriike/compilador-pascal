@@ -112,6 +112,7 @@ class FFunctionDeclaration(FunctionDeclaration):
 
 
 
+
 '''
 CompoundStatementScore e classes concretas
 '''
@@ -130,6 +131,203 @@ class CCompoundStatementScore(CompoundStatementScore):
 
 
 '''
+Statements e classes concretas
+'''
+class Statements(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, Visitor):
+        pass
+
+class SSingleStatement(Statements):
+    def __init__(self, statement):
+        self.statement = statement
+
+    def accept(self, visitor):
+        visitor.visitSSingleStatements(self)
+
+class CCompoundStatement(Statements):
+    def __init__(self, statement, statements):
+        self.statement = statement
+        self.statements = statements
+
+    def accept(self, visitor):
+        visitor.visitCCompoundStatement(self)
+
+
+
+'''
+CompoundStatementSemicolon e classes concretas
+'''
+class CompoundStatementSemicolon(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, Visitor):
+        pass
+
+class CCompoundStatementSemicolon(CompoundStatementSemicolon):
+    def __init__(self, statements):
+        self.statements = statements
+
+    def accept(self, visitor):
+        visitor.visitCCompoundStatementSemicolon(self)
+
+
+
+
+'''
+Statement e classes concretas
+'''
+class Statement(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, Visitor):
+        pass
+
+class AAssignStatement(Statement):
+    def __init__(self, id, exp):
+        self.id = id
+        self.exp = exp
+
+    def accept(self, visitor):
+        visitor.visitAAssignStatement(self)
+
+
+class PProcedureCallStatement(Statement):
+    def __init__(self, id, exprList):
+        self.id = id
+        self.exprList = exprList
+
+    def accept(self, visitor):
+        visitor.visitPProcedureCallStatement(self)
+
+
+class WWhileStatement(Statement):
+    def __init__(self, exp, statement):
+        self.exp = exp
+        self.statement = statement
+
+    def accept(self, visitor):
+        visitor.visitWWhileStatement(self)
+
+
+class IIfStatement(Statement):
+    def __init__(self, expr_list, nstatement1, nstatement2):
+        self.expr_list = expr_list
+        self.nstatement1 = nstatement1
+        self.nstatement2 = nstatement2
+
+    def accept(self, visitor):
+        visitor.visitIIfStatement(self)
+
+
+class RRepeatStatement(Statement):
+    def __init__(self, statement, expr):
+        self.statement = statement
+        self.expr = expr
+
+    def accept(self, visitor):
+        visitor.visitRRepeatStatement(self)
+
+
+class FForStatement(Statement):
+    def __init__(self, id, expr1, expr2, statement):
+        self.id = id
+        self.expr1 = expr1
+        self.expr2 = expr2
+        self.statement = statement
+
+    def accept(self, visitor):
+        visitor.visitFForStatement(self)
+
+
+'''
+Cases e classes concretas
+'''
+class Cases(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, Visitor):
+        pass
+
+
+class SSingleCase(Cases):
+    def __init__(self, case):
+        self.case = case
+
+    def accept(self, visitor):
+        visitor.visitSingleCase(self)
+
+
+class CCompoundCase(Cases):
+    def __init__(self, case, cases):
+        self.case = case
+        self.cases = cases
+
+    def accept(self, visitor):
+        visitor.visitCCompoundCase(self)
+
+
+'''
+Case e classes concretas
+'''
+class Case(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, Visitor):
+        pass
+
+
+class IIntegerCase(Case):
+    def __init__(self, token, statement):
+        self.token = token
+        self.statement = statement
+
+    def accept(self, visitor):
+        visitor.visitIntegerCase(self)
+
+
+class RRealCase(Case):
+    def __init__(self, token, statement):
+        self.token = token
+        self.statement = statement
+
+    def accept(self, visitor):
+        visitor.visitRealCase(self)
+
+
+class IIdCase(Case):
+    def __init__(self, token, statement):
+        self.token = token
+        self.statement = statement
+
+    def accept(self, visitor):
+        visitor.visitIIdCase(self)
+
+
+'''
+ExprList e classes concretas
+'''
+class ExprList(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, Visitor):
+        pass
+
+class SSingleExprList(ExprList):
+    def __init__(self, expr):
+        self.expr = expr
+
+    def accept(self, visitor):
+        visitor.visitSingleExprList(self)
+
+
+class CCompoundExprList(ExprList):
+    def __init__(self, expr1, expr2):
+        self.expr1 = expr1
+        self.expr2 = expr2
+
+    def accept(self, visitor):
+        visitor.visitCCompoundExprList(self)
+
+
+
+
+'''
 Expressão e classes concretas
 '''
 class Expressao(metaclass=ABCMeta):
@@ -138,49 +336,189 @@ class Expressao(metaclass=ABCMeta):
         pass
 
 
-'''
-Assign e classes concretas
-'''
-class Assign(metaclass=ABCMeta):
-    @abstractmethod
+class EEqualsExp(Expressao):
+    def __init__(self, exp1, exp2):
+        self.exp1 = exp1
+        self.exp2 = exp2
     def accept(self, visitor):
-        pass
+        visitor.visitEEqualsExp(self)
 
-class AAssignStatement(Assign):
-    def __init__(self, id, exp):
-        self.id = id
+class LLthanExp(Expressao):
+    def __init__(self, exp1, exp2):
+        self.exp1 = exp1
+        self.exp2 = exp2
+
+    def accept(self, visitor):
+        visitor.visitLLthanExp(self)
+
+class GGthanExp(Expressao):
+    def __init__(self, exp1, exp2):
+        self.exp1 = exp1
+        self.exp2 = exp2
+
+    def accept(self, visitor):
+        visitor.visitGGthanExp(self)
+
+class DDifferentExp(Expressao):
+    def __init__(self, exp1, exp2):
+        self.exp1 = exp1
+        self.exp2 = exp2
+
+    def accept(self, visitor):
+        visitor.visitDDifferentExp(self)
+
+class GGequals(Expressao):
+    def __init__(self, exp1, exp2):
+        self.exp1 = exp1
+        self.exp2 = exp2
+
+    def accept(self, visitor):
+        visitor.visitGGequals(self)
+
+class LLequalsExp(Expressao):
+    def __init__(self, exp1, exp2):
+        self.exp1 = exp1
+        self.exp2 = exp2
+
+    def accept(self, visitor):
+        visitor.visitLLequalsExpp(self)
+
+class PPlusExp(Expressao):
+    def __init__(self, exp1, exp2):
+        self.exp1 = exp1
+        self.exp2 = exp2
+
+    def accept(self, visitor):
+        visitor.visitPPlusExp(self)
+
+
+class MMinusExp(Expressao):
+    def __init__(self, exp1, exp2):
+        self.exp1 = exp1
+        self.exp2 = exp2
+
+    def accept(self, visitor):
+        visitor.visitMMinusExp(self)
+
+class OOrExp(Expressao):
+    def __init__(self, exp1, exp2):
+        self.exp1 = exp1
+        self.exp2 = exp2
+
+    def accept(self, visitor):
+        visitor.visitOOrExp(self)
+
+
+class TTimesExp(Expressao):
+    def __init__(self, exp1, exp2):
+        self.exp1 = exp1
+        self.exp2 = exp2
+
+    def accept(self, visitor):
+        visitor.visitTTimesExp(self)
+
+
+class DDivideExp(Expressao):
+    def __init__(self, exp1, exp2):
+        self.exp1 = exp1
+        self.exp2 = exp2
+
+    def accept(self, visitor):
+        visitor.visitDDivideExp(self)
+
+
+class DDivExp(Expressao):
+    def __init__(self, exp1, exp2):
+        self.exp1 = exp1
+        self.exp2 = exp2
+
+    def accept(self, visitor):
+        visitor.visitDDivExp(self)
+
+
+class MModExp(Expressao):
+    def __init__(self, exp1, exp2):
+        self.exp1 = exp1
+        self.exp2 = exp2
+
+    def accept(self, visitor):
+        visitor.visitMModExp(self)
+
+
+class AAndExp(Expressao):
+    def __init__(self, exp1, exp2):
+        self.exp1 = exp1
+        self.exp2 = exp2
+
+    def accept(self, visitor):
+        visitor.visitAAndExp(self)
+
+
+class UPPlusExp(Expressao):
+    def __init__(self, exp):
         self.exp = exp
+
     def accept(self, visitor):
-        visitor.visitAAssignStatement(self)
+        visitor.visitUPPlusExp(self)
 
 
-'''
-ProcedureCall e classes concretas
-'''
-class ProcedureCall(metaclass=ABCMeta):
-    @abstractmethod
-    def accept(self, visitor):
-        pass
-
-class PProcedureCall(ProcedureCall):
-    def __init__(self, id, exprList):
-        self.id = id
-        self.exprList = exprList
-    def accept(self, visitor):
-        visitor.visitPProcedureCall(self)
-
-
-'''
-While e classes concretas
-'''
-class While(metaclass=ABCMeta):
-    @abstractmethod
-    def accept(self, visitor):
-        pass
-
-class WWhileStatement(While):
-    def __init__(self, exp, statement):
+class UMMinusExp(Expressao):
+    def __init__(self, exp):
         self.exp = exp
-        self.statement = statement
+
     def accept(self, visitor):
-        visitor.visitWWhileStatement(self)
+        visitor.visitUMMinusExp(self)
+
+
+
+
+'''
+Factor e classes concretas
+'''
+class Factor(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, Visitor):
+        pass
+
+
+class FFactorString(Expressao):
+    def __init__(self, type):
+        self.type = type
+
+    def accept(self, visitor):
+        visitor.visitFFactorString(self)
+
+
+class FFactorInt(Expressao):
+    def __init__(self, type):
+        self.type = type
+
+    def accept(self, visitor):
+        visitor.visitFFactorInt(self)
+
+
+class FFactorReal(Expressao):
+    def __init__(self, type):
+        self.type = type
+
+    def accept(self, visitor):
+        visitor.visitFFactorReal(self)
+
+
+class FFactorId(Expressao):
+    def __init__(self, type):
+        self.type = type
+
+    def accept(self, visitor):
+        visitor.visitFFactorId(self)
+
+
+class FFactorNot(Expressao):
+    def __init__(self, type):
+        self.type = type
+
+    def accept(self, visitor):
+        visitor.visitFFactorNot(self)
+
+
+
