@@ -63,7 +63,6 @@ def p_const_declaration_part(p):
     else:
         p[0] = p[2]
 
-
 def p_const_definition(p):
     '''
     const_definition : ID EQUALS types SEMICOLON const_definition
@@ -114,6 +113,7 @@ def p_types(p):
     '''
     p[0] = p[1]
 
+
 # Repetição de variáveis
 def p_identifier_list(p):
     '''
@@ -152,9 +152,6 @@ def p_procedure_declaration(p):
     p[0].dicDefinicoes.update({p[2]:p[4]})
 
 
-
-
-
 # Declaração de função -> Funções que retornam valor
 def p_function_declaration(p):
     '''
@@ -188,46 +185,64 @@ def p_compound_statement_score(p):
     compound_statement_score : BEGIN statements END SCORE
                              | BEGIN END SCORE
     '''
+    if len(p) == 5:
+        p[0] = []
+        p[0].append(sa.CCompoundStatementScore(p[2]))
 
 
 
 def p_compound_statement_semicolon(p):
     '''
     compound_statement_semicolon : BEGIN statements END SEMICOLON
-                                   | BEGIN END SEMICOLON
+                                 | BEGIN END SEMICOLON
     '''
+
+
+
 
 def p_statements(p):
     '''
     statements : statement
-                | statement statements
+               | statement statements
     '''
+    if len(p) == 3:
+        p[0] = p[2]
+    else:
+        p[0] = p[1]
 
 
 def p_statement(p):
     '''
-    statement :  nstatement
-                | if2
+    statement : nstatement
+              | if2
     '''
+    p[0] = p[1]
+
+
 
 def p_nstatement(p):
     '''
-     nstatement : assign_statement
-              | procedure_call
-              | IF expr_list THEN nstatement ELSE nstatement
-              | case_statement
-              | while_statement
-              | repeat_statement
-              | for_statement
-              | compound_statement_semicolon
+    nstatement : assign_statement
+               | procedure_call
+               | IF expr_list THEN nstatement ELSE nstatement
+               | case_statement
+               | while_statement
+               | repeat_statement
+               | for_statement
+               | compound_statement_semicolon
     '''
+    if len(p) == 2:
+        p[0] = p[1]
+
+
+
 
 # Atribuição
 def p_assign_statement(p):
     '''
     assign_statement : ID ASSIGNMENT expr SEMICOLON
     '''
-
+    p[0] = sa.AAssignStatement(p[1], p[3])
 
 
 # Chamada de função,
@@ -235,6 +250,7 @@ def p_procedure_call(p):
     '''
     procedure_call :  ID LPARENT expr_list RPARENT SEMICOLON
     '''
+    p[0] = sa.PProcedureCall(p[1], p[3])
 
 
 def p_if2(p):
@@ -242,8 +258,6 @@ def p_if2(p):
     if2 : IF expr_list THEN statement
         | IF expr_list THEN nstatement ELSE if2
     '''
-
-
 
 
 # Estrutura CASE - SWITCH
@@ -262,14 +276,12 @@ def p_case(p):
     '''
 
 
-
 # Estrutura de Repetição - While
 def p_while_statement(p):
     '''
     while_statement : WHILE expr DO statement
     '''
-
-
+    p[0] = sa.WWhileStatement(p[2], p[4])
 
 
 # Estrutura de Repetição - Repeat
@@ -290,19 +302,21 @@ def p_for_statement(p):
 
 
 
-# ---------------------------------------------------------- Fazer Visitor daqui pra baixo
-
 # Declaração de expr_list
 def p_expr_list(p):
     '''
     expr_list : expr
               | expr COMMA expr_list
     '''
+    if len(p) == 2:
+        p[0] = p[1]
+    else:
+        p[0] = p[1] + " , " + str(p[3])
 
 
 def p_expr(p):
     '''
-    expr : expr EQUALS expr
+    expr :  expr EQUALS expr
           | expr LTHAN expr
           | expr GTHAN expr
           | expr DIFFERENT expr
@@ -320,46 +334,12 @@ def p_expr(p):
           | MINUS expr %prec UMINUS
           | factor
     '''
-
-def p_relop(p):
-    '''
-    relop : EQUALS
-          | LTHAN
-          | GTHAN
-          | DIFFERENT
-          | GEQUALS
-          | LEQUALS
-    '''
-    p[0] = p[1]
-
-
-
-
-
-
-def p_uplus_uminus(p):
-    '''
-    uplus_uminus : UPLUS
-                 | UMINUS
-
-    '''
-
-
-
-
-def p_addop_mulop(p):
-    '''
-    addop_mulop : PLUS
-                | MINUS
-                | OR
-                | TIMES
-                | DIVIDE
-                | DIV
-                | MOD
-                | AND
-
-    '''
-
+    if len(p) == 2:
+        p[0] = p[1]
+    elif len(p) == 4:
+        p[0] = str(p[1]) + ' ' + str(p[2]) + ' ' + str(p[3])
+    elif len(p) == 3:
+        p[0] = p[1] + p[2]
 
 
 
@@ -370,8 +350,9 @@ def p_factor(p):
            | REAL
            | STRING
            | NOT factor
-
     '''
+    if len(p) == 2:
+        p[0] = p[1]
 
 
 

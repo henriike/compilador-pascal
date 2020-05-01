@@ -6,7 +6,6 @@ class Visitor:
             pProgram.block.accept(self)
 
 
-
     def visitBBlock(self, bBlock):
         if bBlock.const_dec != None:
             bBlock.const_dec.accept(self)
@@ -16,8 +15,8 @@ class Visitor:
             for i in bBlock.subroutine_dec:
                 i.accept(self)
         if bBlock.compoundStatement_dec != None:
-            bBlock.compoundStatement_dec.accept(self)
-
+            for i in bBlock.compoundStatement_dec:
+                i.accept(self)
 
 
     def visitCConstDefinition(self, cConstDefinition):
@@ -38,7 +37,6 @@ class Visitor:
                 print(key,' : ', vVarDeclaration.dicDefinicoes[key], ';')
 
 
-
     def visitPProcedureDeclaration(self, pProcedureDeclaration):
         if pProcedureDeclaration != None:
             indices = list(pProcedureDeclaration.dicDefinicoes.keys())
@@ -47,19 +45,37 @@ class Visitor:
                 print('procedure', key, ' ( ', pProcedureDeclaration.dicDefinicoes[key], ' ) ;')
 
 
-
     def visitFFunctionDeclaration(self, fFunctionDeclaration):
         if fFunctionDeclaration != None:
             for key, v in fFunctionDeclaration.dicDefinicoes.items():
                 print('function', fFunctionDeclaration.id, ' ( ', key, ' ) : ', v, ' ; ')
 
 
+    def visitCCompoundStatementScore(self, cCompoundStatementScore):
+        print('begin\t')
+        if cCompoundStatementScore != None:
+            for item in cCompoundStatementScore.statements:
+                print(item)
+        print('end.')
 
-    def visitEExpressao(self, eExpressao):
-        for key in eExpressao.dicDefinicoes.keys():
-            print(key, eExpressao.dicDefinicoes[key])
+
+    def visitAAssignStatement(self, aAssignStatement):
+        if aAssignStatement != None:
+            aAssignStatement.id.accept(self)
+            print(':=')
+            aAssignStatement.exp.accept(self)
+            print(';')
 
 
+    def visitPProcedureCall(self, pProcedureCall):
+        if pProcedureCall != None:
+            pProcedureCall.id.accept(self)
+            print('(', pProcedureCall.exprList, ');')
+
+
+    def visitWWhileStatement(self, wWhileStatement):
+        print('while', wWhileStatement.exp, 'do')
+        wWhileStatement.statement.accept(self)
 
     # p[0] = dict({p[1]: p[3]}.items() + p[0].items())
     # Gera um novo dicionário, inserindo os dados corretamente (organizado)

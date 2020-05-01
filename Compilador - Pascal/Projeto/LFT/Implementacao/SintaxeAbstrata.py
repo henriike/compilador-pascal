@@ -113,15 +113,74 @@ class FFunctionDeclaration(FunctionDeclaration):
 
 
 '''
+CompoundStatementScore e classes concretas
+'''
+class CompoundStatementScore(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, Visitor):
+        pass
+
+class CCompoundStatementScore(CompoundStatementScore):
+    def __init__(self, statements):
+        self.statements = statements
+
+    def accept(self, visitor):
+        visitor.visitCCompoundStatementScore(self)
+
+
+
+'''
+Expressão e classes concretas
+'''
 class Expressao(metaclass=ABCMeta):
     @abstractmethod
     def accept(self, Visitor):
         pass
 
-class EExpressao(Expressao):
-    def __init__(self, dicDefinicoes):
-        self.dicDefinicoes = dicDefinicoes
 
-    def accept(self, visitor):
-        visitor.visitEExpressao(self)
 '''
+Assign e classes concretas
+'''
+class Assign(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, visitor):
+        pass
+
+class AAssignStatement(Assign):
+    def __init__(self, id, exp):
+        self.id = id
+        self.exp = exp
+    def accept(self, visitor):
+        visitor.visitAAssignStatement(self)
+
+
+'''
+ProcedureCall e classes concretas
+'''
+class ProcedureCall(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, visitor):
+        pass
+
+class PProcedureCall(ProcedureCall):
+    def __init__(self, id, exprList):
+        self.id = id
+        self.exprList = exprList
+    def accept(self, visitor):
+        visitor.visitPProcedureCall(self)
+
+
+'''
+While e classes concretas
+'''
+class While(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, visitor):
+        pass
+
+class WWhileStatement(While):
+    def __init__(self, exp, statement):
+        self.exp = exp
+        self.statement = statement
+    def accept(self, visitor):
+        visitor.visitWWhileStatement(self)

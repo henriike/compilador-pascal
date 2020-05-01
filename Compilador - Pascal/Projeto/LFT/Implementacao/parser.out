@@ -12,6 +12,8 @@ Unused terminals:
     RBRACKET
     RESERVED
     TRUE
+    UMINUS
+    UPLUS
 
 Grammar
 
@@ -89,31 +91,15 @@ Rule 70    expr -> expr AND expr
 Rule 71    expr -> PLUS expr
 Rule 72    expr -> MINUS expr
 Rule 73    expr -> factor
-Rule 74    relop -> EQUALS
-Rule 75    relop -> LTHAN
-Rule 76    relop -> GTHAN
-Rule 77    relop -> DIFFERENT
-Rule 78    relop -> GEQUALS
-Rule 79    relop -> LEQUALS
-Rule 80    uplus_uminus -> UPLUS
-Rule 81    uplus_uminus -> UMINUS
-Rule 82    addop_mulop -> PLUS
-Rule 83    addop_mulop -> MINUS
-Rule 84    addop_mulop -> OR
-Rule 85    addop_mulop -> TIMES
-Rule 86    addop_mulop -> DIVIDE
-Rule 87    addop_mulop -> DIV
-Rule 88    addop_mulop -> MOD
-Rule 89    addop_mulop -> AND
-Rule 90    factor -> ID
-Rule 91    factor -> INTEGER
-Rule 92    factor -> REAL
-Rule 93    factor -> STRING
-Rule 94    factor -> NOT factor
+Rule 74    factor -> ID
+Rule 75    factor -> INTEGER
+Rule 76    factor -> REAL
+Rule 77    factor -> STRING
+Rule 78    factor -> NOT factor
 
 Terminals, with rules where they appear
 
-AND                  : 70 89
+AND                  : 70
 ARRAY                : 
 ASSIGNMENT           : 43 54
 BEGIN                : 27 28 29 30
@@ -123,59 +109,58 @@ CHAR                 : 16
 COMMA                : 19 56
 COMMENT              : 
 CONST                : 4
-DIFFERENT            : 60 77
-DIV                  : 68 87
-DIVIDE               : 67 86
+DIFFERENT            : 60
+DIV                  : 68
+DIVIDE               : 67
 DIVIDE_INT           : 
 DO                   : 52 54
 DOWNTO               : 
 ELSE                 : 37 46
 END                  : 27 28 29 30 47
-EQUALS               : 6 7 57 74
+EQUALS               : 6 7 57
 EXP                  : 
 FALSE                : 
 FOR                  : 54
 FUNCTION             : 24
-GEQUALS              : 61 78
-GTHAN                : 59 76
-ID                   : 1 2 6 7 17 18 19 23 24 43 44 51 54 90
+GEQUALS              : 61
+GTHAN                : 59
+ID                   : 1 2 6 7 17 18 19 23 24 43 44 51 54 74
 IF                   : 37 45 46
-INTEGER              : 12 49 91
+INTEGER              : 12 49 75
 LBRACKET             : 
-LEQUALS              : 62 79
+LEQUALS              : 62
 LPARENT              : 23 24 44
-LTHAN                : 58 75
-MINUS                : 64 72 83
-MOD                  : 69 88
-NOT                  : 94
+LTHAN                : 58
+MINUS                : 64 72
+MOD                  : 69
+NOT                  : 78
 OF                   : 47
-OR                   : 65 84
-PLUS                 : 63 71 82
+OR                   : 65
+PLUS                 : 63 71
 PROCEDURE            : 23
 PROGRAM              : 1 2
 RBRACKET             : 
-REAL                 : 13 50 92
+REAL                 : 13 50 76
 REPEAT               : 53
 RESERVED             : 
 RPARENT              : 23 24 44
 SCORE                : 27 28
 SEMICOLON            : 1 2 6 7 10 11 23 24 25 29 30 43 44 47 53
-STRING               : 14 93
+STRING               : 14 77
 THEN                 : 37 45 46
-TIMES                : 66 85
+TIMES                : 66
 TO                   : 54
 TRUE                 : 
 TWOPOINTS            : 10 11 24 25 49 50 51
-UMINUS               : 81
+UMINUS               : 
 UNTIL                : 53
-UPLUS                : 80
+UPLUS                : 
 VAR                  : 8
 WHILE                : 52
 error                : 
 
 Nonterminals, with rules where they appear
 
-addop_mulop          : 
 assign_statement     : 35
 block                : 1
 case                 : 47 48
@@ -186,7 +171,7 @@ const_declaration_part : 3
 const_definition     : 4 6
 expr                 : 43 47 52 53 54 54 55 56 57 57 58 58 59 59 60 60 61 61 62 62 63 63 64 64 65 65 66 66 67 67 68 68 69 69 70 70 71 72
 expr_list            : 37 44 45 46 56
-factor               : 73 94
+factor               : 73 78
 for_statement        : 41
 function_declaration : 21
 identifier_list      : 10 11 19 25
@@ -196,13 +181,11 @@ param_section        : 23 24 25
 procedure_call       : 36
 procedure_declaration : 20
 program              : 0
-relop                : 
 repeat_statement     : 40
 statement            : 31 32 45 49 50 51 52 53 53 54
 statements           : 27 29 32
 subroutine_declaration_part : 3 20 21
 types                : 6 7 10 11 24 25
-uplus_uminus         : 
 var_declaration      : 8 10
 var_declaration_part : 3
 while_statement      : 39
@@ -831,11 +814,11 @@ state 44
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -970,11 +953,11 @@ state 51
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -1025,11 +1008,11 @@ state 53
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -1273,11 +1256,11 @@ state 70
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -1310,11 +1293,11 @@ state 71
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -1356,120 +1339,120 @@ state 72
 
 state 73
 
-    (90) factor -> ID .
+    (74) factor -> ID .
 
-    COMMA           reduce using rule 90 (factor -> ID .)
-    EQUALS          reduce using rule 90 (factor -> ID .)
-    LTHAN           reduce using rule 90 (factor -> ID .)
-    GTHAN           reduce using rule 90 (factor -> ID .)
-    DIFFERENT       reduce using rule 90 (factor -> ID .)
-    GEQUALS         reduce using rule 90 (factor -> ID .)
-    LEQUALS         reduce using rule 90 (factor -> ID .)
-    PLUS            reduce using rule 90 (factor -> ID .)
-    MINUS           reduce using rule 90 (factor -> ID .)
-    OR              reduce using rule 90 (factor -> ID .)
-    TIMES           reduce using rule 90 (factor -> ID .)
-    DIVIDE          reduce using rule 90 (factor -> ID .)
-    DIV             reduce using rule 90 (factor -> ID .)
-    MOD             reduce using rule 90 (factor -> ID .)
-    AND             reduce using rule 90 (factor -> ID .)
-    THEN            reduce using rule 90 (factor -> ID .)
-    OF              reduce using rule 90 (factor -> ID .)
-    DO              reduce using rule 90 (factor -> ID .)
-    SEMICOLON       reduce using rule 90 (factor -> ID .)
-    RPARENT         reduce using rule 90 (factor -> ID .)
-    TO              reduce using rule 90 (factor -> ID .)
+    COMMA           reduce using rule 74 (factor -> ID .)
+    EQUALS          reduce using rule 74 (factor -> ID .)
+    LTHAN           reduce using rule 74 (factor -> ID .)
+    GTHAN           reduce using rule 74 (factor -> ID .)
+    DIFFERENT       reduce using rule 74 (factor -> ID .)
+    GEQUALS         reduce using rule 74 (factor -> ID .)
+    LEQUALS         reduce using rule 74 (factor -> ID .)
+    PLUS            reduce using rule 74 (factor -> ID .)
+    MINUS           reduce using rule 74 (factor -> ID .)
+    OR              reduce using rule 74 (factor -> ID .)
+    TIMES           reduce using rule 74 (factor -> ID .)
+    DIVIDE          reduce using rule 74 (factor -> ID .)
+    DIV             reduce using rule 74 (factor -> ID .)
+    MOD             reduce using rule 74 (factor -> ID .)
+    AND             reduce using rule 74 (factor -> ID .)
+    THEN            reduce using rule 74 (factor -> ID .)
+    OF              reduce using rule 74 (factor -> ID .)
+    DO              reduce using rule 74 (factor -> ID .)
+    SEMICOLON       reduce using rule 74 (factor -> ID .)
+    RPARENT         reduce using rule 74 (factor -> ID .)
+    TO              reduce using rule 74 (factor -> ID .)
 
 
 state 74
 
-    (91) factor -> INTEGER .
+    (75) factor -> INTEGER .
 
-    COMMA           reduce using rule 91 (factor -> INTEGER .)
-    EQUALS          reduce using rule 91 (factor -> INTEGER .)
-    LTHAN           reduce using rule 91 (factor -> INTEGER .)
-    GTHAN           reduce using rule 91 (factor -> INTEGER .)
-    DIFFERENT       reduce using rule 91 (factor -> INTEGER .)
-    GEQUALS         reduce using rule 91 (factor -> INTEGER .)
-    LEQUALS         reduce using rule 91 (factor -> INTEGER .)
-    PLUS            reduce using rule 91 (factor -> INTEGER .)
-    MINUS           reduce using rule 91 (factor -> INTEGER .)
-    OR              reduce using rule 91 (factor -> INTEGER .)
-    TIMES           reduce using rule 91 (factor -> INTEGER .)
-    DIVIDE          reduce using rule 91 (factor -> INTEGER .)
-    DIV             reduce using rule 91 (factor -> INTEGER .)
-    MOD             reduce using rule 91 (factor -> INTEGER .)
-    AND             reduce using rule 91 (factor -> INTEGER .)
-    THEN            reduce using rule 91 (factor -> INTEGER .)
-    OF              reduce using rule 91 (factor -> INTEGER .)
-    DO              reduce using rule 91 (factor -> INTEGER .)
-    SEMICOLON       reduce using rule 91 (factor -> INTEGER .)
-    RPARENT         reduce using rule 91 (factor -> INTEGER .)
-    TO              reduce using rule 91 (factor -> INTEGER .)
+    COMMA           reduce using rule 75 (factor -> INTEGER .)
+    EQUALS          reduce using rule 75 (factor -> INTEGER .)
+    LTHAN           reduce using rule 75 (factor -> INTEGER .)
+    GTHAN           reduce using rule 75 (factor -> INTEGER .)
+    DIFFERENT       reduce using rule 75 (factor -> INTEGER .)
+    GEQUALS         reduce using rule 75 (factor -> INTEGER .)
+    LEQUALS         reduce using rule 75 (factor -> INTEGER .)
+    PLUS            reduce using rule 75 (factor -> INTEGER .)
+    MINUS           reduce using rule 75 (factor -> INTEGER .)
+    OR              reduce using rule 75 (factor -> INTEGER .)
+    TIMES           reduce using rule 75 (factor -> INTEGER .)
+    DIVIDE          reduce using rule 75 (factor -> INTEGER .)
+    DIV             reduce using rule 75 (factor -> INTEGER .)
+    MOD             reduce using rule 75 (factor -> INTEGER .)
+    AND             reduce using rule 75 (factor -> INTEGER .)
+    THEN            reduce using rule 75 (factor -> INTEGER .)
+    OF              reduce using rule 75 (factor -> INTEGER .)
+    DO              reduce using rule 75 (factor -> INTEGER .)
+    SEMICOLON       reduce using rule 75 (factor -> INTEGER .)
+    RPARENT         reduce using rule 75 (factor -> INTEGER .)
+    TO              reduce using rule 75 (factor -> INTEGER .)
 
 
 state 75
 
-    (92) factor -> REAL .
+    (76) factor -> REAL .
 
-    COMMA           reduce using rule 92 (factor -> REAL .)
-    EQUALS          reduce using rule 92 (factor -> REAL .)
-    LTHAN           reduce using rule 92 (factor -> REAL .)
-    GTHAN           reduce using rule 92 (factor -> REAL .)
-    DIFFERENT       reduce using rule 92 (factor -> REAL .)
-    GEQUALS         reduce using rule 92 (factor -> REAL .)
-    LEQUALS         reduce using rule 92 (factor -> REAL .)
-    PLUS            reduce using rule 92 (factor -> REAL .)
-    MINUS           reduce using rule 92 (factor -> REAL .)
-    OR              reduce using rule 92 (factor -> REAL .)
-    TIMES           reduce using rule 92 (factor -> REAL .)
-    DIVIDE          reduce using rule 92 (factor -> REAL .)
-    DIV             reduce using rule 92 (factor -> REAL .)
-    MOD             reduce using rule 92 (factor -> REAL .)
-    AND             reduce using rule 92 (factor -> REAL .)
-    THEN            reduce using rule 92 (factor -> REAL .)
-    OF              reduce using rule 92 (factor -> REAL .)
-    DO              reduce using rule 92 (factor -> REAL .)
-    SEMICOLON       reduce using rule 92 (factor -> REAL .)
-    RPARENT         reduce using rule 92 (factor -> REAL .)
-    TO              reduce using rule 92 (factor -> REAL .)
+    COMMA           reduce using rule 76 (factor -> REAL .)
+    EQUALS          reduce using rule 76 (factor -> REAL .)
+    LTHAN           reduce using rule 76 (factor -> REAL .)
+    GTHAN           reduce using rule 76 (factor -> REAL .)
+    DIFFERENT       reduce using rule 76 (factor -> REAL .)
+    GEQUALS         reduce using rule 76 (factor -> REAL .)
+    LEQUALS         reduce using rule 76 (factor -> REAL .)
+    PLUS            reduce using rule 76 (factor -> REAL .)
+    MINUS           reduce using rule 76 (factor -> REAL .)
+    OR              reduce using rule 76 (factor -> REAL .)
+    TIMES           reduce using rule 76 (factor -> REAL .)
+    DIVIDE          reduce using rule 76 (factor -> REAL .)
+    DIV             reduce using rule 76 (factor -> REAL .)
+    MOD             reduce using rule 76 (factor -> REAL .)
+    AND             reduce using rule 76 (factor -> REAL .)
+    THEN            reduce using rule 76 (factor -> REAL .)
+    OF              reduce using rule 76 (factor -> REAL .)
+    DO              reduce using rule 76 (factor -> REAL .)
+    SEMICOLON       reduce using rule 76 (factor -> REAL .)
+    RPARENT         reduce using rule 76 (factor -> REAL .)
+    TO              reduce using rule 76 (factor -> REAL .)
 
 
 state 76
 
-    (93) factor -> STRING .
+    (77) factor -> STRING .
 
-    COMMA           reduce using rule 93 (factor -> STRING .)
-    EQUALS          reduce using rule 93 (factor -> STRING .)
-    LTHAN           reduce using rule 93 (factor -> STRING .)
-    GTHAN           reduce using rule 93 (factor -> STRING .)
-    DIFFERENT       reduce using rule 93 (factor -> STRING .)
-    GEQUALS         reduce using rule 93 (factor -> STRING .)
-    LEQUALS         reduce using rule 93 (factor -> STRING .)
-    PLUS            reduce using rule 93 (factor -> STRING .)
-    MINUS           reduce using rule 93 (factor -> STRING .)
-    OR              reduce using rule 93 (factor -> STRING .)
-    TIMES           reduce using rule 93 (factor -> STRING .)
-    DIVIDE          reduce using rule 93 (factor -> STRING .)
-    DIV             reduce using rule 93 (factor -> STRING .)
-    MOD             reduce using rule 93 (factor -> STRING .)
-    AND             reduce using rule 93 (factor -> STRING .)
-    THEN            reduce using rule 93 (factor -> STRING .)
-    OF              reduce using rule 93 (factor -> STRING .)
-    DO              reduce using rule 93 (factor -> STRING .)
-    SEMICOLON       reduce using rule 93 (factor -> STRING .)
-    RPARENT         reduce using rule 93 (factor -> STRING .)
-    TO              reduce using rule 93 (factor -> STRING .)
+    COMMA           reduce using rule 77 (factor -> STRING .)
+    EQUALS          reduce using rule 77 (factor -> STRING .)
+    LTHAN           reduce using rule 77 (factor -> STRING .)
+    GTHAN           reduce using rule 77 (factor -> STRING .)
+    DIFFERENT       reduce using rule 77 (factor -> STRING .)
+    GEQUALS         reduce using rule 77 (factor -> STRING .)
+    LEQUALS         reduce using rule 77 (factor -> STRING .)
+    PLUS            reduce using rule 77 (factor -> STRING .)
+    MINUS           reduce using rule 77 (factor -> STRING .)
+    OR              reduce using rule 77 (factor -> STRING .)
+    TIMES           reduce using rule 77 (factor -> STRING .)
+    DIVIDE          reduce using rule 77 (factor -> STRING .)
+    DIV             reduce using rule 77 (factor -> STRING .)
+    MOD             reduce using rule 77 (factor -> STRING .)
+    AND             reduce using rule 77 (factor -> STRING .)
+    THEN            reduce using rule 77 (factor -> STRING .)
+    OF              reduce using rule 77 (factor -> STRING .)
+    DO              reduce using rule 77 (factor -> STRING .)
+    SEMICOLON       reduce using rule 77 (factor -> STRING .)
+    RPARENT         reduce using rule 77 (factor -> STRING .)
+    TO              reduce using rule 77 (factor -> STRING .)
 
 
 state 77
 
-    (94) factor -> NOT . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (78) factor -> NOT . factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     ID              shift and go to state 73
     INTEGER         shift and go to state 74
@@ -1499,11 +1482,11 @@ state 78
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -1538,11 +1521,11 @@ state 79
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -1944,11 +1927,11 @@ state 96
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -1982,11 +1965,11 @@ state 97
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -2019,11 +2002,11 @@ state 98
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -2056,11 +2039,11 @@ state 99
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -2093,11 +2076,11 @@ state 100
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -2130,11 +2113,11 @@ state 101
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -2167,11 +2150,11 @@ state 102
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -2204,11 +2187,11 @@ state 103
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -2241,11 +2224,11 @@ state 104
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -2278,11 +2261,11 @@ state 105
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -2315,11 +2298,11 @@ state 106
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -2352,11 +2335,11 @@ state 107
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -2389,11 +2372,11 @@ state 108
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -2426,11 +2409,11 @@ state 109
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -2463,11 +2446,11 @@ state 110
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -2594,29 +2577,29 @@ state 112
 
 state 113
 
-    (94) factor -> NOT factor .
+    (78) factor -> NOT factor .
 
-    COMMA           reduce using rule 94 (factor -> NOT factor .)
-    EQUALS          reduce using rule 94 (factor -> NOT factor .)
-    LTHAN           reduce using rule 94 (factor -> NOT factor .)
-    GTHAN           reduce using rule 94 (factor -> NOT factor .)
-    DIFFERENT       reduce using rule 94 (factor -> NOT factor .)
-    GEQUALS         reduce using rule 94 (factor -> NOT factor .)
-    LEQUALS         reduce using rule 94 (factor -> NOT factor .)
-    PLUS            reduce using rule 94 (factor -> NOT factor .)
-    MINUS           reduce using rule 94 (factor -> NOT factor .)
-    OR              reduce using rule 94 (factor -> NOT factor .)
-    TIMES           reduce using rule 94 (factor -> NOT factor .)
-    DIVIDE          reduce using rule 94 (factor -> NOT factor .)
-    DIV             reduce using rule 94 (factor -> NOT factor .)
-    MOD             reduce using rule 94 (factor -> NOT factor .)
-    AND             reduce using rule 94 (factor -> NOT factor .)
-    THEN            reduce using rule 94 (factor -> NOT factor .)
-    OF              reduce using rule 94 (factor -> NOT factor .)
-    DO              reduce using rule 94 (factor -> NOT factor .)
-    SEMICOLON       reduce using rule 94 (factor -> NOT factor .)
-    RPARENT         reduce using rule 94 (factor -> NOT factor .)
-    TO              reduce using rule 94 (factor -> NOT factor .)
+    COMMA           reduce using rule 78 (factor -> NOT factor .)
+    EQUALS          reduce using rule 78 (factor -> NOT factor .)
+    LTHAN           reduce using rule 78 (factor -> NOT factor .)
+    GTHAN           reduce using rule 78 (factor -> NOT factor .)
+    DIFFERENT       reduce using rule 78 (factor -> NOT factor .)
+    GEQUALS         reduce using rule 78 (factor -> NOT factor .)
+    LEQUALS         reduce using rule 78 (factor -> NOT factor .)
+    PLUS            reduce using rule 78 (factor -> NOT factor .)
+    MINUS           reduce using rule 78 (factor -> NOT factor .)
+    OR              reduce using rule 78 (factor -> NOT factor .)
+    TIMES           reduce using rule 78 (factor -> NOT factor .)
+    DIVIDE          reduce using rule 78 (factor -> NOT factor .)
+    DIV             reduce using rule 78 (factor -> NOT factor .)
+    MOD             reduce using rule 78 (factor -> NOT factor .)
+    AND             reduce using rule 78 (factor -> NOT factor .)
+    THEN            reduce using rule 78 (factor -> NOT factor .)
+    OF              reduce using rule 78 (factor -> NOT factor .)
+    DO              reduce using rule 78 (factor -> NOT factor .)
+    SEMICOLON       reduce using rule 78 (factor -> NOT factor .)
+    RPARENT         reduce using rule 78 (factor -> NOT factor .)
+    TO              reduce using rule 78 (factor -> NOT factor .)
 
 
 state 114
@@ -2762,11 +2745,11 @@ state 119
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -2799,11 +2782,11 @@ state 120
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
@@ -4050,11 +4033,11 @@ state 159
     (71) expr -> . PLUS expr
     (72) expr -> . MINUS expr
     (73) expr -> . factor
-    (90) factor -> . ID
-    (91) factor -> . INTEGER
-    (92) factor -> . REAL
-    (93) factor -> . STRING
-    (94) factor -> . NOT factor
+    (74) factor -> . ID
+    (75) factor -> . INTEGER
+    (76) factor -> . REAL
+    (77) factor -> . STRING
+    (78) factor -> . NOT factor
 
     PLUS            shift and go to state 70
     MINUS           shift and go to state 71
