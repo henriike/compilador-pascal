@@ -19,7 +19,8 @@ procedure teste80();
 
 begin
 
-    nome := 5 + 12;
+    soma(5+5);
+
 
 
 end.

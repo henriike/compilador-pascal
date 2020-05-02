@@ -51,9 +51,9 @@ Rule 30    compound_statement_semicolon -> BEGIN END SEMICOLON
 Rule 31    statements -> statement
 Rule 32    statements -> statement statements
 Rule 33    statement -> nstatement
-Rule 34    statement -> if2
+Rule 34    statement -> if2_statement
 Rule 35    nstatement -> assign_statement
-Rule 36    nstatement -> procedure_call
+Rule 36    nstatement -> procedure_call_statement
 Rule 37    nstatement -> IF expr_list THEN nstatement ELSE nstatement
 Rule 38    nstatement -> case_statement
 Rule 39    nstatement -> while_statement
@@ -61,9 +61,9 @@ Rule 40    nstatement -> repeat_statement
 Rule 41    nstatement -> for_statement
 Rule 42    nstatement -> compound_statement_semicolon
 Rule 43    assign_statement -> ID ASSIGNMENT expr SEMICOLON
-Rule 44    procedure_call -> ID LPARENT expr_list RPARENT SEMICOLON
-Rule 45    if2 -> IF expr_list THEN statement
-Rule 46    if2 -> IF expr_list THEN nstatement ELSE if2
+Rule 44    procedure_call_statement -> ID LPARENT expr_list RPARENT SEMICOLON
+Rule 45    if2_statement -> IF expr_list THEN statement
+Rule 46    if2_statement -> IF expr_list THEN nstatement ELSE if2_statement
 Rule 47    case_statement -> CASE expr OF cases END SEMICOLON
 Rule 48    cases -> case
 Rule 49    cases -> case cases
@@ -177,10 +177,10 @@ factor               : 74 79
 for_statement        : 41
 function_declaration : 21
 identifier_list      : 10 11 19 25
-if2                  : 34 46
+if2_statement        : 34 46
 nstatement           : 33 37 37 46
 param_section        : 23 24 25
-procedure_call       : 36
+procedure_call_statement : 36
 procedure_declaration : 20
 program              : 0
 repeat_statement     : 40
@@ -440,19 +440,19 @@ state 22
     (31) statements -> . statement
     (32) statements -> . statement statements
     (33) statement -> . nstatement
-    (34) statement -> . if2
+    (34) statement -> . if2_statement
     (35) nstatement -> . assign_statement
-    (36) nstatement -> . procedure_call
+    (36) nstatement -> . procedure_call_statement
     (37) nstatement -> . IF expr_list THEN nstatement ELSE nstatement
     (38) nstatement -> . case_statement
     (39) nstatement -> . while_statement
     (40) nstatement -> . repeat_statement
     (41) nstatement -> . for_statement
     (42) nstatement -> . compound_statement_semicolon
-    (45) if2 -> . IF expr_list THEN statement
-    (46) if2 -> . IF expr_list THEN nstatement ELSE if2
+    (45) if2_statement -> . IF expr_list THEN statement
+    (46) if2_statement -> . IF expr_list THEN nstatement ELSE if2_statement
     (43) assign_statement -> . ID ASSIGNMENT expr SEMICOLON
-    (44) procedure_call -> . ID LPARENT expr_list RPARENT SEMICOLON
+    (44) procedure_call_statement -> . ID LPARENT expr_list RPARENT SEMICOLON
     (47) case_statement -> . CASE expr OF cases END SEMICOLON
     (53) while_statement -> . WHILE expr DO statement
     (54) repeat_statement -> . REPEAT statement UNTIL expr SEMICOLON
@@ -472,9 +472,9 @@ state 22
     statements                     shift and go to state 37
     statement                      shift and go to state 39
     nstatement                     shift and go to state 40
-    if2                            shift and go to state 41
+    if2_statement                  shift and go to state 41
     assign_statement               shift and go to state 42
-    procedure_call                 shift and go to state 43
+    procedure_call_statement       shift and go to state 43
     case_statement                 shift and go to state 45
     while_statement                shift and go to state 46
     repeat_statement               shift and go to state 47
@@ -596,19 +596,19 @@ state 36
     (31) statements -> . statement
     (32) statements -> . statement statements
     (33) statement -> . nstatement
-    (34) statement -> . if2
+    (34) statement -> . if2_statement
     (35) nstatement -> . assign_statement
-    (36) nstatement -> . procedure_call
+    (36) nstatement -> . procedure_call_statement
     (37) nstatement -> . IF expr_list THEN nstatement ELSE nstatement
     (38) nstatement -> . case_statement
     (39) nstatement -> . while_statement
     (40) nstatement -> . repeat_statement
     (41) nstatement -> . for_statement
     (42) nstatement -> . compound_statement_semicolon
-    (45) if2 -> . IF expr_list THEN statement
-    (46) if2 -> . IF expr_list THEN nstatement ELSE if2
+    (45) if2_statement -> . IF expr_list THEN statement
+    (46) if2_statement -> . IF expr_list THEN nstatement ELSE if2_statement
     (43) assign_statement -> . ID ASSIGNMENT expr SEMICOLON
-    (44) procedure_call -> . ID LPARENT expr_list RPARENT SEMICOLON
+    (44) procedure_call_statement -> . ID LPARENT expr_list RPARENT SEMICOLON
     (47) case_statement -> . CASE expr OF cases END SEMICOLON
     (53) while_statement -> . WHILE expr DO statement
     (54) repeat_statement -> . REPEAT statement UNTIL expr SEMICOLON
@@ -628,9 +628,9 @@ state 36
     statements                     shift and go to state 60
     statement                      shift and go to state 39
     nstatement                     shift and go to state 40
-    if2                            shift and go to state 41
+    if2_statement                  shift and go to state 41
     assign_statement               shift and go to state 42
-    procedure_call                 shift and go to state 43
+    procedure_call_statement       shift and go to state 43
     case_statement                 shift and go to state 45
     while_statement                shift and go to state 46
     repeat_statement               shift and go to state 47
@@ -658,19 +658,19 @@ state 39
     (31) statements -> . statement
     (32) statements -> . statement statements
     (33) statement -> . nstatement
-    (34) statement -> . if2
+    (34) statement -> . if2_statement
     (35) nstatement -> . assign_statement
-    (36) nstatement -> . procedure_call
+    (36) nstatement -> . procedure_call_statement
     (37) nstatement -> . IF expr_list THEN nstatement ELSE nstatement
     (38) nstatement -> . case_statement
     (39) nstatement -> . while_statement
     (40) nstatement -> . repeat_statement
     (41) nstatement -> . for_statement
     (42) nstatement -> . compound_statement_semicolon
-    (45) if2 -> . IF expr_list THEN statement
-    (46) if2 -> . IF expr_list THEN nstatement ELSE if2
+    (45) if2_statement -> . IF expr_list THEN statement
+    (46) if2_statement -> . IF expr_list THEN nstatement ELSE if2_statement
     (43) assign_statement -> . ID ASSIGNMENT expr SEMICOLON
-    (44) procedure_call -> . ID LPARENT expr_list RPARENT SEMICOLON
+    (44) procedure_call_statement -> . ID LPARENT expr_list RPARENT SEMICOLON
     (47) case_statement -> . CASE expr OF cases END SEMICOLON
     (53) while_statement -> . WHILE expr DO statement
     (54) repeat_statement -> . REPEAT statement UNTIL expr SEMICOLON
@@ -690,9 +690,9 @@ state 39
     statement                      shift and go to state 39
     statements                     shift and go to state 64
     nstatement                     shift and go to state 40
-    if2                            shift and go to state 41
+    if2_statement                  shift and go to state 41
     assign_statement               shift and go to state 42
-    procedure_call                 shift and go to state 43
+    procedure_call_statement       shift and go to state 43
     case_statement                 shift and go to state 45
     while_statement                shift and go to state 46
     repeat_statement               shift and go to state 47
@@ -719,20 +719,20 @@ state 40
 
 state 41
 
-    (34) statement -> if2 .
+    (34) statement -> if2_statement .
 
-    IF              reduce using rule 34 (statement -> if2 .)
-    ID              reduce using rule 34 (statement -> if2 .)
-    CASE            reduce using rule 34 (statement -> if2 .)
-    WHILE           reduce using rule 34 (statement -> if2 .)
-    REPEAT          reduce using rule 34 (statement -> if2 .)
-    FOR             reduce using rule 34 (statement -> if2 .)
-    BEGIN           reduce using rule 34 (statement -> if2 .)
-    END             reduce using rule 34 (statement -> if2 .)
-    UNTIL           reduce using rule 34 (statement -> if2 .)
-    ELSE            reduce using rule 34 (statement -> if2 .)
-    INTEGER         reduce using rule 34 (statement -> if2 .)
-    REAL            reduce using rule 34 (statement -> if2 .)
+    IF              reduce using rule 34 (statement -> if2_statement .)
+    ID              reduce using rule 34 (statement -> if2_statement .)
+    CASE            reduce using rule 34 (statement -> if2_statement .)
+    WHILE           reduce using rule 34 (statement -> if2_statement .)
+    REPEAT          reduce using rule 34 (statement -> if2_statement .)
+    FOR             reduce using rule 34 (statement -> if2_statement .)
+    BEGIN           reduce using rule 34 (statement -> if2_statement .)
+    END             reduce using rule 34 (statement -> if2_statement .)
+    UNTIL           reduce using rule 34 (statement -> if2_statement .)
+    ELSE            reduce using rule 34 (statement -> if2_statement .)
+    INTEGER         reduce using rule 34 (statement -> if2_statement .)
+    REAL            reduce using rule 34 (statement -> if2_statement .)
 
 
 state 42
@@ -755,27 +755,27 @@ state 42
 
 state 43
 
-    (36) nstatement -> procedure_call .
+    (36) nstatement -> procedure_call_statement .
 
-    IF              reduce using rule 36 (nstatement -> procedure_call .)
-    ID              reduce using rule 36 (nstatement -> procedure_call .)
-    CASE            reduce using rule 36 (nstatement -> procedure_call .)
-    WHILE           reduce using rule 36 (nstatement -> procedure_call .)
-    REPEAT          reduce using rule 36 (nstatement -> procedure_call .)
-    FOR             reduce using rule 36 (nstatement -> procedure_call .)
-    BEGIN           reduce using rule 36 (nstatement -> procedure_call .)
-    END             reduce using rule 36 (nstatement -> procedure_call .)
-    UNTIL           reduce using rule 36 (nstatement -> procedure_call .)
-    ELSE            reduce using rule 36 (nstatement -> procedure_call .)
-    INTEGER         reduce using rule 36 (nstatement -> procedure_call .)
-    REAL            reduce using rule 36 (nstatement -> procedure_call .)
+    IF              reduce using rule 36 (nstatement -> procedure_call_statement .)
+    ID              reduce using rule 36 (nstatement -> procedure_call_statement .)
+    CASE            reduce using rule 36 (nstatement -> procedure_call_statement .)
+    WHILE           reduce using rule 36 (nstatement -> procedure_call_statement .)
+    REPEAT          reduce using rule 36 (nstatement -> procedure_call_statement .)
+    FOR             reduce using rule 36 (nstatement -> procedure_call_statement .)
+    BEGIN           reduce using rule 36 (nstatement -> procedure_call_statement .)
+    END             reduce using rule 36 (nstatement -> procedure_call_statement .)
+    UNTIL           reduce using rule 36 (nstatement -> procedure_call_statement .)
+    ELSE            reduce using rule 36 (nstatement -> procedure_call_statement .)
+    INTEGER         reduce using rule 36 (nstatement -> procedure_call_statement .)
+    REAL            reduce using rule 36 (nstatement -> procedure_call_statement .)
 
 
 state 44
 
     (37) nstatement -> IF . expr_list THEN nstatement ELSE nstatement
-    (45) if2 -> IF . expr_list THEN statement
-    (46) if2 -> IF . expr_list THEN nstatement ELSE if2
+    (45) if2_statement -> IF . expr_list THEN statement
+    (46) if2_statement -> IF . expr_list THEN nstatement ELSE if2_statement
     (56) expr_list -> . expr
     (57) expr_list -> . expr COMMA expr_list
     (58) expr -> . expr EQUALS expr
@@ -906,7 +906,7 @@ state 49
 state 50
 
     (43) assign_statement -> ID . ASSIGNMENT expr SEMICOLON
-    (44) procedure_call -> ID . LPARENT expr_list RPARENT SEMICOLON
+    (44) procedure_call_statement -> ID . LPARENT expr_list RPARENT SEMICOLON
 
     ASSIGNMENT      shift and go to state 75
     LPARENT         shift and go to state 76
@@ -990,19 +990,19 @@ state 53
 
     (54) repeat_statement -> REPEAT . statement UNTIL expr SEMICOLON
     (33) statement -> . nstatement
-    (34) statement -> . if2
+    (34) statement -> . if2_statement
     (35) nstatement -> . assign_statement
-    (36) nstatement -> . procedure_call
+    (36) nstatement -> . procedure_call_statement
     (37) nstatement -> . IF expr_list THEN nstatement ELSE nstatement
     (38) nstatement -> . case_statement
     (39) nstatement -> . while_statement
     (40) nstatement -> . repeat_statement
     (41) nstatement -> . for_statement
     (42) nstatement -> . compound_statement_semicolon
-    (45) if2 -> . IF expr_list THEN statement
-    (46) if2 -> . IF expr_list THEN nstatement ELSE if2
+    (45) if2_statement -> . IF expr_list THEN statement
+    (46) if2_statement -> . IF expr_list THEN nstatement ELSE if2_statement
     (43) assign_statement -> . ID ASSIGNMENT expr SEMICOLON
-    (44) procedure_call -> . ID LPARENT expr_list RPARENT SEMICOLON
+    (44) procedure_call_statement -> . ID LPARENT expr_list RPARENT SEMICOLON
     (47) case_statement -> . CASE expr OF cases END SEMICOLON
     (53) while_statement -> . WHILE expr DO statement
     (54) repeat_statement -> . REPEAT statement UNTIL expr SEMICOLON
@@ -1020,9 +1020,9 @@ state 53
 
     statement                      shift and go to state 79
     nstatement                     shift and go to state 40
-    if2                            shift and go to state 41
+    if2_statement                  shift and go to state 41
     assign_statement               shift and go to state 42
-    procedure_call                 shift and go to state 43
+    procedure_call_statement       shift and go to state 43
     case_statement                 shift and go to state 45
     while_statement                shift and go to state 46
     repeat_statement               shift and go to state 47
@@ -1132,8 +1132,8 @@ state 64
 state 65
 
     (37) nstatement -> IF expr_list . THEN nstatement ELSE nstatement
-    (45) if2 -> IF expr_list . THEN statement
-    (46) if2 -> IF expr_list . THEN nstatement ELSE if2
+    (45) if2_statement -> IF expr_list . THEN statement
+    (46) if2_statement -> IF expr_list . THEN nstatement ELSE if2_statement
 
     THEN            shift and go to state 89
 
@@ -1441,7 +1441,7 @@ state 75
 
 state 76
 
-    (44) procedure_call -> ID LPARENT . expr_list RPARENT SEMICOLON
+    (44) procedure_call_statement -> ID LPARENT . expr_list RPARENT SEMICOLON
     (56) expr_list -> . expr
     (57) expr_list -> . expr COMMA expr_list
     (58) expr -> . expr EQUALS expr
@@ -1646,10 +1646,10 @@ state 88
 state 89
 
     (37) nstatement -> IF expr_list THEN . nstatement ELSE nstatement
-    (45) if2 -> IF expr_list THEN . statement
-    (46) if2 -> IF expr_list THEN . nstatement ELSE if2
+    (45) if2_statement -> IF expr_list THEN . statement
+    (46) if2_statement -> IF expr_list THEN . nstatement ELSE if2_statement
     (35) nstatement -> . assign_statement
-    (36) nstatement -> . procedure_call
+    (36) nstatement -> . procedure_call_statement
     (37) nstatement -> . IF expr_list THEN nstatement ELSE nstatement
     (38) nstatement -> . case_statement
     (39) nstatement -> . while_statement
@@ -1657,17 +1657,17 @@ state 89
     (41) nstatement -> . for_statement
     (42) nstatement -> . compound_statement_semicolon
     (33) statement -> . nstatement
-    (34) statement -> . if2
+    (34) statement -> . if2_statement
     (43) assign_statement -> . ID ASSIGNMENT expr SEMICOLON
-    (44) procedure_call -> . ID LPARENT expr_list RPARENT SEMICOLON
+    (44) procedure_call_statement -> . ID LPARENT expr_list RPARENT SEMICOLON
     (47) case_statement -> . CASE expr OF cases END SEMICOLON
     (53) while_statement -> . WHILE expr DO statement
     (54) repeat_statement -> . REPEAT statement UNTIL expr SEMICOLON
     (55) for_statement -> . FOR ID ASSIGNMENT expr TO expr DO statement
     (29) compound_statement_semicolon -> . BEGIN statements END SEMICOLON
     (30) compound_statement_semicolon -> . BEGIN END SEMICOLON
-    (45) if2 -> . IF expr_list THEN statement
-    (46) if2 -> . IF expr_list THEN nstatement ELSE if2
+    (45) if2_statement -> . IF expr_list THEN statement
+    (46) if2_statement -> . IF expr_list THEN nstatement ELSE if2_statement
 
     IF              shift and go to state 44
     ID              shift and go to state 50
@@ -1679,9 +1679,9 @@ state 89
 
     nstatement                     shift and go to state 119
     statement                      shift and go to state 120
-    if2                            shift and go to state 41
+    if2_statement                  shift and go to state 41
     assign_statement               shift and go to state 42
-    procedure_call                 shift and go to state 43
+    procedure_call_statement       shift and go to state 43
     case_statement                 shift and go to state 45
     while_statement                shift and go to state 46
     repeat_statement               shift and go to state 47
@@ -2422,7 +2422,7 @@ state 108
 
 state 109
 
-    (44) procedure_call -> ID LPARENT expr_list . RPARENT SEMICOLON
+    (44) procedure_call_statement -> ID LPARENT expr_list . RPARENT SEMICOLON
 
     RPARENT         shift and go to state 137
 
@@ -2447,19 +2447,19 @@ state 111
 
     (53) while_statement -> WHILE expr DO . statement
     (33) statement -> . nstatement
-    (34) statement -> . if2
+    (34) statement -> . if2_statement
     (35) nstatement -> . assign_statement
-    (36) nstatement -> . procedure_call
+    (36) nstatement -> . procedure_call_statement
     (37) nstatement -> . IF expr_list THEN nstatement ELSE nstatement
     (38) nstatement -> . case_statement
     (39) nstatement -> . while_statement
     (40) nstatement -> . repeat_statement
     (41) nstatement -> . for_statement
     (42) nstatement -> . compound_statement_semicolon
-    (45) if2 -> . IF expr_list THEN statement
-    (46) if2 -> . IF expr_list THEN nstatement ELSE if2
+    (45) if2_statement -> . IF expr_list THEN statement
+    (46) if2_statement -> . IF expr_list THEN nstatement ELSE if2_statement
     (43) assign_statement -> . ID ASSIGNMENT expr SEMICOLON
-    (44) procedure_call -> . ID LPARENT expr_list RPARENT SEMICOLON
+    (44) procedure_call_statement -> . ID LPARENT expr_list RPARENT SEMICOLON
     (47) case_statement -> . CASE expr OF cases END SEMICOLON
     (53) while_statement -> . WHILE expr DO statement
     (54) repeat_statement -> . REPEAT statement UNTIL expr SEMICOLON
@@ -2477,9 +2477,9 @@ state 111
 
     statement                      shift and go to state 143
     nstatement                     shift and go to state 40
-    if2                            shift and go to state 41
+    if2_statement                  shift and go to state 41
     assign_statement               shift and go to state 42
-    procedure_call                 shift and go to state 43
+    procedure_call_statement       shift and go to state 43
     case_statement                 shift and go to state 45
     while_statement                shift and go to state 46
     repeat_statement               shift and go to state 47
@@ -2623,7 +2623,7 @@ state 118
 state 119
 
     (37) nstatement -> IF expr_list THEN nstatement . ELSE nstatement
-    (46) if2 -> IF expr_list THEN nstatement . ELSE if2
+    (46) if2_statement -> IF expr_list THEN nstatement . ELSE if2_statement
     (33) statement -> nstatement .
 
   ! shift/reduce conflict for ELSE resolved as shift
@@ -2645,20 +2645,20 @@ state 119
 
 state 120
 
-    (45) if2 -> IF expr_list THEN statement .
+    (45) if2_statement -> IF expr_list THEN statement .
 
-    IF              reduce using rule 45 (if2 -> IF expr_list THEN statement .)
-    ID              reduce using rule 45 (if2 -> IF expr_list THEN statement .)
-    CASE            reduce using rule 45 (if2 -> IF expr_list THEN statement .)
-    WHILE           reduce using rule 45 (if2 -> IF expr_list THEN statement .)
-    REPEAT          reduce using rule 45 (if2 -> IF expr_list THEN statement .)
-    FOR             reduce using rule 45 (if2 -> IF expr_list THEN statement .)
-    BEGIN           reduce using rule 45 (if2 -> IF expr_list THEN statement .)
-    END             reduce using rule 45 (if2 -> IF expr_list THEN statement .)
-    UNTIL           reduce using rule 45 (if2 -> IF expr_list THEN statement .)
-    ELSE            reduce using rule 45 (if2 -> IF expr_list THEN statement .)
-    INTEGER         reduce using rule 45 (if2 -> IF expr_list THEN statement .)
-    REAL            reduce using rule 45 (if2 -> IF expr_list THEN statement .)
+    IF              reduce using rule 45 (if2_statement -> IF expr_list THEN statement .)
+    ID              reduce using rule 45 (if2_statement -> IF expr_list THEN statement .)
+    CASE            reduce using rule 45 (if2_statement -> IF expr_list THEN statement .)
+    WHILE           reduce using rule 45 (if2_statement -> IF expr_list THEN statement .)
+    REPEAT          reduce using rule 45 (if2_statement -> IF expr_list THEN statement .)
+    FOR             reduce using rule 45 (if2_statement -> IF expr_list THEN statement .)
+    BEGIN           reduce using rule 45 (if2_statement -> IF expr_list THEN statement .)
+    END             reduce using rule 45 (if2_statement -> IF expr_list THEN statement .)
+    UNTIL           reduce using rule 45 (if2_statement -> IF expr_list THEN statement .)
+    ELSE            reduce using rule 45 (if2_statement -> IF expr_list THEN statement .)
+    INTEGER         reduce using rule 45 (if2_statement -> IF expr_list THEN statement .)
+    REAL            reduce using rule 45 (if2_statement -> IF expr_list THEN statement .)
 
 
 state 121
@@ -3473,7 +3473,7 @@ state 136
 
 state 137
 
-    (44) procedure_call -> ID LPARENT expr_list RPARENT . SEMICOLON
+    (44) procedure_call_statement -> ID LPARENT expr_list RPARENT . SEMICOLON
 
     SEMICOLON       shift and go to state 150
 
@@ -3650,19 +3650,19 @@ state 148
 state 149
 
     (37) nstatement -> IF expr_list THEN nstatement ELSE . nstatement
-    (46) if2 -> IF expr_list THEN nstatement ELSE . if2
+    (46) if2_statement -> IF expr_list THEN nstatement ELSE . if2_statement
     (35) nstatement -> . assign_statement
-    (36) nstatement -> . procedure_call
+    (36) nstatement -> . procedure_call_statement
     (37) nstatement -> . IF expr_list THEN nstatement ELSE nstatement
     (38) nstatement -> . case_statement
     (39) nstatement -> . while_statement
     (40) nstatement -> . repeat_statement
     (41) nstatement -> . for_statement
     (42) nstatement -> . compound_statement_semicolon
-    (45) if2 -> . IF expr_list THEN statement
-    (46) if2 -> . IF expr_list THEN nstatement ELSE if2
+    (45) if2_statement -> . IF expr_list THEN statement
+    (46) if2_statement -> . IF expr_list THEN nstatement ELSE if2_statement
     (43) assign_statement -> . ID ASSIGNMENT expr SEMICOLON
-    (44) procedure_call -> . ID LPARENT expr_list RPARENT SEMICOLON
+    (44) procedure_call_statement -> . ID LPARENT expr_list RPARENT SEMICOLON
     (47) case_statement -> . CASE expr OF cases END SEMICOLON
     (53) while_statement -> . WHILE expr DO statement
     (54) repeat_statement -> . REPEAT statement UNTIL expr SEMICOLON
@@ -3679,9 +3679,9 @@ state 149
     BEGIN           shift and go to state 36
 
     nstatement                     shift and go to state 160
-    if2                            shift and go to state 161
+    if2_statement                  shift and go to state 161
     assign_statement               shift and go to state 42
-    procedure_call                 shift and go to state 43
+    procedure_call_statement       shift and go to state 43
     case_statement                 shift and go to state 45
     while_statement                shift and go to state 46
     repeat_statement               shift and go to state 47
@@ -3690,20 +3690,20 @@ state 149
 
 state 150
 
-    (44) procedure_call -> ID LPARENT expr_list RPARENT SEMICOLON .
+    (44) procedure_call_statement -> ID LPARENT expr_list RPARENT SEMICOLON .
 
-    IF              reduce using rule 44 (procedure_call -> ID LPARENT expr_list RPARENT SEMICOLON .)
-    ID              reduce using rule 44 (procedure_call -> ID LPARENT expr_list RPARENT SEMICOLON .)
-    CASE            reduce using rule 44 (procedure_call -> ID LPARENT expr_list RPARENT SEMICOLON .)
-    WHILE           reduce using rule 44 (procedure_call -> ID LPARENT expr_list RPARENT SEMICOLON .)
-    REPEAT          reduce using rule 44 (procedure_call -> ID LPARENT expr_list RPARENT SEMICOLON .)
-    FOR             reduce using rule 44 (procedure_call -> ID LPARENT expr_list RPARENT SEMICOLON .)
-    BEGIN           reduce using rule 44 (procedure_call -> ID LPARENT expr_list RPARENT SEMICOLON .)
-    END             reduce using rule 44 (procedure_call -> ID LPARENT expr_list RPARENT SEMICOLON .)
-    UNTIL           reduce using rule 44 (procedure_call -> ID LPARENT expr_list RPARENT SEMICOLON .)
-    ELSE            reduce using rule 44 (procedure_call -> ID LPARENT expr_list RPARENT SEMICOLON .)
-    INTEGER         reduce using rule 44 (procedure_call -> ID LPARENT expr_list RPARENT SEMICOLON .)
-    REAL            reduce using rule 44 (procedure_call -> ID LPARENT expr_list RPARENT SEMICOLON .)
+    IF              reduce using rule 44 (procedure_call_statement -> ID LPARENT expr_list RPARENT SEMICOLON .)
+    ID              reduce using rule 44 (procedure_call_statement -> ID LPARENT expr_list RPARENT SEMICOLON .)
+    CASE            reduce using rule 44 (procedure_call_statement -> ID LPARENT expr_list RPARENT SEMICOLON .)
+    WHILE           reduce using rule 44 (procedure_call_statement -> ID LPARENT expr_list RPARENT SEMICOLON .)
+    REPEAT          reduce using rule 44 (procedure_call_statement -> ID LPARENT expr_list RPARENT SEMICOLON .)
+    FOR             reduce using rule 44 (procedure_call_statement -> ID LPARENT expr_list RPARENT SEMICOLON .)
+    BEGIN           reduce using rule 44 (procedure_call_statement -> ID LPARENT expr_list RPARENT SEMICOLON .)
+    END             reduce using rule 44 (procedure_call_statement -> ID LPARENT expr_list RPARENT SEMICOLON .)
+    UNTIL           reduce using rule 44 (procedure_call_statement -> ID LPARENT expr_list RPARENT SEMICOLON .)
+    ELSE            reduce using rule 44 (procedure_call_statement -> ID LPARENT expr_list RPARENT SEMICOLON .)
+    INTEGER         reduce using rule 44 (procedure_call_statement -> ID LPARENT expr_list RPARENT SEMICOLON .)
+    REAL            reduce using rule 44 (procedure_call_statement -> ID LPARENT expr_list RPARENT SEMICOLON .)
 
 
 state 151
@@ -3724,19 +3724,19 @@ state 153
 
     (50) case -> INTEGER TWOPOINTS . statement
     (33) statement -> . nstatement
-    (34) statement -> . if2
+    (34) statement -> . if2_statement
     (35) nstatement -> . assign_statement
-    (36) nstatement -> . procedure_call
+    (36) nstatement -> . procedure_call_statement
     (37) nstatement -> . IF expr_list THEN nstatement ELSE nstatement
     (38) nstatement -> . case_statement
     (39) nstatement -> . while_statement
     (40) nstatement -> . repeat_statement
     (41) nstatement -> . for_statement
     (42) nstatement -> . compound_statement_semicolon
-    (45) if2 -> . IF expr_list THEN statement
-    (46) if2 -> . IF expr_list THEN nstatement ELSE if2
+    (45) if2_statement -> . IF expr_list THEN statement
+    (46) if2_statement -> . IF expr_list THEN nstatement ELSE if2_statement
     (43) assign_statement -> . ID ASSIGNMENT expr SEMICOLON
-    (44) procedure_call -> . ID LPARENT expr_list RPARENT SEMICOLON
+    (44) procedure_call_statement -> . ID LPARENT expr_list RPARENT SEMICOLON
     (47) case_statement -> . CASE expr OF cases END SEMICOLON
     (53) while_statement -> . WHILE expr DO statement
     (54) repeat_statement -> . REPEAT statement UNTIL expr SEMICOLON
@@ -3754,9 +3754,9 @@ state 153
 
     statement                      shift and go to state 163
     nstatement                     shift and go to state 40
-    if2                            shift and go to state 41
+    if2_statement                  shift and go to state 41
     assign_statement               shift and go to state 42
-    procedure_call                 shift and go to state 43
+    procedure_call_statement       shift and go to state 43
     case_statement                 shift and go to state 45
     while_statement                shift and go to state 46
     repeat_statement               shift and go to state 47
@@ -3767,19 +3767,19 @@ state 154
 
     (51) case -> REAL TWOPOINTS . statement
     (33) statement -> . nstatement
-    (34) statement -> . if2
+    (34) statement -> . if2_statement
     (35) nstatement -> . assign_statement
-    (36) nstatement -> . procedure_call
+    (36) nstatement -> . procedure_call_statement
     (37) nstatement -> . IF expr_list THEN nstatement ELSE nstatement
     (38) nstatement -> . case_statement
     (39) nstatement -> . while_statement
     (40) nstatement -> . repeat_statement
     (41) nstatement -> . for_statement
     (42) nstatement -> . compound_statement_semicolon
-    (45) if2 -> . IF expr_list THEN statement
-    (46) if2 -> . IF expr_list THEN nstatement ELSE if2
+    (45) if2_statement -> . IF expr_list THEN statement
+    (46) if2_statement -> . IF expr_list THEN nstatement ELSE if2_statement
     (43) assign_statement -> . ID ASSIGNMENT expr SEMICOLON
-    (44) procedure_call -> . ID LPARENT expr_list RPARENT SEMICOLON
+    (44) procedure_call_statement -> . ID LPARENT expr_list RPARENT SEMICOLON
     (47) case_statement -> . CASE expr OF cases END SEMICOLON
     (53) while_statement -> . WHILE expr DO statement
     (54) repeat_statement -> . REPEAT statement UNTIL expr SEMICOLON
@@ -3797,9 +3797,9 @@ state 154
 
     statement                      shift and go to state 164
     nstatement                     shift and go to state 40
-    if2                            shift and go to state 41
+    if2_statement                  shift and go to state 41
     assign_statement               shift and go to state 42
-    procedure_call                 shift and go to state 43
+    procedure_call_statement       shift and go to state 43
     case_statement                 shift and go to state 45
     while_statement                shift and go to state 46
     repeat_statement               shift and go to state 47
@@ -3810,19 +3810,19 @@ state 155
 
     (52) case -> ID TWOPOINTS . statement
     (33) statement -> . nstatement
-    (34) statement -> . if2
+    (34) statement -> . if2_statement
     (35) nstatement -> . assign_statement
-    (36) nstatement -> . procedure_call
+    (36) nstatement -> . procedure_call_statement
     (37) nstatement -> . IF expr_list THEN nstatement ELSE nstatement
     (38) nstatement -> . case_statement
     (39) nstatement -> . while_statement
     (40) nstatement -> . repeat_statement
     (41) nstatement -> . for_statement
     (42) nstatement -> . compound_statement_semicolon
-    (45) if2 -> . IF expr_list THEN statement
-    (46) if2 -> . IF expr_list THEN nstatement ELSE if2
+    (45) if2_statement -> . IF expr_list THEN statement
+    (46) if2_statement -> . IF expr_list THEN nstatement ELSE if2_statement
     (43) assign_statement -> . ID ASSIGNMENT expr SEMICOLON
-    (44) procedure_call -> . ID LPARENT expr_list RPARENT SEMICOLON
+    (44) procedure_call_statement -> . ID LPARENT expr_list RPARENT SEMICOLON
     (47) case_statement -> . CASE expr OF cases END SEMICOLON
     (53) while_statement -> . WHILE expr DO statement
     (54) repeat_statement -> . REPEAT statement UNTIL expr SEMICOLON
@@ -3840,9 +3840,9 @@ state 155
 
     statement                      shift and go to state 165
     nstatement                     shift and go to state 40
-    if2                            shift and go to state 41
+    if2_statement                  shift and go to state 41
     assign_statement               shift and go to state 42
-    procedure_call                 shift and go to state 43
+    procedure_call_statement       shift and go to state 43
     case_statement                 shift and go to state 45
     while_statement                shift and go to state 46
     repeat_statement               shift and go to state 47
@@ -3945,20 +3945,20 @@ state 160
 
 state 161
 
-    (46) if2 -> IF expr_list THEN nstatement ELSE if2 .
+    (46) if2_statement -> IF expr_list THEN nstatement ELSE if2_statement .
 
-    IF              reduce using rule 46 (if2 -> IF expr_list THEN nstatement ELSE if2 .)
-    ID              reduce using rule 46 (if2 -> IF expr_list THEN nstatement ELSE if2 .)
-    CASE            reduce using rule 46 (if2 -> IF expr_list THEN nstatement ELSE if2 .)
-    WHILE           reduce using rule 46 (if2 -> IF expr_list THEN nstatement ELSE if2 .)
-    REPEAT          reduce using rule 46 (if2 -> IF expr_list THEN nstatement ELSE if2 .)
-    FOR             reduce using rule 46 (if2 -> IF expr_list THEN nstatement ELSE if2 .)
-    BEGIN           reduce using rule 46 (if2 -> IF expr_list THEN nstatement ELSE if2 .)
-    END             reduce using rule 46 (if2 -> IF expr_list THEN nstatement ELSE if2 .)
-    UNTIL           reduce using rule 46 (if2 -> IF expr_list THEN nstatement ELSE if2 .)
-    ELSE            reduce using rule 46 (if2 -> IF expr_list THEN nstatement ELSE if2 .)
-    INTEGER         reduce using rule 46 (if2 -> IF expr_list THEN nstatement ELSE if2 .)
-    REAL            reduce using rule 46 (if2 -> IF expr_list THEN nstatement ELSE if2 .)
+    IF              reduce using rule 46 (if2_statement -> IF expr_list THEN nstatement ELSE if2_statement .)
+    ID              reduce using rule 46 (if2_statement -> IF expr_list THEN nstatement ELSE if2_statement .)
+    CASE            reduce using rule 46 (if2_statement -> IF expr_list THEN nstatement ELSE if2_statement .)
+    WHILE           reduce using rule 46 (if2_statement -> IF expr_list THEN nstatement ELSE if2_statement .)
+    REPEAT          reduce using rule 46 (if2_statement -> IF expr_list THEN nstatement ELSE if2_statement .)
+    FOR             reduce using rule 46 (if2_statement -> IF expr_list THEN nstatement ELSE if2_statement .)
+    BEGIN           reduce using rule 46 (if2_statement -> IF expr_list THEN nstatement ELSE if2_statement .)
+    END             reduce using rule 46 (if2_statement -> IF expr_list THEN nstatement ELSE if2_statement .)
+    UNTIL           reduce using rule 46 (if2_statement -> IF expr_list THEN nstatement ELSE if2_statement .)
+    ELSE            reduce using rule 46 (if2_statement -> IF expr_list THEN nstatement ELSE if2_statement .)
+    INTEGER         reduce using rule 46 (if2_statement -> IF expr_list THEN nstatement ELSE if2_statement .)
+    REAL            reduce using rule 46 (if2_statement -> IF expr_list THEN nstatement ELSE if2_statement .)
 
 
 state 162
@@ -4064,19 +4064,19 @@ state 169
 
     (55) for_statement -> FOR ID ASSIGNMENT expr TO expr DO . statement
     (33) statement -> . nstatement
-    (34) statement -> . if2
+    (34) statement -> . if2_statement
     (35) nstatement -> . assign_statement
-    (36) nstatement -> . procedure_call
+    (36) nstatement -> . procedure_call_statement
     (37) nstatement -> . IF expr_list THEN nstatement ELSE nstatement
     (38) nstatement -> . case_statement
     (39) nstatement -> . while_statement
     (40) nstatement -> . repeat_statement
     (41) nstatement -> . for_statement
     (42) nstatement -> . compound_statement_semicolon
-    (45) if2 -> . IF expr_list THEN statement
-    (46) if2 -> . IF expr_list THEN nstatement ELSE if2
+    (45) if2_statement -> . IF expr_list THEN statement
+    (46) if2_statement -> . IF expr_list THEN nstatement ELSE if2_statement
     (43) assign_statement -> . ID ASSIGNMENT expr SEMICOLON
-    (44) procedure_call -> . ID LPARENT expr_list RPARENT SEMICOLON
+    (44) procedure_call_statement -> . ID LPARENT expr_list RPARENT SEMICOLON
     (47) case_statement -> . CASE expr OF cases END SEMICOLON
     (53) while_statement -> . WHILE expr DO statement
     (54) repeat_statement -> . REPEAT statement UNTIL expr SEMICOLON
@@ -4094,9 +4094,9 @@ state 169
 
     statement                      shift and go to state 170
     nstatement                     shift and go to state 40
-    if2                            shift and go to state 41
+    if2_statement                  shift and go to state 41
     assign_statement               shift and go to state 42
-    procedure_call                 shift and go to state 43
+    procedure_call_statement       shift and go to state 43
     case_statement                 shift and go to state 45
     while_statement                shift and go to state 46
     repeat_statement               shift and go to state 47

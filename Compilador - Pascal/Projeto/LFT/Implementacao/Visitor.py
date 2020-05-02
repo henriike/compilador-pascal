@@ -1,10 +1,14 @@
 class Visitor:
 
+    # Visitor do Program
+
     def visitPProgram(self, pProgram):
         if (pProgram.block != None):
             print('program', pProgram.id, ';')
             pProgram.block.accept(self)
 
+
+    # Visitor do Block
 
     def visitBBlock(self, bBlock):
         if bBlock.const_dec != None:
@@ -18,6 +22,8 @@ class Visitor:
             bBlock.compoundStatement_dec.accept(self)
 
 
+    # Visitor do Const
+
     def visitCConstDefinition(self, cConstDefinition):
         if cConstDefinition != None:
             print('const')
@@ -26,6 +32,8 @@ class Visitor:
             for key in indices:
                 print(key,' = ', cConstDefinition.dicDefinicoes[key], ';')
 
+
+    # Visitor do Var
 
     def visitVVarDeclaration(self, vVarDeclaration):
         if vVarDeclaration != None:
@@ -36,6 +44,8 @@ class Visitor:
                 print(key,' : ', vVarDeclaration.dicDefinicoes[key], ';')
 
 
+    # Visitor do Procedure
+
     def visitPProcedureDeclaration(self, pProcedureDeclaration):
         if pProcedureDeclaration != None:
             indices = list(pProcedureDeclaration.dicDefinicoes.keys())
@@ -44,6 +54,8 @@ class Visitor:
                 print('procedure', key, ' ( ', pProcedureDeclaration.dicDefinicoes[key], ' ) ;')
 
 
+    # Visitor do Function
+
     def visitFFunctionDeclaration(self, fFunctionDeclaration):
         if fFunctionDeclaration != None:
             for key, v in fFunctionDeclaration.dicDefinicoes.items():
@@ -51,11 +63,95 @@ class Visitor:
 
 
 
+    # Visitor do CompoundStatementScore
 
-    # Visitor do Compound
+    def visitCCompoundStatementScore(self, cCompoundStatementScore):
+        if cCompoundStatementScore != None:
+            print('begin', end='')
+            cCompoundStatementScore.statements(self)
+            print('end.', end='')
 
-    #def visitCCompoundStatementScore():
 
+
+    # Visitor do CompoundStatementSemicolon
+
+    def visitCCompoundStatementSemicolon(self, cCompoundStatementSemicolon):
+        if cCompoundStatementSemicolon != None:
+            print('begin', end='')
+            cCompoundStatementSemicolon.statements(self)
+            print('end;', end='')
+
+
+
+    # Visitor do Statements
+
+    def visitSSingleStatement(self, sSingleStatement):
+        if sSingleStatement != None:
+            sSingleStatement.statementt(self)
+
+    def visitCCompoundStatement(self, cCompoundStatement):
+        if cCompoundStatement != None:
+            cCompoundStatement.statementt(self)
+            print(' ', end='')
+            cCompoundStatement.statementss(self)
+
+
+
+    # Visitor do Statement
+
+    def visitAAssignStatement(self, aAssignStatement):
+        if aAssignStatement != None:
+            aAssignStatement.id(self)
+            print(' := ', end='')
+            aAssignStatement.exp(self)
+            print(';', end='')
+
+
+    def visitPProcedureCallStatement(self, pProcedureCallStatement):
+        if pProcedureCallStatement != None:
+            pProcedureCallStatement.id(self)
+            print('( ', end='')
+            pProcedureCallStatement.exprList(self)
+            print(' );', end='')
+
+
+    def visitIIfStatement(self, iIfStatement):
+        if iIfStatement != None:
+            print('if ', end='')
+            iIfStatement.expr_list(self)
+            print(' then ', end='')
+            iIfStatement.nstatement1(self)
+            print(' else ', end='')
+            iIfStatement.nstatement2(self)
+
+
+    def visitWWhileStatement(self, wWhileStatement):
+        if wWhileStatement != None:
+            print('while ', end='')
+            wWhileStatement.expr(self)
+            print(' do')
+            wWhileStatement.statement(self)
+
+
+    def visitRRepeatStatement(self, rRepeatStatement):
+        if rRepeatStatement != None:
+            print('repeat ', end='')
+            rRepeatStatement.statement(self)
+            print(' until ', end='')
+            rRepeatStatement.expr(self)
+            print(';', end='')
+
+
+    def visitFForStatement(self, fForStatement):
+        if fForStatement != None:
+            print('for ', end='')
+            fForStatement.id(self)
+            print(' := ', end='')
+            fForStatement.expr1(self)
+            print(' to ', end='')
+            fForStatement.expr2(self)
+            print(' do ', end='')
+            fForStatement.statement(self)
 
 
 
@@ -169,29 +265,6 @@ class Visitor:
 
     def visitFFactorNot(self, fFactorNot):
         print(' not ', fFactorNot.type, end='')
-
-
-
-    #--------------------------------------------------------------------------------------------
-
-
-    def visitAAssignStatement(self, aAssignStatement):
-        if aAssignStatement != None:
-            aAssignStatement.id.accept(self)
-            print(':=')
-            aAssignStatement.exp.accept(self)
-            print(';')
-
-
-    def visitPProcedureCall(self, pProcedureCall):
-        if pProcedureCall != None:
-            pProcedureCall.id.accept(self)
-            print('(', pProcedureCall.exprList, ');')
-
-
-    def visitWWhileStatement(self, wWhileStatement):
-        print('while', wWhileStatement.exp, 'do')
-        wWhileStatement.statement.accept(self)
 
 
     # p[0] = dict({p[1]: p[3]}.items() + p[0].items())

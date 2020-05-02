@@ -174,9 +174,6 @@ def p_param_section(p):
 
 
 
-
-
-
 # Declaração do compound_statement que chama o statement, onde o statement
 # engloba: assign, procedure_call, if, case, while, repeat, for
 
@@ -213,7 +210,7 @@ def p_statements(p):
 def p_statement(p):
     '''
     statement : nstatement
-              | if2
+              | if2_statement
     '''
     p[0] = p[1]
 
@@ -221,7 +218,7 @@ def p_statement(p):
 def p_nstatement(p):
     '''
     nstatement : assign_statement
-               | procedure_call
+               | procedure_call_statement
                | IF expr_list THEN nstatement ELSE nstatement
                | case_statement
                | while_statement
@@ -230,7 +227,7 @@ def p_nstatement(p):
                | compound_statement_semicolon
     '''
     if p[1] == 'if':
-        p[0] = sa.IfStatement(p[2], p[4], p[6])
+        p[0] = sa.IIfStatement(p[2], p[4], p[6])
     else:
         p[0] = p[1]
 
@@ -246,17 +243,17 @@ def p_assign_statement(p):
 
 
 # Chamada de função,
-def p_procedure_call(p):
+def p_procedure_call_statement(p):
     '''
-    procedure_call :  ID LPARENT expr_list RPARENT SEMICOLON
+    procedure_call_statement :  ID LPARENT expr_list RPARENT SEMICOLON
     '''
-    p[0] = sa.PProcedureCall(p[1], p[3])
+    p[0] = sa.PProcedureCallStatement(p[1], p[3])
 
 
-def p_if2(p):
+def p_if2_statement(p):
     '''
-    if2 : IF expr_list THEN statement
-        | IF expr_list THEN nstatement ELSE if2
+    if2_statement : IF expr_list THEN statement
+                  | IF expr_list THEN nstatement ELSE if2_statement
     '''
     if len(p) == 5:
         p[0] = sa.IIfStatement(p[2], p[4], None)
@@ -313,7 +310,6 @@ def p_repeat_statement(p):
     p[0] = sa.RRepeatStatement(p[2], p[4])
 
 
-
 # Estrutura de Repetição - For
 # No caso To é usado, se o valor inicial for maior que o valor final, a instrução nunca será executada.
 # No caso de DownTo ser usado, se o valor inicial for menor que o valor final, a instrução nunca será executada.
@@ -322,6 +318,7 @@ def p_for_statement(p):
     for_statement : FOR ID ASSIGNMENT expr TO expr DO statement
     '''
     p[0] = sa.FForStatement(p[2], p[4], p[6], p[8])
+
 
 
 

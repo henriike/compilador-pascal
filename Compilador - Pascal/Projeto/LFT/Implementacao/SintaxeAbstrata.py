@@ -129,32 +129,6 @@ class CCompoundStatementScore(CompoundStatementScore):
         visitor.visitCCompoundStatementScore(self)
 
 
-
-'''
-Statements e classes concretas
-'''
-class Statements(metaclass=ABCMeta):
-    @abstractmethod
-    def accept(self, Visitor):
-        pass
-
-class SSingleStatement(Statements):
-    def __init__(self, statement):
-        self.statement = statement
-
-    def accept(self, visitor):
-        visitor.visitSSingleStatements(self)
-
-class CCompoundStatement(Statements):
-    def __init__(self, statement, statements):
-        self.statement = statement
-        self.statements = statements
-
-    def accept(self, visitor):
-        visitor.visitCCompoundStatement(self)
-
-
-
 '''
 CompoundStatementSemicolon e classes concretas
 '''
@@ -169,6 +143,30 @@ class CCompoundStatementSemicolon(CompoundStatementSemicolon):
 
     def accept(self, visitor):
         visitor.visitCCompoundStatementSemicolon(self)
+
+
+'''
+Statements e classes concretas
+'''
+class Statements(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, Visitor):
+        pass
+
+class SSingleStatement(Statements):
+    def __init__(self, statementt):
+        self.statementt = statementt
+
+    def accept(self, visitor):
+        visitor.visitSSingleStatement(self)
+
+class CCompoundStatement(Statements):
+    def __init__(self, statementt, statementss):
+        self.statementt = statementt
+        self.statementss = statementss
+
+    def accept(self, visitor):
+        visitor.visitCCompoundStatement(self)
 
 
 
@@ -199,15 +197,6 @@ class PProcedureCallStatement(Statement):
         visitor.visitPProcedureCallStatement(self)
 
 
-class WWhileStatement(Statement):
-    def __init__(self, exp, statement):
-        self.exp = exp
-        self.statement = statement
-
-    def accept(self, visitor):
-        visitor.visitWWhileStatement(self)
-
-
 class IIfStatement(Statement):
     def __init__(self, expr_list, nstatement1, nstatement2):
         self.expr_list = expr_list
@@ -216,6 +205,15 @@ class IIfStatement(Statement):
 
     def accept(self, visitor):
         visitor.visitIIfStatement(self)
+
+
+class WWhileStatement(Statement):
+    def __init__(self, expr, statement):
+        self.expr = expr
+        self.statement = statement
+
+    def accept(self, visitor):
+        visitor.visitWWhileStatement(self)
 
 
 class RRepeatStatement(Statement):
