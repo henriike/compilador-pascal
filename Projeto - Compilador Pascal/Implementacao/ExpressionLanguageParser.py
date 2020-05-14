@@ -219,7 +219,7 @@ def p_nstatement(p):
     '''
     nstatement : assign_statement
                | procedure_call_statement
-               | IF expr_list THEN nstatement ELSE nstatement
+               | IF LPARENT expr_list RPARENT THEN nstatement ELSE nstatement
                | case_statement
                | while_statement
                | repeat_statement
@@ -227,7 +227,7 @@ def p_nstatement(p):
                | compound_statement_semicolon
     '''
     if p[1] == 'if':
-        p[0] = sa.IIfStatement(p[2], p[4], p[6])
+        p[0] = sa.IIfStatement(p[3], p[6], p[8])
     else:
         p[0] = p[1]
 
@@ -252,13 +252,40 @@ def p_procedure_call_statement(p):
 
 def p_if2_statement(p):
     '''
-    if2_statement : IF expr_list THEN statement
-                  | IF expr_list THEN nstatement ELSE if2_statement
+    if2_statement : IF LPARENT expr_list RPARENT THEN statement
+                  | IF LPARENT expr_list RPARENT THEN nstatement ELSE if2_statement
     '''
-    if len(p) == 5:
-        p[0] = sa.IIfStatement(p[2], p[4], None)
+    if len(p) == 7:
+        p[0] = sa.IIfStatement(p[3], p[6], None)
     else:
-        p[0] = sa.IIfStatement(p[2], p[4], p[6])
+        p[0] = sa.IIfStatement(p[3], p[6], p[8])
+
+
+# Estrutura de Repetição - While
+def p_while_statement(p):
+    '''
+    while_statement : WHILE expr DO statement
+    '''
+    p[0] = sa.WWhileStatement(p[2], p[4])
+
+
+# Estrutura de Repetição - Repeat
+def p_repeat_statement(p):
+    '''
+    repeat_statement : REPEAT statement UNTIL expr SEMICOLON
+    '''
+    p[0] = sa.RRepeatStatement(p[2], p[4])
+
+
+
+# Estrutura de Repetição - For
+# No caso To é usado, se o valor inicial for maior que o valor final, a instrução nunca será executada.
+# No caso de DownTo ser usado, se o valor inicial for menor que o valor final, a instrução nunca será executada.
+def p_for_statement(p):
+    '''
+    for_statement : FOR ID ASSIGNMENT expr TO expr DO statement
+    '''
+    p[0] = sa.FForStatement(p[2], p[4], p[6], p[8])
 
 
 
@@ -267,6 +294,7 @@ def p_case_statement(p):
     '''
     case_statement : CASE expr OF cases END SEMICOLON
     '''
+    p[0] = sa.CCaseStatement(p[2], p[4])
 
 
 def p_cases(p):
@@ -292,33 +320,6 @@ def p_case(p):
         p[0] = sa.RRealCase(p[1], p[3])
     else:
         p[0] = sa.IIdCase(p[1], p[3])
-
-
-# Estrutura de Repetição - While
-def p_while_statement(p):
-    '''
-    while_statement : WHILE expr DO statement
-    '''
-    p[0] = sa.WWhileStatement(p[2], p[4])
-
-
-# Estrutura de Repetição - Repeat
-def p_repeat_statement(p):
-    '''
-    repeat_statement : REPEAT statement UNTIL expr SEMICOLON
-    '''
-    p[0] = sa.RRepeatStatement(p[2], p[4])
-
-
-# Estrutura de Repetição - For
-# No caso To é usado, se o valor inicial for maior que o valor final, a instrução nunca será executada.
-# No caso de DownTo ser usado, se o valor inicial for menor que o valor final, a instrução nunca será executada.
-def p_for_statement(p):
-    '''
-    for_statement : FOR ID ASSIGNMENT expr TO expr DO statement
-    '''
-    p[0] = sa.FForStatement(p[2], p[4], p[6], p[8])
-
 
 
 

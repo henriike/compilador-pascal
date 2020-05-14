@@ -19,7 +19,7 @@ procedure teste80();
 
 begin
 
-    nome := 5*5;
+     nome := 5*5;
     soma(5 mod 3);
 
     while number>0 do
@@ -32,7 +32,22 @@ begin
 
 
     for cont:= 1 to 2 do
-       nome := 10+8;
+    begin
+        nome := 10+8;
+    end;
+
+    case x of
+        1.1 : nome:=4;
+        1.2 : nome:=4;
+        2.1 : nome:=4;
+        p : nome:=4;
+    end;
+
+ if (x > 5) then
+        nome := 4 + 5;
+    else
+        if (nome <> 'larry') then
+            nome := 'larry';
 
 
 

@@ -78,7 +78,7 @@ class Visitor:
     def visitCCompoundStatementSemicolon(self, cCompoundStatementSemicolon):
         if cCompoundStatementSemicolon != None:
             print('begin', end='')
-            cCompoundStatementSemicolon.statements(self)
+            cCompoundStatementSemicolon.statements.accept(self)
             print('end;', end='')
 
 
@@ -113,16 +113,6 @@ class Visitor:
             print(' );')
 
 
-    def visitIIfStatement(self, iIfStatement):
-        if iIfStatement != None:
-            print('if ', end='')
-            iIfStatement.expr_list(self)
-            print(' then ', end='')
-            iIfStatement.nstatement1(self)
-            print(' else ', end='')
-            iIfStatement.nstatement2(self)
-
-
     def visitWWhileStatement(self, wWhileStatement):
         if wWhileStatement != None:
             print('while ', end='')
@@ -151,6 +141,50 @@ class Visitor:
 
 
 
+    def visitCCaseStatement(self, cCaseStatement):
+        if cCaseStatement != None:
+            print('case ', end='')
+            cCaseStatement.expr.accept(self)
+            print(' of')
+            cCaseStatement.cases.accept(self)
+            print('end;')
+
+    def visitSSingleCase(self, sSingleCase):
+        if sSingleCase != None:
+            sSingleCase.case.accept(self)
+
+    def visitCCompoundCase(self, cCompoundCase):
+        if cCompoundCase != None:
+            cCompoundCase.case.accept(self)
+            print(' ', end='')
+            cCompoundCase.cases.accept(self)
+
+    def visitIIntegerCase(self, iIntegerCase):
+        if iIntegerCase != None:
+            print(iIntegerCase.token, ' : ', end='')
+            iIntegerCase.statement.accept(self)
+
+    def visitRRealCase(self, rRealCase):
+        if rRealCase != None:
+            print(rRealCase.token, ' : ', end='')
+            rRealCase.statement.accept(self)
+
+    def visitIIdCase(self, iIdCase):
+        if iIdCase != None:
+            print(iIdCase.token, ' : ', end='')
+            iIdCase.statement.accept(self)
+
+
+    def visitIIfStatement(self, iIfStatement):
+        if iIfStatement != None:
+            print('if (', end='')
+            iIfStatement.expr_list.accept(self)
+            print(') then ', end='')
+            iIfStatement.nstatement1.accept(self)
+
+            if iIfStatement.nstatement2 != None:
+                print(' else ', end='')
+                iIfStatement.nstatement2.accept(self)
 
     # Visitor do ExprList
 

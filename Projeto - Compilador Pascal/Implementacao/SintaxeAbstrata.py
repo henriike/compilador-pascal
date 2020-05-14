@@ -197,16 +197,6 @@ class PProcedureCallStatement(Statement):
         visitor.visitPProcedureCallStatement(self)
 
 
-class IIfStatement(Statement):
-    def __init__(self, expr_list, nstatement1, nstatement2):
-        self.expr_list = expr_list
-        self.nstatement1 = nstatement1
-        self.nstatement2 = nstatement2
-
-    def accept(self, visitor):
-        visitor.visitIIfStatement(self)
-
-
 class WWhileStatement(Statement):
     def __init__(self, expr, statement):
         self.expr = expr
@@ -236,6 +226,25 @@ class FForStatement(Statement):
         visitor.visitFForStatement(self)
 
 
+class CCaseStatement(Statement):
+    def __init__(self, expr, cases):
+        self.expr = expr
+        self.cases = cases
+
+    def accept(self, visitor):
+        visitor.visitCCaseStatement(self)
+
+
+class IIfStatement(Statement):
+    def __init__(self, expr_list, nstatement1, nstatement2):
+        self.expr_list = expr_list
+        self.nstatement1 = nstatement1
+        self.nstatement2 = nstatement2
+
+    def accept(self, visitor):
+        visitor.visitIIfStatement(self)
+
+
 '''
 Cases e classes concretas
 '''
@@ -250,7 +259,7 @@ class SSingleCase(Cases):
         self.case = case
 
     def accept(self, visitor):
-        visitor.visitSingleCase(self)
+        visitor.visitSSingleCase(self)
 
 
 class CCompoundCase(Cases):
@@ -277,7 +286,7 @@ class IIntegerCase(Case):
         self.statement = statement
 
     def accept(self, visitor):
-        visitor.visitIntegerCase(self)
+        visitor.visitIIntegerCase(self)
 
 
 class RRealCase(Case):
@@ -286,7 +295,7 @@ class RRealCase(Case):
         self.statement = statement
 
     def accept(self, visitor):
-        visitor.visitRealCase(self)
+        visitor.visitRRealCase(self)
 
 
 class IIdCase(Case):

@@ -12,13 +12,5 @@ For - ok
 
 
 -------------------------------------
-Testar comandos com bloco de comandos
-while
-	begin
-	end;
-
-Olhar o begin end semicolon
-
-
 Numa estrutura while que possui vários comandos dentro dele é necessário
 associar esses comandos com a estrutura while?
