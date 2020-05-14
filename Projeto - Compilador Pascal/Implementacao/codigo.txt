@@ -19,7 +19,20 @@ procedure teste80();
 
 begin
 
-    soma(5+5);
+    nome := 5*5;
+    soma(5 mod 3);
+
+    while number>0 do
+        nome:= 5*10;
+        nome:= 5*10;
+
+    repeat
+        nome := nome + 1;
+    until nome <= 10;
+
+
+    for cont:= 1 to 2 do
+       nome := 10+8;
 
 
 

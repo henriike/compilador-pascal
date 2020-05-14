@@ -373,9 +373,9 @@ def p_expr(p):
             p[0] = sa.MMinusExp(p[1], p[3])
         elif p[2] == 'or':
             p[0] = sa.OOrExp(p[1], p[3])
-        elif p[2] == 'times':
+        elif p[2] == '*':
             p[0] = sa.TTimesExp(p[1], p[3])
-        elif p[2] == 'divide':
+        elif p[2] == '/':
             p[0] = sa.DDivideExp(p[1], p[3])
         elif p[2] == 'div':
             p[0] = sa.DDivExp(p[1], p[3])

@@ -311,7 +311,7 @@ class SSingleExprList(ExprList):
         self.expr = expr
 
     def accept(self, visitor):
-        visitor.visitSingleExprList(self)
+        visitor.visitSSingleExprList(self)
 
 
 class CCompoundExprList(ExprList):
@@ -379,7 +379,7 @@ class LLequalsExp(Expressao):
         self.exp2 = exp2
 
     def accept(self, visitor):
-        visitor.visitLLequalsExpp(self)
+        visitor.visitLLequalsExp(self)
 
 class PPlusExp(Expressao):
     def __init__(self, exp1, exp2):

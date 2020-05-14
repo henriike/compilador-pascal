@@ -87,13 +87,13 @@ class Visitor:
 
     def visitSSingleStatement(self, sSingleStatement):
         if sSingleStatement != None:
-            sSingleStatement.statementt(self)
+            sSingleStatement.statementt.accept(self)
 
     def visitCCompoundStatement(self, cCompoundStatement):
         if cCompoundStatement != None:
-            cCompoundStatement.statementt(self)
+            cCompoundStatement.statementt.accept(self)
             print(' ', end='')
-            cCompoundStatement.statementss(self)
+            cCompoundStatement.statementss.accept(self)
 
 
 
@@ -101,18 +101,16 @@ class Visitor:
 
     def visitAAssignStatement(self, aAssignStatement):
         if aAssignStatement != None:
-            aAssignStatement.id(self)
-            print(' := ', end='')
-            aAssignStatement.exp(self)
-            print(';', end='')
+            print(aAssignStatement.id, ':= ', end='')
+            aAssignStatement.exp.accept(self)
+            print(';')
 
 
     def visitPProcedureCallStatement(self, pProcedureCallStatement):
         if pProcedureCallStatement != None:
-            pProcedureCallStatement.id(self)
-            print('( ', end='')
-            pProcedureCallStatement.exprList(self)
-            print(' );', end='')
+            print(pProcedureCallStatement.id, '( ', end='')
+            pProcedureCallStatement.exprList.accept(self)
+            print(' );')
 
 
     def visitIIfStatement(self, iIfStatement):
@@ -128,30 +126,28 @@ class Visitor:
     def visitWWhileStatement(self, wWhileStatement):
         if wWhileStatement != None:
             print('while ', end='')
-            wWhileStatement.expr(self)
+            wWhileStatement.expr.accept(self)
             print(' do')
-            wWhileStatement.statement(self)
+            wWhileStatement.statement.accept(self)
 
 
     def visitRRepeatStatement(self, rRepeatStatement):
         if rRepeatStatement != None:
             print('repeat ', end='')
-            rRepeatStatement.statement(self)
+            rRepeatStatement.statement.accept(self)
             print(' until ', end='')
-            rRepeatStatement.expr(self)
+            rRepeatStatement.expr.accept(self)
             print(';', end='')
 
 
     def visitFForStatement(self, fForStatement):
         if fForStatement != None:
-            print('for ', end='')
-            fForStatement.id(self)
-            print(' := ', end='')
-            fForStatement.expr1(self)
+            print('for ', fForStatement.id, ':=', end='')
+            fForStatement.expr1.accept(self)
             print(' to ', end='')
-            fForStatement.expr2(self)
+            fForStatement.expr2.accept(self)
             print(' do ', end='')
-            fForStatement.statement(self)
+            fForStatement.statement.accept(self)
 
 
 
@@ -159,94 +155,94 @@ class Visitor:
     # Visitor do ExprList
 
     def visitSSingleExprList(self, sSingleExprList):
-        print(sSingleExprList.expr, end='')
+        sSingleExprList.expr.accept(self)
 
     def visitCCompoundExprList(self, CCompoundExprList):
-        CCompoundExprList.expr1(self)
+        CCompoundExprList.expr1.accept(self)
         print(' , ', end='')
-        CCompoundExprList.expr2(self)
+        CCompoundExprList.expr2.accept(self)
 
 
 
     # Visitor das Expressões
 
     def visitEEqualsExp(self, eEqualsExp):
-        eEqualsExp.exp1(self)
-        print(' + ', end='')
-        eEqualsExp.exp2(self)
+        eEqualsExp.exp1.accept(self)
+        print(' = ', end='')
+        eEqualsExp.exp2.accept(self)
 
     def visitLLthanExp(self, lLthanExp):
-        lLthanExp.exp1(self)
+        lLthanExp.exp1.accept(self)
         print(' < ', end='')
-        lLthanExp.exp2(self)
+        lLthanExp.exp2.accept(self)
 
     def visitGGthanExp(self, gGthanExp):
-        gGthanExp.exp1(self)
+        gGthanExp.exp1.accept(self)
         print(' > ', end='')
-        gGthanExp.exp2(self)
+        gGthanExp.exp2.accept(self)
 
     def visitDDifferentExp(self, dDifferentExp):
-        dDifferentExp.exp1(self)
+        dDifferentExp.exp1.accept(self)
         print(' <> ', end='')
-        dDifferentExp.exp2(self)
+        dDifferentExp.exp2.accept(self)
 
     def visitGGequals(self, gGequals):
-        gGequals.exp1(self)
+        gGequals.exp1.accept(self)
         print(' >= ', end='')
-        gGequals.exp2(self)
+        gGequals.exp2.accept(self)
 
     def visitLLequalsExp(self, lLequalsExp):
-        lLequalsExp.exp1(self)
+        lLequalsExp.exp1.accept(self)
         print(' <= ', end='')
-        lLequalsExp.exp2(self)
+        lLequalsExp.exp2.accept(self)
 
     def visitPPlusExp(self, pPlusExp):
-        pPlusExp.exp1(self)
+        pPlusExp.exp1.accept(self)
         print(' + ', end='')
-        pPlusExp.exp2(self)
+        pPlusExp.exp2.accept(self)
 
     def visitMMinusExp(self, mMinusExp):
-        mMinusExp.exp1(self)
+        mMinusExp.exp1.accept(self)
         print(' - ', end='')
-        mMinusExp.exp2(self)
+        mMinusExp.exp2.accept(self)
 
     def visitOOrExp(self, oOrExp):
-        oOrExp.exp1(self)
+        oOrExp.exp1.accept(self)
         print(' or ', end='')
-        oOrExp.exp2(self)
+        oOrExp.exp2.accept(self)
 
     def visitTTimesExp(self, tTimesExp):
-        tTimesExp.exp1(self)
+        tTimesExp.exp1.accept(self)
         print(' * ', end='')
-        tTimesExp.exp2(self)
+        tTimesExp.exp2.accept(self)
 
     def visitDDivideExp(self, dDivideExp):
-        dDivideExp.exp1(self)
+        dDivideExp.exp1.accept(self)
         print(' / ', end='')
-        dDivideExp.exp2(self)
+        dDivideExp.exp2.accept(self)
 
     def visitDDivExp(self, dDivExp):
-        dDivExp.exp1(self)
+        dDivExp.exp1.accept(self)
         print(' div ', end='')
-        dDivExp.exp2(self)
+        dDivExp.exp2.accept(self)
 
-    def vistiMModExp(self, mModExp):
-        mModExp.exp1(self)
+    def visitMModExp(self, mModExp):
+        mModExp.exp1.accept(self)
         print(' mod ', end='')
-        mModExp.exp2(self)
+        mModExp.exp2.accept(self)
 
     def visitAAndExp(self, aAndExp):
-        aAndExp.exp1(self)
+        aAndExp.exp1.accept(self)
         print(' and ', end='')
-        aAndExp.exp2(self)
+        aAndExp.exp2.accept(self)
 
     def visitUPPlusExp(self, uPPlusExp):
         print('+', end='')
-        uPPlusExp.exp(self)
+        uPPlusExp.exp.accept(self)
 
     def visitUMMinusExp(self, uMMinusExp):
         print('-', end='')
-        uMMinusExp.exp(self)
+        uMMinusExp.exp.accept(self)
 
 
     # Visitor do Factor
