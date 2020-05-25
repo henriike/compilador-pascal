@@ -68,7 +68,8 @@ class Visitor:
     def visitCCompoundStatementScore(self, cCompoundStatementScore):
         if cCompoundStatementScore != None:
             print('begin', end='')
-            cCompoundStatementScore.statements(self)
+            # Introduzimos o accept
+            cCompoundStatementScore.statements.accept(self)
             print('end.', end='')
 
 
@@ -191,10 +192,10 @@ class Visitor:
     def visitSSingleExprList(self, sSingleExprList):
         sSingleExprList.expr.accept(self)
 
-    def visitCCompoundExprList(self, CCompoundExprList):
-        CCompoundExprList.expr1.accept(self)
+    def visitCCompoundExprList(self, cCompoundExprList):
+        cCompoundExprList.expr1.accept(self)
         print(' , ', end='')
-        CCompoundExprList.expr2.accept(self)
+        cCompoundExprList.expr2.accept(self)
 
 
 

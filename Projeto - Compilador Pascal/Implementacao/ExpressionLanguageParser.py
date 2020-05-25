@@ -7,6 +7,7 @@ import ply.yacc as yacc
 from ExpressionLanguageLex import *
 import SintaxeAbstrata as sa
 import Visitor as vis
+import SemanticVisitor as sv
 
 
 precedence = (
@@ -444,9 +445,13 @@ data = codigo
  
 lexer.input(data)
 parser = yacc.yacc()
-result = parser.parse(debug=True)
+result = parser.parse(debug=False)
 
 
-visitor = vis.Visitor()
+visitor = sv.SemanticVisitor()
+#visitor = vis.Visitor()
 result.accept(visitor)
+
+
+
 

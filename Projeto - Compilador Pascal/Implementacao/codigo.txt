@@ -11,8 +11,8 @@ nome : string;
 teste : real;
 
 
-function teste2(n3,n4: real;) : integer;
-function soma45() : integer;
+function teste2(n3,n4: real; n1:integer;) : integer;
+
 procedure teste3(n3 : real;);
 procedure teste80();
 
@@ -48,8 +48,6 @@ begin
     else
         if (nome <> 'larry') then
             nome := 'larry';
-
-
 
 end.
 

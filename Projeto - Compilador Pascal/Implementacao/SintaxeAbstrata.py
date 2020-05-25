@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from abc import ABCMeta
-from Visitor import Visitor
-
+#from Visitor import Visitor
+from SemanticVisitor import SemanticVisitor
 
 
 '''
