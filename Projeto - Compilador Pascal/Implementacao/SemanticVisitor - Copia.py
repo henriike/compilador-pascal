@@ -76,7 +76,7 @@ class SemanticVisitor(AbstractVisitor):
 
     def visitAssignExp(self, assignExp):
         typeVar = assignExp.exp2.accept(self)
-        if (isinstance(assignExp.exp1, sa.IdExp)):
+        if (isinstance(assignExp, sa.IdExp)):
             st.addVar(assignExp.exp1.id, typeVar)
             return typeVar
         return None

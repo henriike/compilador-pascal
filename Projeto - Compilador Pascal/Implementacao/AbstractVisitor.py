@@ -11,8 +11,6 @@ class AbstractVisitor(metaclass=ABCMeta):
     def visitBBlock(self, bBlock):
         pass
 
-
-
     @abstractmethod
     def visitPPlusExp(self, pPlusExp):
         pass

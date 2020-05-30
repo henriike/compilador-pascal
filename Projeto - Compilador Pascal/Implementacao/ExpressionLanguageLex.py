@@ -134,10 +134,6 @@ def t_INTEGER(t):
     t.value = int(t.value)
     return t
 
-# Define uma regra para rastrear valores booleanos (OK!)
-def t_BOOLEAN(t):
-    r'true|false'
-    return t
 
 # Define uma regra para rastrear comentários (OK!) {} (**) //
 def t_COMMENT(t):

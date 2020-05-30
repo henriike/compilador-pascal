@@ -3,28 +3,27 @@ program teste;
 const
 b = 13;
 a = 12;
-c = 14;
+c = 15;
 
 
 var
-nome : string;
+nome : real;
 teste : real;
 
 
 function teste2(n3,n4: real; n1:integer;) : integer;
 
-procedure teste3(n3 : real;);
-procedure teste80();
-
+procedure teste3(n3 : real; n1:integer;);
 
 begin
 
-     nome := 5*5;
+    nome := 4+5.4;
+    nome := 4+'c';
     soma(5 mod 3);
 
     while number>0 do
-        nome:= 5*10;
-        nome:= 5*10;
+        nome:= 5+10;
+        nome:= 5+10;
 
     repeat
         nome := nome + 1;

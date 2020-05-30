@@ -283,19 +283,22 @@ class Visitor:
     # Visitor do Factor
 
     def visitFFactorString(self, fFactorString):
-        print(fFactorString.type, end='')
+        print(fFactorString.literal, end='')
 
     def visitFFactorInt(self, fFactorInt):
-        print(fFactorInt.type, end='')
+        print(fFactorInt.literal, end='')
 
     def visitFFactorReal(self, fFactorReal):
-        print(fFactorReal.type, end='')
+        print(fFactorReal.literal, end='')
 
     def visitFFactorId(self, fFactorId):
-        print(fFactorId.type, end='')
+        print(fFactorId.literal, end='')
+
+    def visitFFactorBoolean(self, fFactorBoolean):
+        print(fFactorBoolean.literal, end='')
 
     def visitFFactorNot(self, fFactorNot):
-        print(' not ', fFactorNot.type, end='')
+        print(' not ', fFactorNot.literal, end='')
 
 
     # p[0] = dict({p[1]: p[3]}.items() + p[0].items())

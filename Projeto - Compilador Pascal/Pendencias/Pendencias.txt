@@ -1,16 +1,57 @@
-Lista para testar:
+6 - Verificar quais dos exp (equals, different, ...) precisam validar tipo?
+
+Comparação
+1º Passo
+Expressão da esquerda e expressão da direita precisam ser numéricas
+1º Passo
+LTHAN, GTHAN, GEQUALS, LEQUALS
+2º Passo:
+Retorna boolean
 
 
--------------------------------------
-Assign - ok
-ProcedureCall - ok
-IfStatement -
-Case -
-While - ok
-Repeat - ok
-For - ok
+Igual / Diferente
+1º Passo
+Verificam se os tipos são equivalentes
+2º Passo:
+Retorna boolean
 
 
--------------------------------------
-Numa estrutura while que possui vários comandos dentro dele é necessário
-associar esses comandos com a estrutura while?
+Plus, Minus, Times, Divide, Div, Mod
+1º Passo
+Avaliar se os dois lados são numéricos
+2º Passo:
+Retorna numérico (int, float)
+
+
+Uplus, Uminus
+1º Passo
+--> Verificar se a expressão é númerica
+2º Passo:
+Retorna numérico (int, float)
+
+
+And e Or
+1º Passo
+--> Verificar se as expressões são booleanas
+2º Passo:
+Retorna boolean
+
+
+
+Será necessário fazer o código da indentação?
+Sim.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

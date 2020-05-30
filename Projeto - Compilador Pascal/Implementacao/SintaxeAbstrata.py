@@ -17,7 +17,7 @@ class PProgram(Program):
         self.block = block
         self.id = id
     def accept(self, visitor):
-        visitor.visitPProgram(self)
+        return visitor.visitPProgram(self)
 
 
 
@@ -38,7 +38,7 @@ class BBlock(Block):
         self.compoundStatement_dec = compoundStatement_dec
 
     def accept(self, visitor):
-        visitor.visitBBlock(self)
+        return visitor.visitBBlock(self)
 
 
 
@@ -55,7 +55,7 @@ class CConstDefinition(ConstDefinition):
     def __init__(self, dicDefinicoes):
         self.dicDefinicoes = dicDefinicoes
     def accept(self, visitor):
-        visitor.visitCConstDefinition(self)
+        return visitor.visitCConstDefinition(self)
 
 
 
@@ -73,7 +73,7 @@ class VVarDeclaration(VarDeclaration):
     def __init__(self, dicDefinicoes):
         self.dicDefinicoes = dicDefinicoes
     def accept(self, visitor):
-        visitor.visitVVarDeclaration(self)
+        return visitor.visitVVarDeclaration(self)
 
 
 
@@ -90,7 +90,7 @@ class PProcedureDeclaration(ProcedureDeclaration):
     def __init__(self, dicDefinicoes):
         self.dicDefinicoes = dicDefinicoes
     def accept(self, visitor):
-        visitor.visitPProcedureDeclaration(self)
+        return visitor.visitPProcedureDeclaration(self)
 
 
 
@@ -108,7 +108,7 @@ class FFunctionDeclaration(FunctionDeclaration):
         self.dicDefinicoes = dicDefinicoes
         self.id = id
     def accept(self, visitor):
-        visitor.visitFFunctionDeclaration(self)
+        return visitor.visitFFunctionDeclaration(self)
 
 
 
@@ -126,7 +126,7 @@ class CCompoundStatementScore(CompoundStatementScore):
         self.statements = statements
 
     def accept(self, visitor):
-        visitor.visitCCompoundStatementScore(self)
+        return visitor.visitCCompoundStatementScore(self)
 
 
 '''
@@ -142,7 +142,7 @@ class CCompoundStatementSemicolon(CompoundStatementSemicolon):
         self.statements = statements
 
     def accept(self, visitor):
-        visitor.visitCCompoundStatementSemicolon(self)
+        return visitor.visitCCompoundStatementSemicolon(self)
 
 
 '''
@@ -158,7 +158,7 @@ class SSingleStatement(Statements):
         self.statementt = statementt
 
     def accept(self, visitor):
-        visitor.visitSSingleStatement(self)
+        return visitor.visitSSingleStatement(self)
 
 class CCompoundStatement(Statements):
     def __init__(self, statementt, statementss):
@@ -166,7 +166,7 @@ class CCompoundStatement(Statements):
         self.statementss = statementss
 
     def accept(self, visitor):
-        visitor.visitCCompoundStatement(self)
+        return visitor.visitCCompoundStatement(self)
 
 
 
@@ -185,7 +185,7 @@ class AAssignStatement(Statement):
         self.exp = exp
 
     def accept(self, visitor):
-        visitor.visitAAssignStatement(self)
+        return visitor.visitAAssignStatement(self)
 
 
 class PProcedureCallStatement(Statement):
@@ -194,7 +194,7 @@ class PProcedureCallStatement(Statement):
         self.exprList = exprList
 
     def accept(self, visitor):
-        visitor.visitPProcedureCallStatement(self)
+        return visitor.visitPProcedureCallStatement(self)
 
 
 class WWhileStatement(Statement):
@@ -203,7 +203,7 @@ class WWhileStatement(Statement):
         self.statement = statement
 
     def accept(self, visitor):
-        visitor.visitWWhileStatement(self)
+        return visitor.visitWWhileStatement(self)
 
 
 class RRepeatStatement(Statement):
@@ -212,7 +212,7 @@ class RRepeatStatement(Statement):
         self.expr = expr
 
     def accept(self, visitor):
-        visitor.visitRRepeatStatement(self)
+        return visitor.visitRRepeatStatement(self)
 
 
 class FForStatement(Statement):
@@ -223,7 +223,7 @@ class FForStatement(Statement):
         self.statement = statement
 
     def accept(self, visitor):
-        visitor.visitFForStatement(self)
+        return visitor.visitFForStatement(self)
 
 
 class CCaseStatement(Statement):
@@ -232,7 +232,7 @@ class CCaseStatement(Statement):
         self.cases = cases
 
     def accept(self, visitor):
-        visitor.visitCCaseStatement(self)
+        return visitor.visitCCaseStatement(self)
 
 
 class IIfStatement(Statement):
@@ -242,7 +242,7 @@ class IIfStatement(Statement):
         self.nstatement2 = nstatement2
 
     def accept(self, visitor):
-        visitor.visitIIfStatement(self)
+        return visitor.visitIIfStatement(self)
 
 
 '''
@@ -259,7 +259,7 @@ class SSingleCase(Cases):
         self.case = case
 
     def accept(self, visitor):
-        visitor.visitSSingleCase(self)
+        return visitor.visitSSingleCase(self)
 
 
 class CCompoundCase(Cases):
@@ -268,7 +268,7 @@ class CCompoundCase(Cases):
         self.cases = cases
 
     def accept(self, visitor):
-        visitor.visitCCompoundCase(self)
+        return visitor.visitCCompoundCase(self)
 
 
 '''
@@ -286,7 +286,7 @@ class IIntegerCase(Case):
         self.statement = statement
 
     def accept(self, visitor):
-        visitor.visitIIntegerCase(self)
+        return visitor.visitIIntegerCase(self)
 
 
 class RRealCase(Case):
@@ -295,7 +295,7 @@ class RRealCase(Case):
         self.statement = statement
 
     def accept(self, visitor):
-        visitor.visitRRealCase(self)
+        return visitor.visitRRealCase(self)
 
 
 class IIdCase(Case):
@@ -304,7 +304,7 @@ class IIdCase(Case):
         self.statement = statement
 
     def accept(self, visitor):
-        visitor.visitIIdCase(self)
+        return visitor.visitIIdCase(self)
 
 
 '''
@@ -320,7 +320,7 @@ class SSingleExprList(ExprList):
         self.expr = expr
 
     def accept(self, visitor):
-        visitor.visitSSingleExprList(self)
+        return visitor.visitSSingleExprList(self)
 
 
 class CCompoundExprList(ExprList):
@@ -329,7 +329,7 @@ class CCompoundExprList(ExprList):
         self.expr2 = expr2
 
     def accept(self, visitor):
-        visitor.visitCCompoundExprList(self)
+        return visitor.visitCCompoundExprList(self)
 
 
 
@@ -348,7 +348,7 @@ class EEqualsExp(Expressao):
         self.exp1 = exp1
         self.exp2 = exp2
     def accept(self, visitor):
-        visitor.visitEEqualsExp(self)
+        return visitor.visitEEqualsExp(self)
 
 class LLthanExp(Expressao):
     def __init__(self, exp1, exp2):
@@ -356,7 +356,7 @@ class LLthanExp(Expressao):
         self.exp2 = exp2
 
     def accept(self, visitor):
-        visitor.visitLLthanExp(self)
+        return visitor.visitLLthanExp(self)
 
 class GGthanExp(Expressao):
     def __init__(self, exp1, exp2):
@@ -364,7 +364,7 @@ class GGthanExp(Expressao):
         self.exp2 = exp2
 
     def accept(self, visitor):
-        visitor.visitGGthanExp(self)
+        return visitor.visitGGthanExp(self)
 
 class DDifferentExp(Expressao):
     def __init__(self, exp1, exp2):
@@ -372,7 +372,7 @@ class DDifferentExp(Expressao):
         self.exp2 = exp2
 
     def accept(self, visitor):
-        visitor.visitDDifferentExp(self)
+        return visitor.visitDDifferentExp(self)
 
 class GGequals(Expressao):
     def __init__(self, exp1, exp2):
@@ -380,7 +380,7 @@ class GGequals(Expressao):
         self.exp2 = exp2
 
     def accept(self, visitor):
-        visitor.visitGGequals(self)
+        return visitor.visitGGequals(self)
 
 class LLequalsExp(Expressao):
     def __init__(self, exp1, exp2):
@@ -388,7 +388,7 @@ class LLequalsExp(Expressao):
         self.exp2 = exp2
 
     def accept(self, visitor):
-        visitor.visitLLequalsExp(self)
+        return visitor.visitLLequalsExp(self)
 
 class PPlusExp(Expressao):
     def __init__(self, exp1, exp2):
@@ -396,7 +396,7 @@ class PPlusExp(Expressao):
         self.exp2 = exp2
 
     def accept(self, visitor):
-        visitor.visitPPlusExp(self)
+        return visitor.visitPPlusExp(self)
 
 
 class MMinusExp(Expressao):
@@ -405,7 +405,7 @@ class MMinusExp(Expressao):
         self.exp2 = exp2
 
     def accept(self, visitor):
-        visitor.visitMMinusExp(self)
+        return visitor.visitMMinusExp(self)
 
 class OOrExp(Expressao):
     def __init__(self, exp1, exp2):
@@ -413,7 +413,7 @@ class OOrExp(Expressao):
         self.exp2 = exp2
 
     def accept(self, visitor):
-        visitor.visitOOrExp(self)
+        return visitor.visitOOrExp(self)
 
 
 class TTimesExp(Expressao):
@@ -422,7 +422,7 @@ class TTimesExp(Expressao):
         self.exp2 = exp2
 
     def accept(self, visitor):
-        visitor.visitTTimesExp(self)
+        return visitor.visitTTimesExp(self)
 
 
 class DDivideExp(Expressao):
@@ -431,7 +431,7 @@ class DDivideExp(Expressao):
         self.exp2 = exp2
 
     def accept(self, visitor):
-        visitor.visitDDivideExp(self)
+        return visitor.visitDDivideExp(self)
 
 
 class DDivExp(Expressao):
@@ -440,7 +440,7 @@ class DDivExp(Expressao):
         self.exp2 = exp2
 
     def accept(self, visitor):
-        visitor.visitDDivExp(self)
+        return visitor.visitDDivExp(self)
 
 
 class MModExp(Expressao):
@@ -449,7 +449,7 @@ class MModExp(Expressao):
         self.exp2 = exp2
 
     def accept(self, visitor):
-        visitor.visitMModExp(self)
+        return visitor.visitMModExp(self)
 
 
 class AAndExp(Expressao):
@@ -458,7 +458,7 @@ class AAndExp(Expressao):
         self.exp2 = exp2
 
     def accept(self, visitor):
-        visitor.visitAAndExp(self)
+        return visitor.visitAAndExp(self)
 
 
 class UPPlusExp(Expressao):
@@ -466,7 +466,7 @@ class UPPlusExp(Expressao):
         self.exp = exp
 
     def accept(self, visitor):
-        visitor.visitUPPlusExp(self)
+        return visitor.visitUPPlusExp(self)
 
 
 class UMMinusExp(Expressao):
@@ -474,58 +474,56 @@ class UMMinusExp(Expressao):
         self.exp = exp
 
     def accept(self, visitor):
-        visitor.visitUMMinusExp(self)
+        return visitor.visitUMMinusExp(self)
 
-
-
-
-'''
-Factor e classes concretas
-'''
-class Factor(metaclass=ABCMeta):
-    @abstractmethod
-    def accept(self, Visitor):
-        pass
 
 
 class FFactorString(Expressao):
-    def __init__(self, type):
-        self.type = type
+    def __init__(self, literal):
+        self.literal = literal
 
     def accept(self, visitor):
-        visitor.visitFFactorString(self)
+        return visitor.visitFFactorString(self)
 
 
 class FFactorInt(Expressao):
-    def __init__(self, type):
-        self.type = type
+    def __init__(self, literal):
+        self.literal = literal
 
     def accept(self, visitor):
-        visitor.visitFFactorInt(self)
+        return visitor.visitFFactorInt(self)
 
 
 class FFactorReal(Expressao):
-    def __init__(self, type):
-        self.type = type
+    def __init__(self, literal):
+        self.literal = literal
 
     def accept(self, visitor):
-        visitor.visitFFactorReal(self)
+        return visitor.visitFFactorReal(self)
 
 
 class FFactorId(Expressao):
-    def __init__(self, type):
-        self.type = type
+    def __init__(self, literal):
+        self.literal = literal
 
     def accept(self, visitor):
-        visitor.visitFFactorId(self)
+        return visitor.visitFFactorId(self)
+
+
+class FFactorBoolean(Expressao):
+    def __init__(self, literal):
+        self.literal = literal
+
+    def accept(self, visitor):
+        return visitor.visitFFactorBoolean(self)
 
 
 class FFactorNot(Expressao):
-    def __init__(self, type):
-        self.type = type
+    def __init__(self, literal):
+        self.literal = literal
 
     def accept(self, visitor):
-        visitor.visitFFactorNot(self)
+        return visitor.visitFFactorNot(self)
 
 
 

@@ -27,7 +27,7 @@ precedence = (
     ('right', 'NOT')
 
     # Operador Parêntesis
-   # ('left', 'LPARENT', 'RPARENT')
+    # ('left', 'LPARENT', 'RPARENT')
 )
 
 
@@ -243,7 +243,7 @@ def p_assign_statement(p):
     p[0] = sa.AAssignStatement(p[1], p[3])
 
 
-# Chamada de função,
+# Chamada de função
 def p_procedure_call_statement(p):
     '''
     procedure_call_statement :  ID LPARENT expr_list RPARENT SEMICOLON
@@ -404,6 +404,8 @@ def p_factor(p):
            | INTEGER
            | REAL
            | STRING
+           | TRUE
+           | FALSE
            | NOT factor
     '''
     if len(p) == 2:
@@ -413,6 +415,8 @@ def p_factor(p):
             p[0] = sa.FFactorReal(p[1])
         elif p[1][0] == '\'':
             p[0] = sa.FFactorString(p[1])
+        elif p[1] == 'true' or p[1] == 'false':
+            p[0] = sa.FFactorBoolean(p[1])
         else:
             p[0] = sa.FFactorId(p[1])
     else:

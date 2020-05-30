@@ -1,8 +1,9 @@
 #Dicionario que representa a tabela de simbolos.
 symbolTable = []
-INT = 'int'
+INTEGER = 'integer'
 CONST = 'const'
-FLOAT = 'float'
+REAL = 'real'
+STRING = 'string'
 BOOL = 'boolean'
 TYPE = 'type'
 PARAMS = 'params'
@@ -10,7 +11,7 @@ BINDABLE = 'bindable'
 FUNCTION = 'fun'
 VARIABLE = 'var'
 SCOPE = 'scope'
-Number = [INT, FLOAT]
+Number = [INTEGER, REAL]
 
 def beginScope(nameScope):
     global symbolTable
