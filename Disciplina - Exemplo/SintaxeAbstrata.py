@@ -3,19 +3,156 @@ from abc import ABCMeta
 from Visitor import Visitor
 
 '''
-Exp e classes concretas
+Declaracao de funcao
+FuncDecl
 '''
+class FuncDecl(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, visitor):
+        pass
+
+class FuncDeclConcrete(FuncDecl):
+    def __init__(self, signature, body):
+        self.signature = signature
+        self.body = body
+    def accept(self, visitor):
+        return visitor.visitFuncDeclConcrete(self)
+
+'''
+Assinatura de funcao
+Signature
+'''
+class Signature(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, visitor):
+        pass
+
+
+class SignatureConcrete(Signature):
+    def __init__(self, type, id, sigParams):
+        self.type = type
+        self.id = id
+        self.sigParams = sigParams
+    def accept(self, visitor):
+        return visitor.visitSignatureConcrete(self)
+'''
+Parametros de assinatura de funcao
+SigParams
+'''
+
+class SigParams(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, visitor):
+        pass
+
+class SingleSigParams(SigParams):
+    def __init__(self, type, id):
+        self.type = type
+        self.id = id
+    def accept(self, visitor):
+        return visitor.visitSingleSigParams(self)
+
+
+class CompoundSigParams(SigParams):
+    def __init__(self, type, id, sigParams):
+        self.type = type
+        self.id = id
+        self.sigParams = sigParams
+    def accept(self, visitor):
+        return visitor.visitCompoundSigParams(self)
+
+'''
+Corpo de uma funcao
+Body
+'''
+
+class Body(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, visitor):
+        pass
+
+
+class BodyConcrete(Body):
+    def __init__(self, stms):
+        self.stms = stms
+    def accept(self, visitor):
+        return visitor.visitBodyConcrete(self)
+
+'''
+Comandos
+Stms
+'''
+
+class Stms(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, visitor):
+        pass
+
+class SingleStm(Stms):
+    def __init__(self, stm):
+        self.stm = stm
+    def accept(self, visitor):
+        return visitor.visitSingleStm(self)
+
+class CompoundStm(Stms):
+    def __init__(self, stm, stms):
+        self.stm = stm
+        self.stms = stms
+    def accept(self, visitor):
+        return visitor.visitCompoundStm(self)
+
+'''
+Comando
+Stm
+'''
+
+class Stm(metaclass=ABCMeta):
+    @abstractmethod
+    def accept(self, visitor):
+        pass
+
+class StmExp(Stm):
+    def __init__(self, exp):
+        self.exp = exp
+    def accept(self, visitor):
+        return visitor.visitStmExp(self)
+
+class StmWhile(Stm):
+    def __init__(self, exp, block):
+        self.exp = exp
+        self.block = block
+    def accept(self, visitor):
+        return visitor.visitStmWhile(self)
+
+class StmReturn(Stm):
+    def __init__(self, exp):
+        self.exp = exp
+    def accept(self, visitor):
+        return visitor.visitStmReturn(self)
+
+'''
+Expressoes
+Exp
+'''
+
 class Exp(metaclass=ABCMeta):
     @abstractmethod
     def accept(self, visitor):
         pass
+
+class AssignExp(Exp):
+    def __init__(self, exp1, exp2):
+        self.exp1 = exp1
+        self.exp2 = exp2
+    def accept(self, visitor):
+        return visitor.visitAssignExp(self)
 
 class SomaExp(Exp):
     def __init__(self, exp1, exp2):
         self.exp1 = exp1
         self.exp2 = exp2
     def accept(self, visitor):
-        visitor.visitSomaExp(self)
+        return visitor.visitSomaExp(self)
 
 
 class MulExp(Exp):
@@ -23,7 +160,7 @@ class MulExp(Exp):
         self.exp1 = exp1
         self.exp2 = exp2
     def accept(self, visitor):
-        visitor.visitMulExp(self)
+        return visitor.visitMulExp(self)
 
 
 class PotExp(Exp):
@@ -31,39 +168,38 @@ class PotExp(Exp):
         self.exp1 = exp1
         self.exp2 = exp2
     def accept(self, visitor):
-        visitor.visitPotExp(self)
+        return visitor.visitPotExp(self)
 
 
-class CallExp(Exp):
+class CallExp(Exp, Stm):
     def __init__(self, call):
         self.call = call
 
     def accept(self, visitor):
-        visitor.visitCallExp(self)
-
-class AssignExp(Exp):
-    def __init__(self, assign):
-        self.assign = assign
-    def accept(self, visitor):
-        visitor.visitAssignExp(self)
-
+        return visitor.visitCallExp(self)
 
 class NumExp(Exp):
     def __init__(self, num):
         self.num = num
     def accept(self, visitor):
-        visitor.visitNumExp(self)
+        return visitor.visitNumExp(self)
 
 
 class IdExp(Exp):
     def __init__(self, id):
         self.id = id
     def accept(self, visitor):
-        visitor.visitIdExp(self)
+        return visitor.visitIdExp(self)
 
+class BooleanExp(Exp):
+    def __init__(self, boolValue):
+        self.boolValue = boolValue
+    def accept(self, visitor):
+        return visitor.visitBooleanExp(self)
 
 '''
-Call e classes concretas
+Chamada de funcao
+Call
 '''
 class Call(metaclass=ABCMeta):
     @abstractmethod
@@ -75,17 +211,18 @@ class ParamsCall(Call):
         self.id = id
         self.params = params
     def accept(self, visitor):
-        visitor.visitParamsCall(self)
+        return visitor.visitParamsCall(self)
 
-class SimpleCall(Call):
+class NoParamsCall(Call):
     def __init__(self, id):
         self.id = id
     def accept(self, visitor):
-        visitor.visitSimpleCall(self)
+        return visitor.visitNoParamsCall(self)
 
 
 '''
-Params e classes concretas
+Parametros de uma chamada de funcao
+Params
 '''
 class Params(metaclass=ABCMeta):
     @abstractmethod
@@ -97,26 +234,12 @@ class CompoundParams(Params):
         self.exp = exp
         self.params = params
     def accept(self, visitor):
-        visitor.visitCompoundParams(self)
+        return visitor.visitCompoundParams(self)
 
 class SingleParam(Params):
     def __init__(self, exp):
         self.exp = exp
     def accept(self, visitor):
-        visitor.visitSingleParam(self)
+        return visitor.visitSingleParam(self)
 
 
-'''
-Assign e classes concretas
-'''
-class Assign(metaclass=ABCMeta):
-    @abstractmethod
-    def accept(self, visitor):
-        pass
-
-class AssignAss(Assign):
-    def __init__(self, id, exp):
-        self.id = id
-        self.exp = exp
-    def accept(self, visitor):
-        visitor.visitAssignAss(self)

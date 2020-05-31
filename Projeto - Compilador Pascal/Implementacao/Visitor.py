@@ -201,36 +201,9 @@ class Visitor:
 
     # Visitor das Expressões
 
-    def visitEEqualsExp(self, eEqualsExp):
-        eEqualsExp.exp1.accept(self)
-        print(' = ', end='')
-        eEqualsExp.exp2.accept(self)
-
-    def visitLLthanExp(self, lLthanExp):
-        lLthanExp.exp1.accept(self)
-        print(' < ', end='')
-        lLthanExp.exp2.accept(self)
-
-    def visitGGthanExp(self, gGthanExp):
-        gGthanExp.exp1.accept(self)
-        print(' > ', end='')
-        gGthanExp.exp2.accept(self)
-
-    def visitDDifferentExp(self, dDifferentExp):
-        dDifferentExp.exp1.accept(self)
-        print(' <> ', end='')
-        dDifferentExp.exp2.accept(self)
-
-    def visitGGequals(self, gGequals):
-        gGequals.exp1.accept(self)
-        print(' >= ', end='')
-        gGequals.exp2.accept(self)
-
-    def visitLLequalsExp(self, lLequalsExp):
-        lLequalsExp.exp1.accept(self)
-        print(' <= ', end='')
-        lLequalsExp.exp2.accept(self)
-
+    # Soma, Subtração, Multiplicação, Divisão, Mod
+    # 1º Passo: Avaliar se os dois lados são numéricos
+    # 2º Passo: Retorna númerico (int, float)
     def visitPPlusExp(self, pPlusExp):
         pPlusExp.exp1.accept(self)
         print(' + ', end='')
@@ -240,11 +213,6 @@ class Visitor:
         mMinusExp.exp1.accept(self)
         print(' - ', end='')
         mMinusExp.exp2.accept(self)
-
-    def visitOOrExp(self, oOrExp):
-        oOrExp.exp1.accept(self)
-        print(' or ', end='')
-        oOrExp.exp2.accept(self)
 
     def visitTTimesExp(self, tTimesExp):
         tTimesExp.exp1.accept(self)
@@ -266,11 +234,63 @@ class Visitor:
         print(' mod ', end='')
         mModExp.exp2.accept(self)
 
+
+    # Igual, Diferente
+    # 1º Passo: Verificar se os tipos são equivalentes
+    # 2º Passo: Retorna boolean
+    def visitEEqualsExp(self, eEqualsExp):
+        eEqualsExp.exp1.accept(self)
+        print(' = ', end='')
+        eEqualsExp.exp2.accept(self)
+
+    def visitDDifferentExp(self, dDifferentExp):
+        dDifferentExp.exp1.accept(self)
+        print(' <> ', end='')
+        dDifferentExp.exp2.accept(self)
+
+
+    # Menor que, maior que, maior ou igual, menor ou igual
+    # 1º Passo: Expressão da esquerda e expressão da direita precisam ser numéricas
+    # 2º Passo: Retorna boolean
+    def visitLLthanExp(self, lLthanExp):
+        lLthanExp.exp1.accept(self)
+        print(' < ', end='')
+        lLthanExp.exp2.accept(self)
+
+    def visitGGthanExp(self, gGthanExp):
+        gGthanExp.exp1.accept(self)
+        print(' > ', end='')
+        gGthanExp.exp2.accept(self)
+
+    def visitGGequals(self, gGequals):
+        gGequals.exp1.accept(self)
+        print(' >= ', end='')
+        gGequals.exp2.accept(self)
+
+    def visitLLequalsExp(self, lLequalsExp):
+        lLequalsExp.exp1.accept(self)
+        print(' <= ', end='')
+        lLequalsExp.exp2.accept(self)
+
+
+
+    # And, Or
+    # 1º Passo: Expressão da esquerda e expressão da direita precisam ser booleanas
+    # 2º Passo: Retorna boolean
     def visitAAndExp(self, aAndExp):
         aAndExp.exp1.accept(self)
         print(' and ', end='')
         aAndExp.exp2.accept(self)
 
+    def visitOOrExp(self, oOrExp):
+        oOrExp.exp1.accept(self)
+        print(' or ', end='')
+        oOrExp.exp2.accept(self)
+
+
+    # Operador unário: +, Operador unário: -
+    # 1º Passo: Expressão da esquerda e expressão da direita precisam ser numéricas
+    # 2º Passo: Retorna numérico (int, float)
     def visitUPPlusExp(self, uPPlusExp):
         print('+', end='')
         uPPlusExp.exp.accept(self)

@@ -1,57 +1,31 @@
-6 - Verificar quais dos exp (equals, different, ...) precisam validar tipo?
+Pendências
 
-Comparação
-1º Passo
-Expressão da esquerda e expressão da direita precisam ser numéricas
-1º Passo
-LTHAN, GTHAN, GEQUALS, LEQUALS
-2º Passo:
-Retorna boolean
+Observação: No pascal não há validação de tipos e sim validação de valores
 
-
-Igual / Diferente
-1º Passo
-Verificam se os tipos são equivalentes
-2º Passo:
-Retorna boolean
-
-
-Plus, Minus, Times, Divide, Div, Mod
-1º Passo
-Avaliar se os dois lados são numéricos
-2º Passo:
-Retorna numérico (int, float)
-
-
-Uplus, Uminus
-1º Passo
---> Verificar se a expressão é númerica
-2º Passo:
-Retorna numérico (int, float)
-
-
-And e Or
-1º Passo
---> Verificar se as expressões são booleanas
-2º Passo:
-Retorna boolean
+1 - Precisa fazer ele reconhecer o tipo char e o tipo string
+--> Está dando erro por causa disso
+A string seria um vetor? Ou um tipo realmente?
 
 
 
-Será necessário fazer o código da indentação?
-Sim.
+2 - Constatamos que na regra expr_list não existe uma regra semelhante a:
+expr OPERATOR expr_list
+
+nome := 4=4 and 5=4;
 
 
 
+3 - 4+4 and 5+5
+Como 4+4 ainda não retorna nenhum valor (true, false) ele da o erro, estaria certo ou não?
 
 
 
+4 - Como fazer para tratar que um inteiro não receba float e um float receba inteiro?
+integer e integer, ok!
+real e real, ok!
 
 
+5 - Como exibir a mensagem de erro nos operadores unários?
 
-
-
-
-
-
-
+nome := +nome;
+--> O que acontece com isso?

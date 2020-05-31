@@ -3,7 +3,7 @@ program teste;
 const
 b = 13;
 a = 12;
-c = 15;
+c = 15.4;
 
 
 var
@@ -17,8 +17,7 @@ procedure teste3(n3 : real; n1:integer;);
 
 begin
 
-    nome := 4+5.4;
-    nome := 4+'c';
+    nome := -5;
     soma(5 mod 3);
 
     while number>0 do

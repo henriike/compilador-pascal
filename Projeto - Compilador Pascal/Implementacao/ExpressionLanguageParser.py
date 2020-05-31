@@ -413,7 +413,7 @@ def p_factor(p):
             p[0] = sa.FFactorInt(p[1])
         elif isinstance(p[1], float):
             p[0] = sa.FFactorReal(p[1])
-        elif p[1][0] == '\'':
+        elif p[1] == '\'':
             p[0] = sa.FFactorString(p[1])
         elif p[1] == 'true' or p[1] == 'false':
             p[0] = sa.FFactorBoolean(p[1])
