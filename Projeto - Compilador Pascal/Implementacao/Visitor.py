@@ -318,7 +318,8 @@ class Visitor:
         print(fFactorBoolean.literal, end='')
 
     def visitFFactorNot(self, fFactorNot):
-        print(' not ', fFactorNot.literal, end='')
+        print('not ', end='')
+        fFactorNot.literal.accept(self)
 
 
     # p[0] = dict({p[1]: p[3]}.items() + p[0].items())

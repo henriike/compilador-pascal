@@ -117,6 +117,7 @@ def t_ID(t):
 
 # Define uma regra para rastrear palavras reservadas (OK!)
 
+
 # --------------------IMPORTANTE -------------------------
 # Por íncrivel que pareça, colocar a regra do float antes da regra do integer funciona a regex de cada uma (rastrear número inteiro e 
 # rastrear número float), regex essas que se inverter a ordem das regras colocando a regra integer acima da regra do float as regex
@@ -144,14 +145,12 @@ def t_COMMENT(t):
 
 # Define uma regra para que possamos rastrear strings (OK!)
 def t_STRING(t):
-    r'\'[\w\d !@#$%¨&*()_+^~?\"/*-+.,<>|ºª`//]* \' '
-    #r'((\')[\w\d !@#$%¨&*()_+^~?\'"/*-+.,<>|ºª`//]*(\'))'
+    r'\'([^\\\n]|(\\.))*?\''
     t.value = str(t.value)
-    t.value = t.value.replace("'","")
     return t
 
 def t_CHAR(t):
-    r'\'\w\''
+    r'\'([^\\\n]|(\\.))?\''
     return t
 
 # Define uma regra para que possamos rastrear números de linha

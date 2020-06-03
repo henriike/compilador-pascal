@@ -45,6 +45,14 @@ def validaExpressaoNumerica(exp1, exp2):
         return None
 
 
+# Expressão da esquerda e expressão da direita precisam ser booleanas
+def validaExpressaoBooleana(exp1, exp2):
+    if (exp1 == st.BOOL and exp2 == st.BOOL):
+        return st.BOOL
+    else:
+        return None
+
+
 # Expressão da direita precisa ser um número
 def validaUnaria(exp1):
     if (exp1 in st.Number):
@@ -54,16 +62,6 @@ def validaUnaria(exp1):
             return st.INTEGER
     else:
         return None
-
-
-# Expressão da esquerda e expressão da direita precisam ser booleanas
-def validaExpressaoBooleana(exp1, exp2):
-    if (exp1 == st.BOOL and exp2 == st.BOOL):
-        print('entrei')
-        return st.BOOL
-    else:
-        return None
-
 
 
 # Estamos traduzindo os parâmetros para um dicionário, porque originalmente estão como string
@@ -185,14 +183,18 @@ class SemanticVisitor:
 
             if infoBind != None:
                 if infoBind[st.BINDABLE] == st.VARIABLE:
-                    if infoBind[st.TYPE] != typeVar:
+                    if infoBind[st.TYPE] != st.REAL and infoBind[st.TYPE] != typeVar:
                         print("[ASSIGN] A expressão ", end='')
                         aAssignStatement.exp.accept(self.printer)
-                        print(" possui tipo diferente da variavel", aAssignStatement.id)
+                        print(" é do tipo", typeVar, "e possui tipo diferente da variavel", aAssignStatement.id, "que é do tipo", infoBind[st.TYPE])
+                    elif not(typeVar in st.Number) and infoBind[st.TYPE] == st.REAL:
+                        print("[ASSIGN] A expressão ", end='')
+                        aAssignStatement.exp.accept(self.printer)
+                        print(" é do tipo", typeVar, "e possui tipo diferente da variavel", aAssignStatement.id, "que é do tipo", infoBind[st.TYPE])
                     else:
                         return typeVar
                 elif infoBind[st.BINDABLE] == st.CONST:
-                    print("O identificador", aAssignStatement.id, "é uma constante, portanto não pode ser modificado")
+                    print("[ASSIGN] O identificador", aAssignStatement.id, "é uma constante, portanto não pode ser modificado")
 
         return None
 
@@ -398,7 +400,9 @@ class SemanticVisitor:
 
         c = validaUnaria(tipoExp1)
         if (c == None):
-            print('deu erro')
+            print('[ERRO] Expressão unária inválida: ', end='')
+            uPPlusExp.accept(self.printer)
+            print('. Operador unário só pode ser utilizado com números!\n')
         return c
 
 
@@ -407,12 +411,14 @@ class SemanticVisitor:
 
         c = validaUnaria(tipoExp1)
         if (c == None):
-            print('deu erro')
+            print('[ERRO] Expressão unária inválida: ', end='')
+            uMMinusExp.accept(self.printer)
+            print('. Operador unário só pode ser utilizado com números!\n')
         return c
 
 
     def visitFFactorString(self, fFactorString):
-        fFactorString.type.accept(self)
+        return st.STRING
 
     def visitFFactorInt(self, fFactorInt):
         return st.INTEGER
@@ -430,4 +436,10 @@ class SemanticVisitor:
         return st.BOOL
 
     def visitFFactorNot(self, fFactorNot):
-        fFactorNot.type.accept(self)
+        type = fFactorNot.literal.accept(self)
+        if type == st.BOOL:
+            return type
+        else:
+            print("Não é possível aplicar o operador not em uma expressão não booleana")
+            return None
+

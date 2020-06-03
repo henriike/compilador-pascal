@@ -7,7 +7,7 @@ c = 15.4;
 
 
 var
-nome : real;
+nome : integer;
 teste : real;
 
 
@@ -17,7 +17,7 @@ procedure teste3(n3 : real; n1:integer;);
 
 begin
 
-    nome := -5;
+    nome := not 1;
     soma(5 mod 3);
 
     while number>0 do
