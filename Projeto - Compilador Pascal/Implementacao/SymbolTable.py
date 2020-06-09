@@ -8,7 +8,8 @@ BOOL = 'boolean'
 TYPE = 'type'
 PARAMS = 'params'
 BINDABLE = 'bindable'
-FUNCTION = 'fun'
+FUNCTION = 'function'
+PROCEDURE = 'procedure'
 VARIABLE = 'var'
 SCOPE = 'scope'
 Number = [INTEGER, REAL]
@@ -36,7 +37,13 @@ def addFunction(name, params, returnType):
     symbolTable[-1][name] = {BINDABLE: FUNCTION, PARAMS: params, TYPE : returnType}
 
 def addProcedure(name, params):
+    global symbolTable
+    symbolTable[-1][name] = {BINDABLE: PROCEDURE, PARAMS: params}
+
+'''
+def addProcedure(name, params):
     addFunction(name, params, None)
+'''
 
 def getBindable(bindableName):
     global symbolTable

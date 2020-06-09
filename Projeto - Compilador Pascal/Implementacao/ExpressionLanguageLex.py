@@ -145,7 +145,7 @@ def t_COMMENT(t):
 
 # Define uma regra para que possamos rastrear strings (OK!)
 def t_STRING(t):
-    r'\'([^\\\n]|(\\.))*?\''
+    r'\'([^\\\n]|(\\.))([^\\\n]|(\\.))([^\\\n]|(\\.))*?\''
     t.value = str(t.value)
     return t
 

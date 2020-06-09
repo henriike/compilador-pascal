@@ -107,10 +107,10 @@ class Visitor:
             print(';')
 
 
-    def visitPProcedureCallStatement(self, pProcedureCallStatement):
-        if pProcedureCallStatement != None:
-            print(pProcedureCallStatement.id, '( ', end='')
-            pProcedureCallStatement.exprList.accept(self)
+    def visitPProcedureFFunctionCallStatement(self, pProcedureFFunctionCallStatement):
+        if pProcedureFFunctionCallStatement != None:
+            print(pProcedureFFunctionCallStatement.id, '( ', end='')
+            pProcedureFFunctionCallStatement.exprList.accept(self)
             print(' );')
 
 
@@ -186,6 +186,7 @@ class Visitor:
             if iIfStatement.nstatement2 != None:
                 print(' else ', end='')
                 iIfStatement.nstatement2.accept(self)
+
 
     # Visitor do ExprList
 

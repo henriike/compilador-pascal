@@ -219,7 +219,7 @@ def p_statement(p):
 def p_nstatement(p):
     '''
     nstatement : assign_statement
-               | procedure_call_statement
+               | procedure_function_call_statement
                | IF LPARENT expr_list RPARENT THEN nstatement ELSE nstatement
                | case_statement
                | while_statement
@@ -243,12 +243,12 @@ def p_assign_statement(p):
     p[0] = sa.AAssignStatement(p[1], p[3])
 
 
-# Chamada de função
-def p_procedure_call_statement(p):
+# Chamada de função que não retorna nada
+def p_procedure_function_call_statement(p):
     '''
-    procedure_call_statement :  ID LPARENT expr_list RPARENT SEMICOLON
+    procedure_function_call_statement :  ID LPARENT expr_list RPARENT SEMICOLON
     '''
-    p[0] = sa.PProcedureCallStatement(p[1], p[3])
+    p[0] = sa.PProcedureFFunctionCallStatement(p[1], p[3])
 
 
 def p_if2_statement(p):
@@ -423,12 +423,6 @@ def p_factor(p):
         p[0] = sa.FFactorNot(p[2])
 
 
-
-
-
-
-
-
 def p_error(p):
     print("Syntax error in input!")
 
@@ -449,7 +443,7 @@ data = codigo
  
 lexer.input(data)
 parser = yacc.yacc()
-result = parser.parse(debug=False)
+result = parser.parse(debug=True)
 
 
 visitor = sv.SemanticVisitor()

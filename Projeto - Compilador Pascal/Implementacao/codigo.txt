@@ -9,6 +9,10 @@ c = 15.4;
 var
 nome : integer;
 teste : real;
+number : boolean;
+ffunction : boolean;
+cont : boolean;
+x : integer;
 
 
 function teste2(n3,n4: real; n1:integer;) : integer;
@@ -17,35 +21,7 @@ procedure teste3(n3 : real; n1:integer;);
 
 begin
 
-    nome := not 1;
-    soma(5 mod 3);
-
-    while number>0 do
-        nome:= 5+10;
-        nome:= 5+10;
-
-    repeat
-        nome := nome + 1;
-    until nome <= 10;
-
-
-    for cont:= 1 to 2 do
-    begin
-        nome := 10+8;
-    end;
-
-    case x of
-        1.1 : nome:=4;
-        1.2 : nome:=4;
-        2.1 : nome:=4;
-        p : nome:=4;
-    end;
-
- if (x > 5) then
-        nome := 4 + 5;
-    else
-        if (nome <> 'larry') then
-            nome := 'larry';
+    nome := 4;
 
 end.
 

@@ -87,6 +87,7 @@ class SemanticVisitor:
         self.printer = Visitor()
         st.beginScope('main')
 
+#---------------------------------------------------------------------------------------
 
     def visitPProgram(self, pProgram):
         if (pProgram.block != None):
@@ -105,6 +106,9 @@ class SemanticVisitor:
             bBlock.compoundStatement_dec.accept(self)
 
 
+#---------------------------------------------------------------------------------------
+
+
     def visitCConstDefinition(self, cConstDefinition):
         if cConstDefinition != None:
             for i in cConstDefinition.dicDefinicoes.keys():
@@ -116,14 +120,12 @@ class SemanticVisitor:
                     addConst(i, st.STRING)
 
 
-
-
     def visitVVarDeclaration(self, vVarDeclaration):
         if vVarDeclaration != None:
             for i in vVarDeclaration.dicDefinicoes.keys():
                 addVar(i, vVarDeclaration.dicDefinicoes[i])
 
-
+#---------------------------------------------------------------------------------------
 
     def visitPProcedureDeclaration(self, pProcedureDeclaration):
         if pProcedureDeclaration != None:
@@ -139,6 +141,7 @@ class SemanticVisitor:
                 dic = translateToDicParams(key)
                 addFunction(fFunctionDeclaration.id, dic, v)
 
+#---------------------------------------------------------------------------------------
 
 
     def visitCCompoundStatementScore(self, cCompoundStatementScore):
@@ -151,7 +154,7 @@ class SemanticVisitor:
         if cCompoundStatementSemicolon != None:
             cCompoundStatementSemicolon.statements.accept(self)
 
-
+#---------------------------------------------------------------------------------------
 
     def visitSSingleStatement(self, sSingleStatement):
         if sSingleStatement != None:
@@ -164,7 +167,7 @@ class SemanticVisitor:
             cCompoundStatement.statementt.accept(self)
             cCompoundStatement.statementss.accept(self)
 
-
+#---------------------------------------------------------------------------------------
 
     def visitSSingleExprList(self, sSingleExprList):
         sSingleExprList.expr.accept(self)
@@ -173,8 +176,7 @@ class SemanticVisitor:
         cCompoundExprList.expr1.accept(self)
         cCompoundExprList.expr2.accept(self)
 
-
-
+#---------------------------------------------------------------------------------------
 
     def visitAAssignStatement(self, aAssignStatement):
         if aAssignStatement != None:
@@ -183,21 +185,148 @@ class SemanticVisitor:
 
             if infoBind != None:
                 if infoBind[st.BINDABLE] == st.VARIABLE:
+
                     if infoBind[st.TYPE] != st.REAL and infoBind[st.TYPE] != typeVar:
-                        print("[ASSIGN] A expressão ", end='')
                         aAssignStatement.exp.accept(self.printer)
-                        print(" é do tipo", typeVar, "e possui tipo diferente da variavel", aAssignStatement.id, "que é do tipo", infoBind[st.TYPE])
+                        print("\n\t[ASSIGN] A expressão ", end='')
+                        aAssignStatement.exp.accept(self.printer)
+                        print(" é do tipo", typeVar, "e possui tipo diferente da variável", aAssignStatement.id, "que é do tipo", infoBind[st.TYPE], end= ".\n\n")
+
+
                     elif not(typeVar in st.Number) and infoBind[st.TYPE] == st.REAL:
-                        print("[ASSIGN] A expressão ", end='')
                         aAssignStatement.exp.accept(self.printer)
-                        print(" é do tipo", typeVar, "e possui tipo diferente da variavel", aAssignStatement.id, "que é do tipo", infoBind[st.TYPE])
+                        print("\n\t[ASSIGN] A expressão ", end='')
+                        aAssignStatement.exp.accept(self.printer)
+                        print(" é do tipo", typeVar, "e possui tipo diferente da variável", aAssignStatement.id, "que é do tipo", infoBind[st.TYPE], end=".\n\n")
+
+
                     else:
                         return typeVar
+
                 elif infoBind[st.BINDABLE] == st.CONST:
-                    print("[ASSIGN] O identificador", aAssignStatement.id, "é uma constante, portanto não pode ser modificado")
+                    aAssignStatement.exp.accept((self.printer))
+                    print("\n\t[ASSIGN] O identificador", aAssignStatement.id, "é uma constante, portanto não pode ser modificado.", end=".\n\n")
 
         return None
 
+#---------------------------------------------------------------------------------------
+
+    def visitPProcedureFFunctionCallStatement(self, pProcedureFFunctionCallStatement):
+
+        # Captura o ID
+        bindable = st.getBindable(pProcedureFFunctionCallStatement.id)
+
+        # Caso seja Função
+        if (bindable != None and bindable[st.BINDABLE] == st.FUNCTION):
+            typeParams = pProcedureFFunctionCallStatement.exprList.accept(self)
+            print("AQUI: ", pProcedureFFunctionCallStatement.exprList.accept(self))
+
+            if (list(bindable[st.PARAMS][1::2]) == typeParams):
+                return bindable[st.TYPE]
+
+            pProcedureFFunctionCallStatement.accept(self.printer)
+            print("\n\t[FUNCTION] Chamada de função inválida. Tipos passados na chamada são:", typeParams)
+            print("enquanto que os tipos definidos no método são:", bindable[st.PARAMS][1::2], "\n")
+
+        # Caso seja procedure
+        elif (bindable != None and bindable[st.BINDABLE] == st.PROCEDURE):
+            typeParams = pProcedureFFunctionCallStatement.exprList.accept(self)
+            print(typeParams)
+
+#---------------------------------------------------------------------------------------
+
+    def visitWWhileStatement(self, wWhileStatement):
+        type = wWhileStatement.expr.accept(self)
+
+        if (type != st.BOOL):
+            wWhileStatement.expr.accept(self.printer)
+            print("\n\t[WHILE] A expressão ", end='')
+            wWhileStatement.expr.accept(self.printer)
+            print(" é do tipo", type, end='')
+            print(", mas deveria ser do tipo boolean.", end='\n\n')
+        wWhileStatement.statement.accept(self)
+
+#---------------------------------------------------------------------------------------
+
+    def visitRRepeatStatement(self, rRepeatStatement):
+        type = rRepeatStatement.expr.accept(self)
+
+        if (type != st.BOOL):
+            rRepeatStatement.expr.accept(self.printer)
+            print("\n\t[REPEAT] A expressão ", end='')
+            rRepeatStatement.expr.accept(self.printer)
+            print(" é do tipo", type, end='')
+            print(", mas deveria ser do tipo boolean.", end='\n\n')
+        rRepeatStatement.statement.accept(self)
+
+#---------------------------------------------------------------------------------------
+
+    def visitFForStatement(self, fForStatement):
+
+        # Captura ID
+        bindable = st.getBindable(fForStatement.id)
+
+        if (bindable != None and bindable[st.BINDABLE] == st.VARIABLE):
+            typeExpr1 = fForStatement.expr1.accept(self)
+
+            if bindable[st.TYPE] == 'integer' or bindable[st.TYPE] == 'string':
+                if typeExpr1 == bindable[st.TYPE]:
+                    typeExpr2 = fForStatement.expr2.accept(self)
+
+                    if typeExpr2 != bindable[st.TYPE]:
+                        print("A expressão ", end='')
+                        fForStatement.expr2.accept(self.printer)
+                        print(' é do tipo', typeExpr2, ", mas deveria ser do tipo", bindable[st.TYPE], end='.\n\n')
+                else:
+                    print("A expressão ", end='')
+                    fForStatement.expr1.accept(self.printer)
+                    print(' é do tipo', typeExpr1, ", mas deveria ser do tipo", bindable[st.TYPE], end='.\n\n')
+
+            else:
+                print("[FOR] A variável", fForStatement.id, "é do tipo", bindable[st.TYPE], ", mas deveria ser do tipo integer ou char.", end='\n\n')
+
+#---------------------------------------------------------------------------------------
+
+    def visitSSingleCase(self, sSingleCase):
+        sSingleCase.case.accept(self)
+
+    def visitCCompoundCase(self, cCompoundCase):
+        cCompoundCase.case.accept(self)
+        cCompoundCase.cases.accept(self)
+
+
+    def visitCCaseStatement(self, cCaseStatement):
+        type = cCaseStatement.expr.accept(self)
+
+        if (type != 'integer' and type != 'string'):
+            print("[CASE] A expressão ", end='')
+            cCaseStatement.expr.accept(self.printer)
+            print(" é do tipo", type, ", mas deveria ser integer ou string.")
+
+        cCaseStatement.cases.accept(self)
+
+
+    def visitIIntegerCase(self, iIntegerCase):
+        type = iIntegerCase.token
+        print(type)
+
+        if (type != 'integer' and type != 'string'):
+            print("[CASE - INTERNO] A expressão ", end='')
+
+            print(" é do tipo", type, ", mas deveria ser integer ou string.")
+
+#---------------------------------------------------------------------------------------
+
+    def visitIIfStatement(self, iIfStatement):
+
+
+        type = iIfStatement.expr_list.accept(self)
+        print(iIfStatement.expr_list.accept(self))
+
+        iIfStatement.nstatement1.accept(self)
+        iIfStatement.nstatement2.accept(self)
+
+#---------------------------------------------------------------------------------------
 
 
     def visitPPlusExp(self, pPlusExp):
@@ -207,11 +336,12 @@ class SemanticVisitor:
         c = coercion(tipoExp1, tipoExp2)
         if (c == None):
             pPlusExp.accept(self.printer)
-            print('\n\t[Erro] Soma invalida. A expressao ', end='')
+            print('\n\t[ERRO] Soma inválida! A expressão ', end='')
             pPlusExp.exp1.accept(self.printer)
-            print(' eh do tipo', tipoExp1, 'enquanto a expressao ', end='')
+            print(' é do tipo', tipoExp1, end=',')
+            print(' enquanto a expressão ', end='')
             pPlusExp.exp2.accept(self.printer)
-            print(' eh do tipo', tipoExp2, '\n')
+            print(' é do tipo', tipoExp2, end='.\n\n')
         return c
 
 
@@ -222,11 +352,12 @@ class SemanticVisitor:
         c = coercion(tipoExp1, tipoExp2)
         if (c == None):
             mMinusExp.accept(self.printer)
-            print('\n\t[Erro] Subtracao invalida. A expressao ', end='')
+            print('\n\t[ERRO] Subtracao invalida! A expressão ', end='')
             mMinusExp.exp1.accept(self.printer)
-            print(' eh do tipo', tipoExp1, 'enquanto a expressao ', end='')
+            print(' é do tipo', tipoExp1, end=',')
+            print(' enquanto a expressão ', end='')
             mMinusExp.exp2.accept(self.printer)
-            print(' eh do tipo', tipoExp2, '\n')
+            print(' é do tipo', tipoExp2, end='.\n\n')
         return c
 
 
@@ -237,11 +368,12 @@ class SemanticVisitor:
         c = coercion(tipoExp1, tipoExp2)
         if (c == None):
             tTimesExp.accept(self.printer)
-            print('\n\t[Erro] Multiplicacao invalida. A expressao ', end='')
+            print('\n\t[ERRO] Multiplicação invalida! A expressão ', end='')
             tTimesExp.exp1.accept(self.printer)
-            print(' eh do tipo', tipoExp1, 'enquanto a expressao ', end='')
+            print(' é do tipo', tipoExp1, end=',')
+            print(' enquanto a expressão ', end='')
             tTimesExp.exp2.accept(self.printer)
-            print(' eh do tipo', tipoExp2, '\n')
+            print(' é do tipo', tipoExp2, '.\n')
         return c
 
 
@@ -252,11 +384,12 @@ class SemanticVisitor:
         c = coercion(tipoExp1, tipoExp2)
         if (c == None):
             dDivideExp.accept(self.printer)
-            print('\n\t[Erro] Divisão invalida. A expressao ', end='')
+            print('\n\t[ERRO] Divisão invalida. A expressão ', end='')
             dDivideExp.exp1.accept(self.printer)
-            print(' eh do tipo', tipoExp1, 'enquanto a expressao ', end='')
+            print(' é do tipo', tipoExp1, end=',')
+            print(' enquanto a expressão ', end='')
             dDivideExp.exp2.accept(self.printer)
-            print(' eh do tipo', tipoExp2, '\n')
+            print(' é do tipo', tipoExp2, end='.\n\n')
         return c
 
 
@@ -267,11 +400,12 @@ class SemanticVisitor:
         c = coercionDDivExp(tipoExp1, tipoExp2)
         if (c == None):
             dDivExp.accept(self.printer)
-            print('\n\t[Erro] Divisão invalida. A expressao ', end='')
+            print('\n\t[ERRO] Divisão invalida! A expressão ', end='')
             dDivExp.exp1.accept(self.printer)
-            print(' eh do tipo', tipoExp1, 'enquanto a expressao ', end='')
+            print(' é do tipo', tipoExp1, end=',')
+            print(' enquanto a expressão ', end='')
             dDivExp.exp2.accept(self.printer)
-            print(' eh do tipo', tipoExp2, '\n')
+            print(' é do tipo', tipoExp2, end='.\n\n')
         return c
 
 
@@ -282,11 +416,12 @@ class SemanticVisitor:
         c = coercion(tipoExp1, tipoExp2)
         if (c == None):
             mModExp.accept(self.printer)
-            print('\n\t[Erro] Divisão invalida. A expressao ', end='')
+            print('\n\t[ERRO] Divisão invalida! A expressão ', end='')
             mModExp.exp1.accept(self.printer)
-            print(' eh do tipo', tipoExp1, 'enquanto a expressao ', end='')
+            print(' é do tipo', tipoExp1, end=',')
+            print(' enquanto a expressão ', end='')
             mModExp.exp2.accept(self.printer)
-            print(' eh do tipo', tipoExp2, '\n')
+            print(' é do tipo', tipoExp2, end='.\n\n')
         return c
 
 
@@ -297,11 +432,12 @@ class SemanticVisitor:
         c = validaTipo(tipoExp1, tipoExp2)
         if (c == None):
             eEqualsExp.accept(self.printer)
-            print('\n\t[Erro] Comparacao invalida. A expressao ', end='')
+            print('\n\t[ERRO: =] Comparação inválida! A expressão ', end='')
             eEqualsExp.exp1.accept(self.printer)
-            print(' eh do tipo', tipoExp1, 'enquanto a expressao ', end='')
+            print(' é do tipo', tipoExp1, end=',')
+            print(' enquanto a expressão ', end='')
             eEqualsExp.exp2.accept(self.printer)
-            print(' eh do tipo', tipoExp2, '\n')
+            print(' é do tipo', tipoExp2, end='.\n\n')
         return c
 
 
@@ -312,11 +448,12 @@ class SemanticVisitor:
         c = validaTipo(tipoExp1, tipoExp2)
         if (c == None):
             dDifferentExp.accept(self.printer)
-            print('\n\t[Erro] Comparacao invalida. A expressao ', end='')
+            print('\n\t[ERRO: <>] Comparação inválida! A expressão ', end='')
             dDifferentExp.exp1.accept(self.printer)
-            print(' eh do tipo', tipoExp1, 'enquanto a expressao ', end='')
+            print(' é do tipo', tipoExp1, end=',')
+            print(' enquanto a expressão ', end='')
             dDifferentExp.exp2.accept(self.printer)
-            print(' eh do tipo', tipoExp2, '\n')
+            print(' é do tipo', tipoExp2, end='.\n\n')
         return c
 
 
@@ -327,11 +464,12 @@ class SemanticVisitor:
         c = validaExpressaoNumerica(tipoExp1, tipoExp2)
         if (c == None):
             lLthanExp.accept(self.printer)
-            print('\n\t[Erro] Comparacao invalida. A expressao ', end='')
+            print('\n\t[ERRO: <] Comparacão inválida! A expressão ', end='')
             lLthanExp.exp1.accept(self.printer)
-            print(' eh do tipo', tipoExp1, 'enquanto a expressao ', end='')
+            print(' é do tipo', tipoExp1, end=',')
+            print(' enquanto a expressao ', end='')
             lLthanExp.exp2.accept(self.printer)
-            print(' eh do tipo', tipoExp2, '\n')
+            print(' é do tipo', tipoExp2, end='.\n\n')
         return c
 
 
@@ -342,11 +480,12 @@ class SemanticVisitor:
         c = validaExpressaoNumerica(tipoExp1, tipoExp2)
         if (c == None):
             gGthanExp.accept(self.printer)
-            print('\n\t[Erro] Comparacao invalida. A expressao ', end='')
+            print('\n\t[ERRO: >] Comparação inválida! A expressão ', end='')
             gGthanExp.exp1.accept(self.printer)
-            print(' eh do tipo', tipoExp1, 'enquanto a expressao ', end='')
+            print(' é do tipo', tipoExp1, end=',')
+            print(' enquanto a expressão ', end='')
             gGthanExp.exp2.accept(self.printer)
-            print(' eh do tipo', tipoExp2, '\n')
+            print(' é do tipo', tipoExp2, end='.\n\n')
         return c
 
 
@@ -357,11 +496,12 @@ class SemanticVisitor:
         c = validaExpressaoNumerica(tipoExp1, tipoExp2)
         if (c == None):
             gGequals.accept(self.printer)
-            print('\n\t[Erro] Comparacao invalida. A expressao ', end='')
+            print('\n\t[ERRO: >=] Comparacão inválida. A expressão ', end='')
             gGequals.exp1.accept(self.printer)
-            print(' eh do tipo', tipoExp1, 'enquanto a expressao ', end='')
+            print(' é do tipo', tipoExp1, end=',')
+            print(' enquanto a expressão ', end='')
             gGequals.exp2.accept(self.printer)
-            print(' eh do tipo', tipoExp2, '\n')
+            print(' é do tipo', tipoExp2, end='.\n\n')
         return c
 
 
@@ -372,11 +512,12 @@ class SemanticVisitor:
         c = validaExpressaoNumerica(tipoExp1, tipoExp2)
         if (c == None):
             lLequalsExp.accept(self.printer)
-            print('\n\t[Erro] Comparacao invalida. A expressao ', end='')
+            print('\n\t[ERRO: <=] Comparacão inválida! A expressão ', end='')
             lLequalsExp.exp1.accept(self.printer)
-            print(' eh do tipo', tipoExp1, 'enquanto a expressao ', end='')
+            print(' é do tipo', tipoExp1, end=',')
+            print(' enquanto a expressão ', end='')
             lLequalsExp.exp2.accept(self.printer)
-            print(' eh do tipo', tipoExp2, '\n')
+            print(' é do tipo', tipoExp2, end='.\n\n')
         return c
 
 
@@ -387,11 +528,27 @@ class SemanticVisitor:
         c = validaExpressaoBooleana(tipoExp1, tipoExp2)
         if (c == None):
             aAndExp.accept(self.printer)
-            print('\n\t[Erro] Comparacao invalida. A expressao ', end='')
+            print('\n\t[ERRO: AND] Comparacão inválida! A expressão ', end='')
             aAndExp.exp1.accept(self.printer)
-            print(' eh do tipo', tipoExp1, 'enquanto a expressao ', end='')
+            print(' é do tipo', tipoExp1, end=',')
+            print(' enquanto a expressão ', end='')
             aAndExp.exp2.accept(self.printer)
-            print(' eh do tipo', tipoExp2, '\n')
+            print(' é do tipo', tipoExp2, end='.\n\n')
+        return c
+
+    def visitOOrExp(self, oOrExp):
+        tipoExp1 = oOrExp.exp1.accept(self)
+        tipoExp2 = oOrExp.exp2.accept(self)
+
+        c = validaExpressaoBooleana(tipoExp1, tipoExp2)
+        if (c == None):
+            oOrExp.accept(self.printer)
+            print('\n\t[ERRO: OR] Comparacão inválida! A expressão ', end='')
+            oOrExp.exp1.accept(self.printer)
+            print(' é do tipo', tipoExp1, end=',')
+            print(' enquanto a expressão ', end='')
+            oOrExp.exp2.accept(self.printer)
+            print(' é do tipo', tipoExp2, end='.\n\n')
         return c
 
 
@@ -400,9 +557,10 @@ class SemanticVisitor:
 
         c = validaUnaria(tipoExp1)
         if (c == None):
-            print('[ERRO] Expressão unária inválida: ', end='')
             uPPlusExp.accept(self.printer)
-            print('. Operador unário só pode ser utilizado com números!\n')
+            print('\n\t[ERRO: UPLUS] Expressão unária inválida: ', end='')
+            uPPlusExp.accept(self.printer)
+            print("! Operador unário só pode ser utilizado com números.", end="\n\n")
         return c
 
 
@@ -411,9 +569,10 @@ class SemanticVisitor:
 
         c = validaUnaria(tipoExp1)
         if (c == None):
-            print('[ERRO] Expressão unária inválida: ', end='')
             uMMinusExp.accept(self.printer)
-            print('. Operador unário só pode ser utilizado com números!\n')
+            print('\n\t[ERRO: UMINUS] Expressão unária inválida: ', end='')
+            uMMinusExp.accept(self.printer)
+            print("! Operador unário só pode ser utilizado com números.", end='\n\n')
         return c
 
 
@@ -440,6 +599,6 @@ class SemanticVisitor:
         if type == st.BOOL:
             return type
         else:
-            print("Não é possível aplicar o operador not em uma expressão não booleana")
+            print("Não é possível aplicar o operador not em uma expressão não booleana.")
             return None
 

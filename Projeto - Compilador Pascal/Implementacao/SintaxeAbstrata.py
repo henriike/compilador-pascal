@@ -188,13 +188,13 @@ class AAssignStatement(Statement):
         return visitor.visitAAssignStatement(self)
 
 
-class PProcedureCallStatement(Statement):
+class PProcedureFFunctionCallStatement(Statement):
     def __init__(self, id, exprList):
         self.id = id
         self.exprList = exprList
 
     def accept(self, visitor):
-        return visitor.visitPProcedureCallStatement(self)
+        return visitor.visitPProcedureFFunctionCallStatement(self)
 
 
 class WWhileStatement(Statement):
@@ -272,7 +272,7 @@ class CCompoundCase(Cases):
 
 
 '''
-Case e classes concretas
+Tipos de Case e classes concretas
 '''
 class Case(metaclass=ABCMeta):
     @abstractmethod
