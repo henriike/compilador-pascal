@@ -1,42 +1,7 @@
-1º O compilador ainda não consegue diferenciar char e string (precisa resolver)
-
-2º 
-
-Alteramos o nome da regra PProcedureCallStatement
-para PProcedureFFunctionCallStatement
-
-Na tabela de símbolos o addProcedure estava chamando um function,
-mas como precisamos diferenciar function e procedure, resolvemos fazer
-um addProcedure desvinculado do addFunction (facilitar o desenvolvimento)
-
-Falta desenvolver
-
-Expr_List não exibe nada
+#Este arquivo serve como um guia do que tem de ser feito nas reuniões!
 
 
-
-3º Uma variável recebe uma função?
---> Na gramática uma função não consegue retornar tipo
-
-
-
-4º A variável usada no comando for deve ser do tipo inteiro, caractere ou enumeração.
---> Para utilizar mais de um comando no for é necessário utilizar o begin e o end;
-
-Devemos deixar o inteiro ou inteiro e char na estrutura FOR?
-
-
-
-5º Testando a estrutura case no Pascalzim, o case só reconhecer integer e char.
-Deixamos integer e char ou integer, char, id e real?
-
-
-
-6º Não conseguimos fazer muita coisa do if, é um pouco complicado de entender porque
-é fragmentado
-
-
-7º Mudar para o abstract visitor
+1º Mudar para o abstract visitor
 
 
 

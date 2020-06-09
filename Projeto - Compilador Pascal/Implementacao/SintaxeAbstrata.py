@@ -236,8 +236,8 @@ class CCaseStatement(Statement):
 
 
 class IIfStatement(Statement):
-    def __init__(self, expr_list, nstatement1, nstatement2):
-        self.expr_list = expr_list
+    def __init__(self, expr, nstatement1, nstatement2):
+        self.expr = expr
         self.nstatement1 = nstatement1
         self.nstatement2 = nstatement2
 
@@ -484,6 +484,13 @@ class FFactorString(Expressao):
 
     def accept(self, visitor):
         return visitor.visitFFactorString(self)
+
+class FFactorChar(Expressao):
+    def __init__(self, literal):
+        self.literal = literal
+
+    def accept(self, visitor):
+        return visitor.visitFFactorChar(self)
 
 
 class FFactorInt(Expressao):

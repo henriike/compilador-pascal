@@ -143,14 +143,15 @@ def t_COMMENT(t):
     t.value = t.value.replace("\"","")
     pass 
 
+
+def t_CHAR(t):
+    r'\'([^\\\n]|(\\.))?\''
+    return t
+
 # Define uma regra para que possamos rastrear strings (OK!)
 def t_STRING(t):
     r'\'([^\\\n]|(\\.))([^\\\n]|(\\.))([^\\\n]|(\\.))*?\''
     t.value = str(t.value)
-    return t
-
-def t_CHAR(t):
-    r'\'([^\\\n]|(\\.))?\''
     return t
 
 # Define uma regra para que possamos rastrear números de linha

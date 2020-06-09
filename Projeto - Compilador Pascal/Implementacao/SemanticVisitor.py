@@ -170,11 +170,10 @@ class SemanticVisitor:
 #---------------------------------------------------------------------------------------
 
     def visitSSingleExprList(self, sSingleExprList):
-        sSingleExprList.expr.accept(self)
+        return [sSingleExprList.expr.accept(self)]
 
     def visitCCompoundExprList(self, cCompoundExprList):
-        cCompoundExprList.expr1.accept(self)
-        cCompoundExprList.expr2.accept(self)
+        return [cCompoundExprList.expr1.accept(self)] + cCompoundExprList.expr2.accept(self)
 
 #---------------------------------------------------------------------------------------
 
@@ -219,19 +218,24 @@ class SemanticVisitor:
         # Caso seja Função
         if (bindable != None and bindable[st.BINDABLE] == st.FUNCTION):
             typeParams = pProcedureFFunctionCallStatement.exprList.accept(self)
-            print("AQUI: ", pProcedureFFunctionCallStatement.exprList.accept(self))
 
-            if (list(bindable[st.PARAMS][1::2]) == typeParams):
+            if (list(bindable[st.PARAMS].values()) == typeParams):
                 return bindable[st.TYPE]
 
             pProcedureFFunctionCallStatement.accept(self.printer)
-            print("\n\t[FUNCTION] Chamada de função inválida. Tipos passados na chamada são:", typeParams)
-            print("enquanto que os tipos definidos no método são:", bindable[st.PARAMS][1::2], "\n")
+            print("\n\t[FUNCTION] Chamada de função inválida! Tipos passados na chamada são:", typeParams)
+            print("enquanto que os tipos definidos no método são:", list(bindable[st.PARAMS].values()), ".\n")
 
-        # Caso seja procedure
+        # Caso seja Procedure
         elif (bindable != None and bindable[st.BINDABLE] == st.PROCEDURE):
             typeParams = pProcedureFFunctionCallStatement.exprList.accept(self)
-            print(typeParams)
+
+            if (list(bindable[st.PARAMS].values()) == typeParams):
+                return None
+
+            pProcedureFFunctionCallStatement.accept(self.printer)
+            print("\n\t[PROCEDURE] Chamada de procedimento inválida! Tipos passados na chamada são:", typeParams)
+            print("enquanto que os tipos definidos no método são:", list(bindable[st.PARAMS].values()), ".\n")
 
 #---------------------------------------------------------------------------------------
 
@@ -266,65 +270,105 @@ class SemanticVisitor:
         # Captura ID
         bindable = st.getBindable(fForStatement.id)
 
+
         if (bindable != None and bindable[st.BINDABLE] == st.VARIABLE):
             typeExpr1 = fForStatement.expr1.accept(self)
 
-            if bindable[st.TYPE] == 'integer' or bindable[st.TYPE] == 'string':
+            if bindable[st.TYPE] == st.INTEGER or bindable[st.TYPE] == st.CHAR:
                 if typeExpr1 == bindable[st.TYPE]:
                     typeExpr2 = fForStatement.expr2.accept(self)
 
                     if typeExpr2 != bindable[st.TYPE]:
-                        print("A expressão ", end='')
+                        print("for ", fForStatement.id, ":= ", end='')
+                        fForStatement.expr1.accept(self.printer)
+                        print(" to ", end='')
+                        fForStatement.expr2.accept(self.printer)
+                        print(" do")
+                        print("\n\t[FOR] A expressão ", end='')
                         fForStatement.expr2.accept(self.printer)
                         print(' é do tipo', typeExpr2, ", mas deveria ser do tipo", bindable[st.TYPE], end='.\n\n')
                 else:
-                    print("A expressão ", end='')
+                    print("for ", fForStatement.id, ":= ", end='')
+                    fForStatement.expr1.accept(self.printer)
+                    print(" to ", end='')
+                    fForStatement.expr2.accept(self.printer)
+                    print(" do")
+                    print("\n\t[FOR] A expressão ", end='')
                     fForStatement.expr1.accept(self.printer)
                     print(' é do tipo', typeExpr1, ", mas deveria ser do tipo", bindable[st.TYPE], end='.\n\n')
 
             else:
-                print("[FOR] A variável", fForStatement.id, "é do tipo", bindable[st.TYPE], ", mas deveria ser do tipo integer ou char.", end='\n\n')
-
+                print("for ", fForStatement.id, ":= ", end='')
+                fForStatement.expr1.accept(self.printer)
+                print(" to ", end='')
+                fForStatement.expr2.accept(self.printer)
+                print(" do")
+                print("\n\t[FOR] A variável", fForStatement.id, "é do tipo", bindable[st.TYPE], ", mas deveria ser do tipo integer ou char.", end='\n\n')
+        else:
+            print("for ", fForStatement.id, ":= ", end='')
+            fForStatement.expr1.accept(self.printer)
+            print(" to ", end='')
+            fForStatement.expr2.accept(self.printer)
+            print(" do")
+            print("\t[FOR] A variável", fForStatement.id, "não foi definida.")
 #---------------------------------------------------------------------------------------
 
     def visitSSingleCase(self, sSingleCase):
-        sSingleCase.case.accept(self)
+        return sSingleCase.case.accept(self)
+
 
     def visitCCompoundCase(self, cCompoundCase):
-        cCompoundCase.case.accept(self)
-        cCompoundCase.cases.accept(self)
+        temp = cCompoundCase.case.accept(self)
+        print("Aqui: ", type(temp))
+        temp.update(cCompoundCase.cases.accept(self))
 
+        return temp
 
     def visitCCaseStatement(self, cCaseStatement):
         type = cCaseStatement.expr.accept(self)
 
-        if (type != 'integer' and type != 'string'):
-            print("[CASE] A expressão ", end='')
+        if (type != st.CHAR and type != st.INTEGER):
+            print("\n\t[CASE] A expressão ", end='')
             cCaseStatement.expr.accept(self.printer)
-            print(" é do tipo", type, ", mas deveria ser integer ou string.")
+            print(" é do tipo", type, ", mas deveria ser integer ou char.")
+        else:
+            for key in cCaseStatement.cases.keys():
+                if cCaseStatement.cases[key] != type:
+                    print("\n\t[CASE] O tipo da guarda ", key, "é ", cCaseStatement.cases[key], "mas deveria ser ", type, ".")
+
 
         cCaseStatement.cases.accept(self)
 
 
     def visitIIntegerCase(self, iIntegerCase):
-        type = iIntegerCase.token
-        print(type)
+        return {iIntegerCase.token:st.INTEGER}
 
-        if (type != 'integer' and type != 'string'):
-            print("[CASE - INTERNO] A expressão ", end='')
+    def visitCCharCase(self, cCharCase):
+        return {cCharCase.token:st.CHAR}
 
-            print(" é do tipo", type, ", mas deveria ser integer ou string.")
+    def visitIIdCase(self, iIDCase):
+        return {iIDCase.token:st.getBindable(iIDCase.token)[st.TYPE]}
+
 
 #---------------------------------------------------------------------------------------
 
     def visitIIfStatement(self, iIfStatement):
+        type = iIfStatement.expr.accept(self)
+
+        if (type != st.BOOL):
+            iIfStatement.expr.accept(self.printer)
+            print("\n\t[IF] A expressão ", end='')
+            iIfStatement.expr.accept(self.printer)
+            print(" é do tipo", type, end='')
+            print(", mas deveria ser do tipo boolean.", end='\n\n')
 
 
-        type = iIfStatement.expr_list.accept(self)
-        print(iIfStatement.expr_list.accept(self))
+        if iIfStatement.nstatement1 != None:
+            iIfStatement.nstatement1.accept(self)
 
-        iIfStatement.nstatement1.accept(self)
-        iIfStatement.nstatement2.accept(self)
+        if iIfStatement.nstatement2 != None:
+            iIfStatement.nstatement2.accept(self)
+
 
 #---------------------------------------------------------------------------------------
 
@@ -581,6 +625,9 @@ class SemanticVisitor:
 
     def visitFFactorInt(self, fFactorInt):
         return st.INTEGER
+
+    def visitFFactorChar(self, fFactorChar):
+        return st.CHAR
 
     def visitFFactorReal(self, fFactorReal):
         return st.REAL

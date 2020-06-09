@@ -165,10 +165,11 @@ class Visitor:
             print(iIntegerCase.token, ' : ', end='')
             iIntegerCase.statement.accept(self)
 
-    def visitRRealCase(self, rRealCase):
-        if rRealCase != None:
-            print(rRealCase.token, ' : ', end='')
-            rRealCase.statement.accept(self)
+
+    def visitCCharCase(self, cCharCase):
+        if cCharCase != None:
+            print(cCharCase.token, ' : ', end='')
+            cCharCase.statement.accept(self)
 
     def visitIIdCase(self, iIdCase):
         if iIdCase != None:
@@ -179,7 +180,7 @@ class Visitor:
     def visitIIfStatement(self, iIfStatement):
         if iIfStatement != None:
             print('if (', end='')
-            iIfStatement.expr_list.accept(self)
+            iIfStatement.expr.accept(self)
             print(') then ', end='')
             iIfStatement.nstatement1.accept(self)
 
@@ -308,6 +309,9 @@ class Visitor:
 
     def visitFFactorInt(self, fFactorInt):
         print(fFactorInt.literal, end='')
+
+    def visitFFactorChar(self, fFactorChar):
+        print(fFactorChar.literal, end='')
 
     def visitFFactorReal(self, fFactorReal):
         print(fFactorReal.literal, end='')

@@ -8,20 +8,24 @@ c = 15.4;
 
 var
 nome : integer;
-teste : real;
-number : boolean;
-ffunction : boolean;
-cont : boolean;
-x : integer;
-
+i : char;
 
 function teste2(n3,n4: real; n1:integer;) : integer;
-
 procedure teste3(n3 : real; n1:integer;);
 
 begin
 
-    nome := 4;
+    if (5 > 4) then
+        nome := 4;
+    else if (5 > 2) then
+        begin
+            if (ashuauhs) then
+                nome := 4;
+            nome := 4;
+        end;
+    else if (5 < 2) then
+        nome := 4;
+
 
 end.
 

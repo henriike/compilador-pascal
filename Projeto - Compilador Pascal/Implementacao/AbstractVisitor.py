@@ -88,7 +88,7 @@ class AbstractVisitor(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def visitRRealCase(self, rRealCase):
+    def visitCCharCase(self, iIntegerCase):
         pass
 
     @abstractmethod

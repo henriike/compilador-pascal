@@ -220,7 +220,7 @@ def p_nstatement(p):
     '''
     nstatement : assign_statement
                | procedure_function_call_statement
-               | IF LPARENT expr_list RPARENT THEN nstatement ELSE nstatement
+               | IF LPARENT expr RPARENT THEN nstatement ELSE nstatement
                | case_statement
                | while_statement
                | repeat_statement
@@ -251,10 +251,17 @@ def p_procedure_function_call_statement(p):
     p[0] = sa.PProcedureFFunctionCallStatement(p[1], p[3])
 
 
+def p_procedure_function_call_exp(p):
+    '''
+    procedure_function_call_exp :  ID LPARENT expr_list RPARENT
+    '''
+    p[0] = sa.PProcedureFFunctionCallStatement(p[1], p[3])
+
+
 def p_if2_statement(p):
     '''
-    if2_statement : IF LPARENT expr_list RPARENT THEN statement
-                  | IF LPARENT expr_list RPARENT THEN nstatement ELSE if2_statement
+    if2_statement : IF LPARENT expr RPARENT THEN statement
+                  | IF LPARENT expr RPARENT THEN nstatement ELSE if2_statement
     '''
     if len(p) == 7:
         p[0] = sa.IIfStatement(p[3], p[6], None)
@@ -293,9 +300,9 @@ def p_for_statement(p):
 # Estrutura CASE - SWITCH
 def p_case_statement(p):
     '''
-    case_statement : CASE expr OF cases END SEMICOLON
+    case_statement : CASE LPARENT expr RPARENT OF cases END SEMICOLON
     '''
-    p[0] = sa.CCaseStatement(p[2], p[4])
+    p[0] = sa.CCaseStatement(p[3], p[6])
 
 
 def p_cases(p):
@@ -312,13 +319,13 @@ def p_cases(p):
 def p_case(p):
     '''
     case : INTEGER TWOPOINTS statement
-         | REAL TWOPOINTS statement
+         | CHAR TWOPOINTS statement
          | ID TWOPOINTS statement
     '''
     if isinstance(p[1], int):
         p[0] = sa.IIntegerCase(p[1], p[3])
-    elif isinstance(p[1], float):
-        p[0] = sa.RRealCase(p[1], p[3])
+    elif p[1][0] == '\'':
+        p[0] = sa.CCharCase(p[1], p[3])
     else:
         p[0] = sa.IIdCase(p[1], p[3])
 
@@ -404,17 +411,24 @@ def p_factor(p):
            | INTEGER
            | REAL
            | STRING
+           | CHAR
            | TRUE
            | FALSE
            | NOT factor
+           | procedure_function_call_exp
     '''
     if len(p) == 2:
         if isinstance(p[1], int):
             p[0] = sa.FFactorInt(p[1])
         elif isinstance(p[1], float):
             p[0] = sa.FFactorReal(p[1])
+        elif isinstance(p[1], sa.PProcedureFFunctionCallStatement):
+            p[0] = p[1]
         elif p[1][0] == '\'':
-            p[0] = sa.FFactorString(p[1])
+            if len(p[1]) > 3:
+                p[0] = sa.FFactorString(p[1])
+            else:
+                p[0] = sa.FFactorChar(p[1])
         elif p[1] == 'true' or p[1] == 'false':
             p[0] = sa.FFactorBoolean(p[1])
         else:
@@ -443,7 +457,7 @@ data = codigo
  
 lexer.input(data)
 parser = yacc.yacc()
-result = parser.parse(debug=True)
+result = parser.parse(debug=False)
 
 
 visitor = sv.SemanticVisitor()
