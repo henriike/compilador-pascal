@@ -1,31 +1,94 @@
-program teste;
+program Exemplo;
 
 const
-b = 13;
-a = 12;
-c = 15.4;
+pi = 3.14;
+taxaJuros = 15;
+pai = 'harryPotter';
 
 
 var
-nome : integer;
-i : char;
+valor1 : integer;
+valor2 : char;
+valor3 : string;
+valor4, valor5 : real;
+valor6 : boolean;
+base1, base2 : integer;
+expoente1, expoente2 : integer;
+numero : integer;
 
-function teste2(n3,n4: real; n1:integer;) : integer;
-procedure teste3(n3 : real; n1:integer;);
+
+procedure potencia(base1,base2 : real; expoente1,expoente2 : real);
+procedure soma(numero1, numero2 : integer);
+
+function fatorial(numero : integer; fator : integer) : integer;
+
 
 begin
 
-    if (5 > 4) then
-        nome := 4;
-    else if (5 > 2) then
-        begin
-            if (ashuauhs) then
-                nome := 4;
-            nome := 4;
-        end;
-    else if (5 < 2) then
-        nome := 4;
+    valor1 := 10;
+    valor2 := 'c';
+    valor3 := 'ola';
+    valor4 := 10.0;
+    valor5 := 12.5;
+    valor6 := true;
 
+
+    potencia(valor1, valor5, valor4, valor5);
+    soma(expoente1, expoente2);
+
+
+    // (IF - ELSE IF - ELSE) Nesse teste verificamos tanto a forma correta como a forma incorreta
+    if (valor1 = 10) then
+        valor6 := false;
+    else if(valor1 = 15) then
+        valor6 := true;
+        if (valor6 = true) then
+            valor6 := false;
+    else if(asuauhsshu) then
+        valor4 := 18;
+
+
+    // (SWITCH) Nesse teste verificamos tanto a forma correta como a forma incorreta
+    case (valor2) of
+        valor2 : valor4 := 20;
+        10 : valor5 := 10;
+    end;
+
+
+    // (WHILE) Nesse teste verificamos tanto a forma correta como a forma incorreta
+    while (10) do
+    begin
+        valor6 := false;
+        valor2 := 'p';
+    end;
+
+    while true do
+    begin
+        valor6 := false;
+        valor2 := 'p';
+    end;
+
+
+
+    // (DO WHILE) Nesse teste verificamos tanto a forma correta como a forma incorreta
+    numero := 200;
+    repeat
+        numero := numero + 200;
+    until numero <= 1000;
+
+    numero := 200;
+    repeat
+        numero := numero + 200;
+    until numero <= 'C';
+
+
+
+    // (FOR) Nesse teste verificamos tanto a forma correta como a forma incorreta
+    for numero := 1 to 1000 do
+        numero := numero + 1;
+
+    for numero := 1 to 'Z' do
+        numero := numero + 1;
 
 end.
 

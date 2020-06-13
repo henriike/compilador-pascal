@@ -12,7 +12,7 @@ import SemanticVisitor as sv
 
 precedence = (
     # Operadores relacionais (=, <, <=, >, >=, <>)
-    ('nonassoc', 'EQUALS', 'LTHAN', 'LEQUALS', 'GTHAN', 'GEQUALS', 'DIFFERENT'),
+    ('left', 'EQUALS', 'LTHAN', 'LEQUALS', 'GTHAN', 'GEQUALS', 'DIFFERENT'),
 
     # Operadores Aditivos
     ('left', 'PLUS', 'MINUS', 'OR'),
@@ -24,10 +24,10 @@ precedence = (
     ('left', 'UMINUS', 'UPLUS'),
 
     # O operador NOT é associativo a direita
-    ('right', 'NOT')
+    ('right', 'NOT'),
 
     # Operador Parêntesis
-    # ('left', 'LPARENT', 'RPARENT')
+    ('left', 'LPARENT', 'RPARENT')
 )
 
 
@@ -166,12 +166,15 @@ def p_function_declaration(p):
 def p_param_section(p):
     '''
     param_section : identifier_list TWOPOINTS types SEMICOLON param_section
+                  | identifier_list TWOPOINTS types
                   |
     '''
     if len(p) == 1:
         p[0] = ''
-    else:
+    elif len(p) == 6:
         p[0] = str(p[1]) + " : " + p[3] + " ; " + str(p[5])
+    else:
+        p[0] = str(p[1]) + " : " + p[3]
 
 
 
@@ -361,6 +364,7 @@ def p_expr(p):
           | expr AND expr
           | PLUS expr %prec UPLUS
           | MINUS expr %prec UMINUS
+          | LPARENT expr RPARENT
           | factor
     '''
     if len(p) == 4:
@@ -392,6 +396,8 @@ def p_expr(p):
             p[0] = sa.MModExp(p[1], p[3])
         elif p[2] == 'and':
             p[0] = sa.AAndExp(p[1], p[3])
+        elif p[1] == '(':
+            p[0] = p[2]
 
     elif len(p) == 3:
         if p[1] == '+':

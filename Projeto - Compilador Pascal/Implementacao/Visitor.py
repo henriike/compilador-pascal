@@ -1,15 +1,14 @@
-class Visitor:
+from AbstractVisitor import AbstractVisitor
+
+class Visitor(AbstractVisitor):
 
     # Visitor do Program
-
     def visitPProgram(self, pProgram):
         if (pProgram.block != None):
             print('program', pProgram.id, ';')
             pProgram.block.accept(self)
 
-
     # Visitor do Block
-
     def visitBBlock(self, bBlock):
         if bBlock.const_dec != None:
             bBlock.const_dec.accept(self)

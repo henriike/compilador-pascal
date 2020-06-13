@@ -2,41 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c9d0ae3-7e7d-4f75-8a8a-7493d48d43df" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/lft.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/lft.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/AbstractVisitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/AbstractVisitor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/ExpressionLanguageLex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/ExpressionLanguageLex.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/ExpressionLanguageParser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/ExpressionLanguageParser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/SemanticVisitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/SemanticVisitor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/SintaxeAbstrata.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/SintaxeAbstrata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/SymbolTable.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/SymbolTable.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/Visitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/Visitor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/codigo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/codigo.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/parser.out" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/parser.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/parsetab.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao/parsetab.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto - Compilador Pascal/Pendencias/Pendencias.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto - Compilador Pascal/Pendencias/Pendencias.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pip-20.1.1.dist-info/RECORD" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pip-20.1.1.dist-info/RECORD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/ply-3.11.dist-info/DESCRIPTION.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/ply-3.11.dist-info/INSTALLER" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/ply-3.11.dist-info/METADATA" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/ply-3.11.dist-info/RECORD" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/ply-3.11.dist-info/WHEEL" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/ply-3.11.dist-info/metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/ply-3.11.dist-info/top_level.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/ply/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/ply/cpp.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/ply/ctokens.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/ply/lex.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/ply/yacc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/ply/ygen.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools-47.1.1.dist-info/RECORD" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools-47.1.1.dist-info/RECORD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/easy_install-3.8.exe" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/easy_install-3.8.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/easy_install.exe" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/easy_install.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/pip.exe" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/pip.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/pip3.8.exe" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/pip3.8.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/pip3.exe" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/pip3.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/pyvenv.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/venv/pyvenv.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projeto - Compilador Pascal/Pendencias/Pendencias.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +69,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1591730254472</updated>
-      <workItem from="1591730261785" duration="261000" />
+      <workItem from="1591730261785" duration="552000" />
+      <workItem from="1592050296068" duration="252000" />
+      <workItem from="1592050655732" duration="11782000" />
     </task>
     <servers />
   </component>
@@ -108,12 +83,28 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="736" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1591730438642" />
+    <state width="2500" height="384" key="GridCell.Tab.0.bottom" timestamp="1592062443155">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="2500" height="384" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1592062443155" />
+    <state width="2500" height="384" key="GridCell.Tab.0.center" timestamp="1592062443155">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="2500" height="384" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1592062443155" />
+    <state width="2500" height="384" key="GridCell.Tab.0.left" timestamp="1592062443154">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="2500" height="384" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1592062443154" />
+    <state width="2500" height="384" key="GridCell.Tab.0.right" timestamp="1592062443155">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state width="2500" height="384" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1592062443155" />
     <state x="783" y="151" key="SettingsEditor" timestamp="1591730525351">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="783" y="151" key="SettingsEditor/0.0.2560.1040@0.0.2560.1040" timestamp="1591730525351" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/lft$ExpressionLanguageParser.coverage" NAME="ExpressionLanguageParser Coverage Results" MODIFIED="1591730541086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao" />
+    <SUITE FILE_PATH="coverage/lft$ExpressionLanguageParser.coverage" NAME="ExpressionLanguageParser Coverage Results" MODIFIED="1592062443142" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Projeto - Compilador Pascal/Implementacao" />
   </component>
 </project>

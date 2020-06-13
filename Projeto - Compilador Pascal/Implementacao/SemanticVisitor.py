@@ -1,7 +1,7 @@
-from AbstractVisitor import AbstractVisitor
 import SymbolTable as st
 from SymbolTable import *
 
+from AbstractVisitor import AbstractVisitor
 from Visitor import Visitor
 import SintaxeAbstrata as sa
 
@@ -71,17 +71,23 @@ def translateToDicParams(pStr):
 
         l = p.split(':')
 
+
         if ',' in l[0]:
             for v in l[0].split(','):
                 dic[v.strip()] = l[1].strip()
+
+
+
         elif len(l) == 2:
             dic[l[0].strip()] = l[1].strip()
+
+
 
     return dic
 
 
 
-class SemanticVisitor:
+class SemanticVisitor(AbstractVisitor):
 
     def __init__(self):
         self.printer = Visitor()
@@ -149,7 +155,6 @@ class SemanticVisitor:
             cCompoundStatementScore.statements.accept(self)
 
 
-
     def visitCCompoundStatementSemicolon(self, cCompoundStatementSemicolon):
         if cCompoundStatementSemicolon != None:
             cCompoundStatementSemicolon.statements.accept(self)
@@ -198,7 +203,6 @@ class SemanticVisitor:
                         aAssignStatement.exp.accept(self.printer)
                         print(" é do tipo", typeVar, "e possui tipo diferente da variável", aAssignStatement.id, "que é do tipo", infoBind[st.TYPE], end=".\n\n")
 
-
                     else:
                         return typeVar
 
@@ -215,15 +219,17 @@ class SemanticVisitor:
         # Captura o ID
         bindable = st.getBindable(pProcedureFFunctionCallStatement.id)
 
+
         # Caso seja Função
         if (bindable != None and bindable[st.BINDABLE] == st.FUNCTION):
             typeParams = pProcedureFFunctionCallStatement.exprList.accept(self)
+            pProcedureFFunctionCallStatement.exprList.accept(self.printer)
 
             if (list(bindable[st.PARAMS].values()) == typeParams):
                 return bindable[st.TYPE]
 
             pProcedureFFunctionCallStatement.accept(self.printer)
-            print("\n\t[FUNCTION] Chamada de função inválida! Tipos passados na chamada são:", typeParams)
+            print("\t[FUNCTION] Chamada de função inválida! Tipos passados na chamada são:", typeParams)
             print("enquanto que os tipos definidos no método são:", list(bindable[st.PARAMS].values()), ".\n")
 
         # Caso seja Procedure
@@ -234,7 +240,7 @@ class SemanticVisitor:
                 return None
 
             pProcedureFFunctionCallStatement.accept(self.printer)
-            print("\n\t[PROCEDURE] Chamada de procedimento inválida! Tipos passados na chamada são:", typeParams)
+            print("\t[PROCEDURE] Chamada de procedimento inválida! Tipos passados na chamada são:", typeParams)
             print("enquanto que os tipos definidos no método são:", list(bindable[st.PARAMS].values()), ".\n")
 
 #---------------------------------------------------------------------------------------
@@ -284,7 +290,7 @@ class SemanticVisitor:
                         print(" to ", end='')
                         fForStatement.expr2.accept(self.printer)
                         print(" do")
-                        print("\n\t[FOR] A expressão ", end='')
+                        print("\t[FOR] A expressão ", end='')
                         fForStatement.expr2.accept(self.printer)
                         print(' é do tipo', typeExpr2, ", mas deveria ser do tipo", bindable[st.TYPE], end='.\n\n')
                 else:
@@ -319,9 +325,7 @@ class SemanticVisitor:
 
     def visitCCompoundCase(self, cCompoundCase):
         temp = cCompoundCase.case.accept(self)
-        print("Aqui: ", type(temp))
         temp.update(cCompoundCase.cases.accept(self))
-
         return temp
 
     def visitCCaseStatement(self, cCaseStatement):
@@ -332,9 +336,11 @@ class SemanticVisitor:
             cCaseStatement.expr.accept(self.printer)
             print(" é do tipo", type, ", mas deveria ser integer ou char.")
         else:
-            for key in cCaseStatement.cases.keys():
-                if cCaseStatement.cases[key] != type:
-                    print("\n\t[CASE] O tipo da guarda ", key, "é ", cCaseStatement.cases[key], "mas deveria ser ", type, ".")
+            dict = cCaseStatement.cases.accept(self)
+            for key in dict.keys():
+                if dict[key] != type:
+
+                    print("\t[CASE] O tipo da guarda", key, "é", dict[key], ", mas deveria ser do tipo", type, ".\n")
 
 
         cCaseStatement.cases.accept(self)
