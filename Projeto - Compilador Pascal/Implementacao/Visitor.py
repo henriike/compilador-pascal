@@ -199,7 +199,6 @@ class Visitor(AbstractVisitor):
         cCompoundExprList.expr2.accept(self)
 
 
-
     # Visitor das Expressões
 
     # Soma, Subtração, Multiplicação, Divisão, Mod

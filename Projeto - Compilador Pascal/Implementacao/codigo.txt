@@ -13,14 +13,17 @@ valor3 : string;
 valor4, valor5 : real;
 valor6 : boolean;
 base1, base2 : integer;
-expoente1, expoente2 : integer;
+expoente1, expoente2 : real;
 numero : integer;
+teste1 : real;
+resultado : integer;
 
 
-procedure potencia(base1,base2 : real; expoente1,expoente2 : real);
+procedure potencia(base1 : integer; base2 : integer; expoente1 : real ;expoente2 : real);
 procedure soma(numero1, numero2 : integer);
 
 function fatorial(numero : integer; fator : integer) : integer;
+function max(num1, num2 : integer) : integer;
 
 
 begin
@@ -31,10 +34,15 @@ begin
     valor4 := 10.0;
     valor5 := 12.5;
     valor6 := true;
+    numero := 15;
 
 
-    potencia(valor1, valor5, valor4, valor5);
-    soma(expoente1, expoente2);
+
+    potencia(base1, base2, expoente1, expoente2);
+    soma(numero, expoente2);
+
+    resultado := fatorial(numero, valor1);
+    resultado := max(teste1, valor1);
 
 
     // (IF - ELSE IF - ELSE) Nesse teste verificamos tanto a forma correta como a forma incorreta

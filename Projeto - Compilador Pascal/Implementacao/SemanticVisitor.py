@@ -71,17 +71,12 @@ def translateToDicParams(pStr):
 
         l = p.split(':')
 
-
         if ',' in l[0]:
             for v in l[0].split(','):
                 dic[v.strip()] = l[1].strip()
 
-
-
         elif len(l) == 2:
             dic[l[0].strip()] = l[1].strip()
-
-
 
     return dic
 
@@ -192,14 +187,14 @@ class SemanticVisitor(AbstractVisitor):
 
                     if infoBind[st.TYPE] != st.REAL and infoBind[st.TYPE] != typeVar:
                         aAssignStatement.exp.accept(self.printer)
-                        print("\n\t[ASSIGN] A expressão ", end='')
+                        print("\t[ASSIGN] A expressão ", end='')
                         aAssignStatement.exp.accept(self.printer)
                         print(" é do tipo", typeVar, "e possui tipo diferente da variável", aAssignStatement.id, "que é do tipo", infoBind[st.TYPE], end= ".\n\n")
 
 
                     elif not(typeVar in st.Number) and infoBind[st.TYPE] == st.REAL:
                         aAssignStatement.exp.accept(self.printer)
-                        print("\n\t[ASSIGN] A expressão ", end='')
+                        print("\t[ASSIGN] A expressão ", end='')
                         aAssignStatement.exp.accept(self.printer)
                         print(" é do tipo", typeVar, "e possui tipo diferente da variável", aAssignStatement.id, "que é do tipo", infoBind[st.TYPE], end=".\n\n")
 
@@ -208,7 +203,7 @@ class SemanticVisitor(AbstractVisitor):
 
                 elif infoBind[st.BINDABLE] == st.CONST:
                     aAssignStatement.exp.accept((self.printer))
-                    print("\n\t[ASSIGN] O identificador", aAssignStatement.id, "é uma constante, portanto não pode ser modificado.", end=".\n\n")
+                    print("\t[ASSIGN] O identificador", aAssignStatement.id, "é uma constante, portanto não pode ser modificado.", end=".\n\n")
 
         return None
 
@@ -219,11 +214,10 @@ class SemanticVisitor(AbstractVisitor):
         # Captura o ID
         bindable = st.getBindable(pProcedureFFunctionCallStatement.id)
 
-
         # Caso seja Função
         if (bindable != None and bindable[st.BINDABLE] == st.FUNCTION):
             typeParams = pProcedureFFunctionCallStatement.exprList.accept(self)
-            pProcedureFFunctionCallStatement.exprList.accept(self.printer)
+
 
             if (list(bindable[st.PARAMS].values()) == typeParams):
                 return bindable[st.TYPE]
@@ -241,7 +235,7 @@ class SemanticVisitor(AbstractVisitor):
 
             pProcedureFFunctionCallStatement.accept(self.printer)
             print("\t[PROCEDURE] Chamada de procedimento inválida! Tipos passados na chamada são:", typeParams)
-            print("enquanto que os tipos definidos no método são:", list(bindable[st.PARAMS].values()), ".\n")
+            print("enquanto que os tipos definidos no procedimento são:", list(bindable[st.PARAMS].values()), ".\n")
 
 #---------------------------------------------------------------------------------------
 

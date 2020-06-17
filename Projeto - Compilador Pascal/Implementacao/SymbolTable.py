@@ -25,9 +25,31 @@ def endScope():
     global symbolTable
     symbolTable = symbolTable[0:-1]
 
+
 def addVar(name, type):
     global symbolTable
-    symbolTable[-1][name] = {BINDABLE: VARIABLE, TYPE : type}
+
+    # Verifica se tem algum parâmetro separado por vírgula
+    if ',' in name:
+
+        # Existindo parâmetros separados por vírgula
+        # Faz uma lista desses parâmetros utilizando como base a vírgula
+        temp = name.split(",")
+
+        for var in temp:
+            # Esse var recebe cada linha que tem mais de 1 parâmetro
+            # Tira o espaço de cada elemento, sem isso na tabela de símbolos eles ficam assim: 'expoente 1
+            # Portanto de alguma forma não será reconhecido e receberá o valor None
+            var = var.replace(" ", "")
+
+            #Adiciona de fato na tabela de símbolos
+            symbolTable[-1][var] = {BINDABLE: VARIABLE, TYPE: type}
+
+    else:
+        symbolTable[-1][name] = {BINDABLE: VARIABLE, TYPE: type}
+
+
+
 
 def addConst(name, type):
     global symbolTable
