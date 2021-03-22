@@ -1,6 +1,0 @@
-# tab_size = {4}
-
-if (5 < 2):
-			print("Ola mundo")				
-else:
-	print("Hello world")
