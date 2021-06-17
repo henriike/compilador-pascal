@@ -12,7 +12,7 @@
 
 
 <h4 align="center"> 
-	🚧 Compialador Pascal - Concluído 🚀 🚧
+	🚧 Compilador Pascal - Concluído 🚀 🚧
 </h4>
 
 <p align="center">
