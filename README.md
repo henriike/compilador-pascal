@@ -36,17 +36,9 @@ Compilador da linguagem de programação Pascal desenvolvido durante a execuçã
 
 ## ⚙️ Features
 
-O site é **responsivo** e possue as seguintes seções:
-
-- [x] Home
-- [x] About us
-- [x] Services
-- [x] Our projects
-- [x] Our teams
-- [x] Happy clients
-- [x] Price
-- [x] Some facts
-- [x] Contact us
+- [x] Análise Léxica
+- [x] Análise Sintática
+- [x] Análise Semântica
 
 ---
 
