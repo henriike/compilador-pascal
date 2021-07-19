@@ -46,7 +46,7 @@ Compilador da linguagem de programação Pascal desenvolvido durante a execuçã
 
 ## 🛠 Tecnologias
 
-#### **Website**  ([PYTHON](https://www.python.org/))
+#### [PYTHON](https://www.python.org/)
 
 ---
 
